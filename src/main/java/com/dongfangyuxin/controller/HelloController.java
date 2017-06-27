@@ -27,4 +27,16 @@ public class HelloController {
         return "hello";
     }
 
+    /**
+     * 测试easyui
+     *
+     * @return
+     */
+    @RequestMapping(value = "/basicCRUD", method = RequestMethod.GET)
+    public String basicCRUD(Model model) {
+        logger.info("进入请求了");
+        model.addAttribute("name", "Dear");
+        return "basicCRUD";
+    }
+
 }
