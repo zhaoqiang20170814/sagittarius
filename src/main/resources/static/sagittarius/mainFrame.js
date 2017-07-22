@@ -31,6 +31,10 @@ function jumpMenu(menuIndex) {
     } else if (menuIndex == "1-6") {
         // 用户信息界面
         $("#center").panel('refresh', "http://localhost/basicCRUD.html");
+    } else if (menuIndex == "1-7") {
+        // 度量衡信息维护
+        title = '度量衡信息维护';
+        content = createFrame("/unitMaster");
     }
     $('#mainPanel').panel({
         title: title,

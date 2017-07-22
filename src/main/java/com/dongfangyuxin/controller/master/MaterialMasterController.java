@@ -24,9 +24,9 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/materialMaster")
-public class MasterController {
+public class MaterialMasterController {
     // 日志
-    public static final Logger LOGGER = LogManager.getLogger(MasterController.class);
+    public static final Logger LOGGER = LogManager.getLogger(MaterialMasterController.class);
 
     @Autowired
     private MaterialMasterService materialMasterService;
@@ -45,6 +45,8 @@ public class MasterController {
     /**
      * 界面初始化
      *
+     * @param request  请求
+     * @param response 响应
      * @return
      */
     @RequestMapping(value = "init", produces = "application/json;charset=UTF-8")
