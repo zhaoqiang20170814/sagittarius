@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * 系统主页面框架
  *
@@ -26,7 +29,7 @@ public class MainFrameController {
      * 主框架界面
      */
     @RequestMapping(value = "mainFrame", method = RequestMethod.GET)
-    public String mainFrame(Model model) {
+    public String mainFrame(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "mainFrame";
     }
 
