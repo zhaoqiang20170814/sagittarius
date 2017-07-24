@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +52,7 @@ public class UnitMasterController {
      */
     @RequestMapping(value = "init", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> init(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> init(HttpServletRequest request, HttpServletResponse response, @RequestParam int page, @RequestParam int rows) {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         // 查询度量衡信息

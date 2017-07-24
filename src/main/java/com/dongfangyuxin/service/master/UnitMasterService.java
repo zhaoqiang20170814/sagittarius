@@ -30,7 +30,7 @@ public class UnitMasterService {
      * @return 度量衡信息
      */
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<UnitBean> getUnitInfo(UnitBeanExample condition) {
+    public List<UnitBean> getUnitInfo(UnitBeanExample condition,) {
         List<UnitBean> dataList = unitEngine.getUnit(condition);
         return dataList;
     }
