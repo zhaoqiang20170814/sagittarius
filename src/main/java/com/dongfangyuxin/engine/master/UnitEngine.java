@@ -6,6 +6,8 @@ import com.dongfangyuxin.common.dao.bean.MaterialBean;
 import com.dongfangyuxin.common.dao.bean.MaterialBeanExample;
 import com.dongfangyuxin.common.dao.bean.UnitBean;
 import com.dongfangyuxin.common.dao.bean.UnitBeanExample;
+import com.dongfangyuxin.controller.common.Page;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,9 +32,24 @@ public class UnitEngine {
      * @param condition 查询条件
      * @return 度量衡信息List
      */
-    public List<UnitBean> getUnit(UnitBeanExample condition) {
+    public List<UnitBean> getUnit(UnitBeanExample condition, Page page) {
+        // 设置分页信息
+        RowBounds rowBounds = new RowBounds(page.getOffset(), page.getLimit());
         // 取得度量衡信息
-        List<UnitBean> dataList = unitBeanMapper.selectByExample(condition);
+        List<UnitBean> dataList = unitBeanMapper.selectByExampleWithRowbounds(condition, rowBounds);
+        return dataList;
+    }
+
+    /**
+     * 查询度量衡数据信息
+     *
+     * @param condition 查询条件
+     * @param page      the page
+     * @return 度量衡信息List unit
+     */
+    public long getUnitCount(UnitBeanExample condition) {
+        // 取得度量衡信息
+        long dataList = unitBeanMapper.countByExample(condition);
         return dataList;
     }
 }

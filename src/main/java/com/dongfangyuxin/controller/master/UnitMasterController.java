@@ -1,6 +1,7 @@
 package com.dongfangyuxin.controller.master;
 
 import com.dongfangyuxin.common.dao.bean.UnitBean;
+import com.dongfangyuxin.controller.common.BaseAction;
 import com.dongfangyuxin.service.master.UnitMasterService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -25,7 +26,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/unitMaster")
-public class UnitMasterController {
+public class UnitMasterController extends BaseAction {
     // 日志
     private static final Logger LOGGER = LogManager.getLogger(UnitMasterController.class);
     // 度量衡单位维护相关服务
@@ -56,11 +57,9 @@ public class UnitMasterController {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         // 查询度量衡信息
-        List<UnitBean> dataList = unitMasterService.getUnitInfo(null);
-        // 数据信息
-        resultMap.put("rows", dataList);
+        resultMap.put("rows", unitMasterService.getUnitInfo(null, paging(page, rows)));
         // 数据条数
-        resultMap.put("total", dataList.size());
+        resultMap.put("total", unitMasterService.getUnitCountInfo(null));
         // 返回度量衡信息
         return resultMap;
     }

@@ -5,27 +5,59 @@ package com.dongfangyuxin.controller.common;
  */
 public class Page {
     /**
-     * 分页查询开始记录位置
+     * 数据偏移量
      */
-    private int begin;
+    private int offset;
+
     /**
-     * 分页查看下结束位置
+     * 数据量限制
      */
-    private int end;
+    private int limit;
 
-    public int getBegin() {
-        return begin;
+    /**
+     * Instantiates a new Page.
+     *
+     * @param offset the offset
+     * @param limit  the limit
+     */
+    public Page(int offset, int limit) {
+        this.offset = offset;
+        this.limit = limit;
     }
 
-    public void setBegin(int begin) {
-        this.begin = begin;
+    /**
+     * Gets offset.
+     *
+     * @return the offset
+     */
+    public int getOffset() {
+        return offset;
     }
 
-    public int getEnd() {
-        return end;
+    /**
+     * Sets offset.
+     *
+     * @param offset the offset
+     */
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
-    public void setEnd(int end) {
-        this.end = end;
+    /**
+     * Gets limit.
+     *
+     * @return the limit
+     */
+    public int getLimit() {
+        return limit;
+    }
+
+    /**
+     * Sets limit.
+     *
+     * @param limit the limit
+     */
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 }

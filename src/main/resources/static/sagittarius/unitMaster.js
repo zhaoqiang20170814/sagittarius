@@ -4,7 +4,7 @@
 
 $(function () {
     // 加载数据表格
-    $('#workorderlist').datagrid({
+    $('#dg').datagrid({
         fit: true,
         toolbar: '#toolbar',
         url: '/unitMaster/init',
@@ -16,6 +16,13 @@ $(function () {
         }, {
             field: 'code',
             title: '单位编号',
+            width: 150,
+            align: 'center',
+            halign: 'center',
+            sortable: true
+        }, {
+            field: 'name',
+            title: '单位名称',
             width: 150,
             align: 'center',
             halign: 'center',

@@ -9,14 +9,15 @@ public class BaseAction {
     /**
      * 分页信息设置
      *
-     * @param request
-     * @return
+     * @param page the page
+     * @param rows the rows
+     * @return page
      */
     protected Page paging(int page, int rows) {
-        // 当前页码
-        int page = Integer.parseInt((request.getParameter("page") == null || request.getParameter("page") == "0") ? "1" : request.getParameter("page"));
-        // 每页显示数据条数
-        int number = Integer.parseInt((request.getParameter("rows") == null || request.getParameter("rows") == "0") ? "20" : request.getParameter("rows"));
-        return new Page((page - 1) * number, number);
+        // 数据范围开始：每页的行数*页数
+        int offset = rows * (page - 1);
+        // 数据范围结束：每页的行数*（页数+1）
+        int limit = rows;
+        return new Page(offset, limit);
     }
 }

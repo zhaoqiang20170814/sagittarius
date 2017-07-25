@@ -2,6 +2,7 @@ package com.dongfangyuxin.service.master;
 
 import com.dongfangyuxin.common.dao.bean.UnitBean;
 import com.dongfangyuxin.common.dao.bean.UnitBeanExample;
+import com.dongfangyuxin.controller.common.Page;
 import com.dongfangyuxin.engine.master.UnitEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,22 @@ public class UnitMasterService {
      * @return 度量衡信息
      */
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<UnitBean> getUnitInfo(UnitBeanExample condition,) {
-        List<UnitBean> dataList = unitEngine.getUnit(condition);
+    public List<UnitBean> getUnitInfo(UnitBeanExample condition, Page page) {
+        // 查询度量衡信息
+        List<UnitBean> dataList = unitEngine.getUnit(condition, page);
         return dataList;
+    }
+
+    /**
+     * 取得度量衡信息数量
+     *
+     * @param condition 查询条件
+     * @return 度量衡信息
+     */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public long getUnitCountInfo(UnitBeanExample condition) {
+        // 查询度量衡信息
+        long dataCnt = unitEngine.getUnitCount(condition);
+        return dataCnt;
     }
 }
