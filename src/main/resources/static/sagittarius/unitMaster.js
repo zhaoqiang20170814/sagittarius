@@ -9,11 +9,6 @@ $(function () {
         toolbar: '#toolbar',
         url: '/unitMaster/load',
         columns: [[{
-            field: 'ck',
-            width: 50,
-            checkbox: true,
-            align: 'center'
-        }, {
             field: 'id',
             title: '主键',
             hidden: true,
@@ -38,7 +33,6 @@ $(function () {
         pagination: true,
         pageSize: 20,
         pageList: [10, 20, 30, 40, 50],
-        rownumbers: false,
         singleSelect: false, // 不允许复选
         striped: true,
         checkOnSelect: false,
@@ -66,7 +60,6 @@ function editUnit() {
     if (row) {
         $('#dlg').dialog('open').dialog('center').dialog('setTitle', '修改');
         $('#fm').form('load', row);
-        url = 'update_user.php?id=' + row.id;
     }
 }
 /**
@@ -82,11 +75,13 @@ function removeUnit() {
                         $('#dg').datagrid('reload');    // reload the user data
                     } else {
                         $.messager.show({    // show error message
-                            title: 'Error',
-                            msg: result.errorMsg
+                            title: '错误',
+                            msg: result.message
                         });
                     }
                 }, 'json');
+                // 刷新页面
+                $('#dg').datagrid('reload');    // reload the user data
             }
         });
     }
@@ -98,11 +93,11 @@ function saveUser() {
     // 获得操作类型
     var editType = $('#editType').val();
     var realurl;
-     if(editType == 'new') {
-         realurl = '/unitMaster/add';
-     }else if(editType == 'edit'){
-         realurl = '/unitMaster/edit';
-     }
+    if (editType == 'new') {
+        realurl = '/unitMaster/add';
+    } else if (editType == 'edit') {
+        realurl = '/unitMaster/edit';
+    }
     $('#fm').form('submit', {
         url: realurl,
         onSubmit: function () {
@@ -110,14 +105,16 @@ function saveUser() {
         },
         success: function (result) {
             var result = eval('(' + result + ')');
-            if (result.errorMsg) {
-                $.messager.show({
-                    title: 'Error',
-                    msg: result.errorMsg
-                });
+            if (result.success) {
+                // close the dialog
+                $('#dlg').dialog('close');
+                // reload the user data
+                $('#dg').datagrid('reload');
             } else {
-                $('#dlg').dialog('close');        // close the dialog
-                $('#dg').datagrid('reload');    // reload the user data
+                $.messager.show({
+                    title: '错误',
+                    msg: result.message
+                });
             }
         }
     });

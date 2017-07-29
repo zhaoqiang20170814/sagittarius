@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,7 +45,6 @@ public class UnitMasterController extends BaseAction {
 
     /**
      * 度量衡单位维护初始化界面
-     *
      *
      * @param request  请求
      * @param response 响应
@@ -83,7 +81,7 @@ public class UnitMasterController extends BaseAction {
         unitBean.setName(name);
         long key = unitMasterService.addUnitInfo(unitBean);
         // 返回度量衡信息
-        return resultMap;
+        return convertReponse(resultMap, true, null);
     }
 
     /**
@@ -105,7 +103,7 @@ public class UnitMasterController extends BaseAction {
         unitBean.setName(name);
         int key = unitMasterService.editUnitInfo(unitBean);
         // 返回度量衡信息
-        return resultMap;
+        return convertReponse(resultMap, true, null);
     }
 
     /**
@@ -125,6 +123,6 @@ public class UnitMasterController extends BaseAction {
         unitBean.setId(id);
         int key = unitMasterService.removeUnitInfo(unitBean);
         // 返回度量衡信息
-        return resultMap;
+        return convertReponse(resultMap, true, null);
     }
 }
