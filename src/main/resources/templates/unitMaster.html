@@ -24,6 +24,9 @@
     <div id="dlg" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg-buttons">
         <form id="fm" method="post" novalidate="novalidate" style="margin:0;padding:20px 50px">
             <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">度量衡信息维护</div>
+            <div style="margin-bottom:10px" hidden="hidden">
+                <input name="id" class="easyui-textbox" required="true" label="主键" style="width:100%"/>
+            </div>
             <div style="margin-bottom:10px">
                 <input name="code" class="easyui-textbox" required="true" label="单位编号" style="width:100%"/>
             </div>
@@ -35,6 +38,9 @@
     <div id="dlg-buttons">
         <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+    </div>
+    <div>
+        <input id="editType" hidden="hidden"/>
     </div>
 </div>
 </body>

@@ -49,4 +49,43 @@ public class UnitMasterService {
         long dataCnt = unitEngine.getUnitCount(condition);
         return dataCnt;
     }
+
+    /**
+     * 增加度量衡信息
+     *
+     * @param condition 查询条件
+     * @return 度量衡信息
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public long addUnitInfo(UnitBean data) {
+        // 查询度量衡信息
+        long key = unitEngine.addUnit(data);
+        return key;
+    }
+
+    /**
+     * 修改度量衡信息
+     *
+     * @param data 修改数据内容
+     * @return 度量衡信息
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int editUnitInfo(UnitBean data) {
+        // 查询度量衡信息
+        int key = unitEngine.editUnit(data);
+        return key;
+    }
+
+    /**
+     * 删除度量衡信息
+     *
+     * @param data 修改数据内容
+     * @return 度量衡信息
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int removeUnitInfo(UnitBean data) {
+        // 查询度量衡信息
+        int key = unitEngine.removeUnit(data);
+        return key;
+    }
 }

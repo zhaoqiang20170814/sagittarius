@@ -7,12 +7,16 @@ $(function () {
     $('#dg').datagrid({
         fit: true,
         toolbar: '#toolbar',
-        url: '/unitMaster/init',
+        url: '/unitMaster/load',
         columns: [[{
             field: 'ck',
             width: 50,
             checkbox: true,
             align: 'center'
+        }, {
+            field: 'id',
+            title: '主键',
+            hidden: true,
         }, {
             field: 'code',
             title: '单位编号',
@@ -49,16 +53,18 @@ $(function () {
  * 新增单位
  */
 function newUnit() {
-    $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'New User');
+    $('#dlg').dialog('open').dialog('center').dialog('setTitle', '新增');
     $('#fm').form('clear');
+    $('#editType').val("new");
 }
 /**
  * 修改单位
  */
 function editUnit() {
+    $('#editType').val("edit");
     var row = $('#dg').datagrid('getSelected');
     if (row) {
-        $('#dlg').dialog('open').dialog('center').dialog('setTitle', 'Edit User');
+        $('#dlg').dialog('open').dialog('center').dialog('setTitle', '修改');
         $('#fm').form('load', row);
         url = 'update_user.php?id=' + row.id;
     }
@@ -67,4 +73,52 @@ function editUnit() {
  * 删除单位
  */
 function removeUnit() {
+    var row = $('#dg').datagrid('getSelected');
+    if (row) {
+        $.messager.confirm('Confirm', '您是否确定要删除此条数据?(' + row.code + ')', function (r) {
+            if (r) {
+                $.post('/unitMaster/remove', {id: row.id}, function (result) {
+                    if (result.success) {
+                        $('#dg').datagrid('reload');    // reload the user data
+                    } else {
+                        $.messager.show({    // show error message
+                            title: 'Error',
+                            msg: result.errorMsg
+                        });
+                    }
+                }, 'json');
+            }
+        });
+    }
+}
+/**
+ * 保存按钮
+ */
+function saveUser() {
+    // 获得操作类型
+    var editType = $('#editType').val();
+    var realurl;
+     if(editType == 'new') {
+         realurl = '/unitMaster/add';
+     }else if(editType == 'edit'){
+         realurl = '/unitMaster/edit';
+     }
+    $('#fm').form('submit', {
+        url: realurl,
+        onSubmit: function () {
+            return $(this).form('validate');
+        },
+        success: function (result) {
+            var result = eval('(' + result + ')');
+            if (result.errorMsg) {
+                $.messager.show({
+                    title: 'Error',
+                    msg: result.errorMsg
+                });
+            } else {
+                $('#dlg').dialog('close');        // close the dialog
+                $('#dg').datagrid('reload');    // reload the user data
+            }
+        }
+    });
 }

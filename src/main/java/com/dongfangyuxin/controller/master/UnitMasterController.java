@@ -47,19 +47,83 @@ public class UnitMasterController extends BaseAction {
     /**
      * 度量衡单位维护初始化界面
      *
+     *
      * @param request  请求
      * @param response 响应
      * @return
      */
-    @RequestMapping(value = "init", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "load", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> init(HttpServletRequest request, HttpServletResponse response, @RequestParam int page, @RequestParam int rows) {
+    public Map<String, Object> load(HttpServletRequest request, HttpServletResponse response, @RequestParam int page, @RequestParam int rows) {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         // 查询度量衡信息
         resultMap.put("rows", unitMasterService.getUnitInfo(null, paging(page, rows)));
         // 数据条数
         resultMap.put("total", unitMasterService.getUnitCountInfo(null));
+        // 返回度量衡信息
+        return resultMap;
+    }
+
+    /**
+     * 度量衡单位新增
+     *
+     * @param request  请求
+     * @param response 响应
+     * @return
+     */
+    @RequestMapping(value = "add", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> add(HttpServletRequest request, HttpServletResponse response, @RequestParam String code, @RequestParam String name) {
+        // 请求结果
+        Map<String, Object> resultMap = new HashMap<>();
+        // 数据设定
+        UnitBean unitBean = new UnitBean();
+        unitBean.setCode(code);
+        unitBean.setName(name);
+        long key = unitMasterService.addUnitInfo(unitBean);
+        // 返回度量衡信息
+        return resultMap;
+    }
+
+    /**
+     * 度量衡单位修改
+     *
+     * @param request  请求
+     * @param response 响应
+     * @return
+     */
+    @RequestMapping(value = "edit", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> edit(HttpServletRequest request, HttpServletResponse response, @RequestParam int id, @RequestParam String code, @RequestParam String name) {
+        // 请求结果
+        Map<String, Object> resultMap = new HashMap<>();
+        // 数据设定
+        UnitBean unitBean = new UnitBean();
+        unitBean.setId(id);
+        unitBean.setCode(code);
+        unitBean.setName(name);
+        int key = unitMasterService.editUnitInfo(unitBean);
+        // 返回度量衡信息
+        return resultMap;
+    }
+
+    /**
+     * 度量衡单位删除
+     *
+     * @param request  请求
+     * @param response 响应
+     * @return
+     */
+    @RequestMapping(value = "remove", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> remove(HttpServletRequest request, HttpServletResponse response, @RequestParam int id) {
+        // 请求结果
+        Map<String, Object> resultMap = new HashMap<>();
+        // 数据设定
+        UnitBean unitBean = new UnitBean();
+        unitBean.setId(id);
+        int key = unitMasterService.removeUnitInfo(unitBean);
         // 返回度量衡信息
         return resultMap;
     }
