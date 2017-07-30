@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>成本一级分类信息一览</title>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/metro/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/color.css"/>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/icon.css"/>
+    <script type="text/javascript" src="plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="plugins/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="sagittarius/classificationLevelOneMaster.js"></script>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'center'">
+    <table id="dg" class="easyui-datagrid" style="width:95%;height:95%">
+    </table>
+    <!-- datagrid功能菜单 -->
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUnit()">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUnit()">编辑</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="removeUnit()">删除</a>
+    </div>
+    <!--编辑窗口 -->
+    <div id="dlg" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg-buttons">
+        <form id="fm" method="post" novalidate="novalidate" style="margin:0;padding:20px 50px">
+            <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">成本一级分类信息维护</div>
+            <div style="margin-bottom:10px" hidden="hidden">
+                <input name="id" class="easyui-textbox" label="主键" style="width:100%"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="code" class="easyui-textbox" required="true" label="编号" style="width:100%"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="name" class="easyui-textbox" required="true" label="分类名称" style="width:100%"/>
+            </div>
+        </form>
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+    </div>
+    <div>
+        <input id="editType" hidden="hidden"/>
+    </div>
+</div>
+</body>
+</html>

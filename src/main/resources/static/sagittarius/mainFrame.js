@@ -29,9 +29,14 @@ function jumpMenu(menuIndex) {
         // 用户信息界面
         $("#center").panel('refresh', "http://localhost/basicCRUD.html");
     } else if (menuIndex == "1-6") {
-        // 用户信息界面
-        $("#center").panel('refresh', "http://localhost/basicCRUD.html");
+        // 成本一级分类信息界面
+        title = '成本一级分类信息界面';
+        content = createFrame("/classificationLevelOneMaster");
     } else if (menuIndex == "1-7") {
+        // 成本二级分类信息界面
+        title = '成本一级分类信息界面';
+        content = createFrame("/classificationLevelTwoMaster");
+    } else if (menuIndex == "1-8") {
         // 度量衡信息维护
         title = '度量衡信息维护';
         content = createFrame("/unitMaster");
