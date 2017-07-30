@@ -3,7 +3,6 @@ package com.dongfangyuxin.engine.master;
 import com.dongfangyuxin.common.dao.ClassificationLevelOneBeanMapper;
 import com.dongfangyuxin.common.dao.bean.ClassificationLevelOneBean;
 import com.dongfangyuxin.common.dao.bean.ClassificationLevelOneBeanExample;
-import com.dongfangyuxin.common.dao.bean.UnitBean;
 import com.dongfangyuxin.common.util.Utils;
 import com.dongfangyuxin.controller.common.Page;
 import org.apache.ibatis.session.RowBounds;
@@ -26,13 +25,13 @@ public class ClassificationLevelOneEngine {
     private ClassificationLevelOneBeanMapper classificationLevelOneBeanMapper;
 
     /**
-     * 查询数据信息
+     * 查询数据信息(分页)
      *
      * @param condition 查询条件
      * @param page      分页信息
      * @return 度量衡信息List
      */
-    public List<ClassificationLevelOneBean> getUnit(ClassificationLevelOneBeanExample condition, Page page) {
+    public List<ClassificationLevelOneBean> getClassificationLevelOne(ClassificationLevelOneBeanExample condition, Page page) {
         // 设置分页信息
         RowBounds rowBounds = new RowBounds(page.getOffset(), page.getLimit());
         // 取得数据信息
@@ -41,12 +40,23 @@ public class ClassificationLevelOneEngine {
     }
 
     /**
+     * 查询数据信息
+     *
+     * @return 度量衡信息List
+     */
+    public List<ClassificationLevelOneBean> getClassificationLevelOne() {
+        // 取得数据信息
+        List<ClassificationLevelOneBean> dataList = classificationLevelOneBeanMapper.selectByExample(null);
+        return dataList;
+    }
+
+    /**
      * 查询数据数量信息
      *
      * @param condition 查询条件
-     * @return 度量衡信息List unit
+     * @return 度量衡信息List ClassificationLevelOne
      */
-    public long getUnitCount(ClassificationLevelOneBeanExample condition) {
+    public long getClassificationLevelOneCount(ClassificationLevelOneBeanExample condition) {
         // 取得数据数量信息
         long dataList = classificationLevelOneBeanMapper.countByExample(condition);
         return dataList;
@@ -56,9 +66,9 @@ public class ClassificationLevelOneEngine {
      * 增加数据信息
      *
      * @param data 数据
-     * @return 度量衡信息List unit
+     * @return 度量衡信息List ClassificationLevelOne
      */
-    public long addUnit(ClassificationLevelOneBean data) {
+    public long addClassificationLevelOne(ClassificationLevelOneBean data) {
         // 设置数据库后4项
         Utils.setEntityCreateAndOperInfo(data);
         // 新增数据信息
@@ -70,9 +80,9 @@ public class ClassificationLevelOneEngine {
      * 修改数据信息
      *
      * @param data 数据
-     * @return 度量衡信息List unit
+     * @return 度量衡信息List ClassificationLevelOne
      */
-    public int editUnit(ClassificationLevelOneBean data) {
+    public int editClassificationLevelOne(ClassificationLevelOneBean data) {
         // 设置数据库后4项
         Utils.setEntityOperInfo(data);
         // 修改度量衡信息
@@ -84,9 +94,9 @@ public class ClassificationLevelOneEngine {
      * 删除数据信息
      *
      * @param data 数据
-     * @return 度量衡信息List unit
+     * @return 度量衡信息List ClassificationLevelOne
      */
-    public int removeUnit(ClassificationLevelOneBean data) {
+    public int removeClassificationLevelOne(ClassificationLevelOneBean data) {
         // 删除数据信息
         int updateCnt = classificationLevelOneBeanMapper.deleteByPrimaryKey(data.getId());
         return updateCnt;

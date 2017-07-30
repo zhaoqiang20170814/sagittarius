@@ -18,14 +18,14 @@ $(function () {
             width: 150,
             align: 'center',
             halign: 'center',
-            sortable: true
+            sortable: false
         }, {
             field: 'name',
             title: '单位名称',
             width: 150,
             align: 'center',
             halign: 'center',
-            sortable: true
+            sortable: false
         }]],
         loadMsg: '数据装载中......', // 在从远程站点加载数据的时候显示提示消息
         collapsible: true,

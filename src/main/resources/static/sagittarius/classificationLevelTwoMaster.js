@@ -3,11 +3,13 @@
  */
 
 $(function () {
+    // 成本一级分类信息
+    var classificationLevelOneInfo = $.parseJSON($('#classificationLevelOneInfoList').val());
     // 加载数据表格
     $('#dg').datagrid({
         fit: true,
         toolbar: '#toolbar',
-        url: '/classificationLevelOneMaster/load',
+        url: '/classificationLevelTwoMaster/load',
         columns: [[{
             field: 'id',
             title: '主键',
@@ -26,6 +28,20 @@ $(function () {
             align: 'center',
             halign: 'center',
             sortable: false
+        }, {
+            field: 'parent',
+            title: '父分类',
+            width: 150,
+            align: 'center',
+            halign: 'center',
+            sortable: false,
+            formatter: function (value) {
+                for (var i = 0; i < classificationLevelOneInfo.length; i++) {
+                    if (classificationLevelOneInfo[i].code == value)
+                        return classificationLevelOneInfo[i].name;
+                }
+                return value;
+            }
         }]],
         loadMsg: '数据装载中......', // 在从远程站点加载数据的时候显示提示消息
         collapsible: true,
@@ -70,7 +86,7 @@ function removeUnit() {
     if (row) {
         $.messager.confirm('Confirm', '您是否确定要删除此条数据?(' + row.code + ')', function (r) {
             if (r) {
-                $.post('/classificationLevelOneMaster/remove', {id: row.id}, function (result) {
+                $.post('/classificationLevelTwoMaster/remove', {id: row.id}, function (result) {
                     if (result.success) {
                         $('#dg').datagrid('reload');    // reload the user data
                     } else {
@@ -94,9 +110,9 @@ function saveUser() {
     var editType = $('#editType').val();
     var realurl;
     if (editType == 'new') {
-        realurl = '/classificationLevelOneMaster/add';
+        realurl = '/classificationLevelTwoMaster/add';
     } else if (editType == 'edit') {
-        realurl = '/classificationLevelOneMaster/edit';
+        realurl = '/classificationLevelTwoMaster/edit';
     }
     $('#fm').form('submit', {
         url: realurl,

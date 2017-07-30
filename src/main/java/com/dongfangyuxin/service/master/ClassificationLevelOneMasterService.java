@@ -2,7 +2,6 @@ package com.dongfangyuxin.service.master;
 
 import com.dongfangyuxin.common.dao.bean.ClassificationLevelOneBean;
 import com.dongfangyuxin.common.dao.bean.ClassificationLevelOneBeanExample;
-import com.dongfangyuxin.common.dao.bean.UnitBean;
 import com.dongfangyuxin.controller.common.Page;
 import com.dongfangyuxin.engine.master.ClassificationLevelOneEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class ClassificationLevelOneMasterService {
     private ClassificationLevelOneEngine classificationLevelOneEngine;
 
     /**
-     * 取得成本一级分类信息
+     * 取得成本一级分类信息（分页）
      *
      * @param condition 查询条件
      * @return 成本一级分类信息
@@ -34,7 +33,20 @@ public class ClassificationLevelOneMasterService {
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public List<ClassificationLevelOneBean> getClassificationLevelOneInfo(ClassificationLevelOneBeanExample condition, Page page) {
         // 查询成本一级分类信息
-        List<ClassificationLevelOneBean> dataList = classificationLevelOneEngine.getUnit(condition, page);
+        List<ClassificationLevelOneBean> dataList = classificationLevelOneEngine.getClassificationLevelOne(condition, page);
+        return dataList;
+    }
+
+    /**
+     * 取得成本一级分类信息
+     *
+     * @param condition 查询条件
+     * @return 成本一级分类信息
+     */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public List<ClassificationLevelOneBean> getClassificationLevelOneAllInfo() {
+        // 查询成本一级分类信息
+        List<ClassificationLevelOneBean> dataList = classificationLevelOneEngine.getClassificationLevelOne();
         return dataList;
     }
 
@@ -47,7 +59,7 @@ public class ClassificationLevelOneMasterService {
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public long getClassificationLevelOneCountInfo(ClassificationLevelOneBeanExample condition) {
         // 查询成本一级分类信息
-        long dataCnt = classificationLevelOneEngine.getUnitCount(condition);
+        long dataCnt = classificationLevelOneEngine.getClassificationLevelOneCount(condition);
         return dataCnt;
     }
 
@@ -60,7 +72,7 @@ public class ClassificationLevelOneMasterService {
     @Transactional(propagation = Propagation.REQUIRED)
     public long addClassificationLevelOneInfo(ClassificationLevelOneBean data) {
         // 查询成本一级分类信息
-        long key = classificationLevelOneEngine.addUnit(data);
+        long key = classificationLevelOneEngine.addClassificationLevelOne(data);
         return key;
     }
 
@@ -73,7 +85,7 @@ public class ClassificationLevelOneMasterService {
     @Transactional(propagation = Propagation.REQUIRED)
     public int editClassificationLevelOneInfo(ClassificationLevelOneBean data) {
         // 查询成本一级分类信息
-        int key = classificationLevelOneEngine.editUnit(data);
+        int key = classificationLevelOneEngine.editClassificationLevelOne(data);
         return key;
     }
 
@@ -86,7 +98,7 @@ public class ClassificationLevelOneMasterService {
     @Transactional(propagation = Propagation.REQUIRED)
     public int removeClassificationLevelOneInfo(ClassificationLevelOneBean data) {
         // 查询成本一级分类信息
-        int key = classificationLevelOneEngine.removeUnit(data);
+        int key = classificationLevelOneEngine.removeClassificationLevelOne(data);
         return key;
     }
 }
