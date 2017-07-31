@@ -26,15 +26,16 @@ function jumpMenu(menuIndex) {
         // 用户信息界面
         $("#center").panel('refresh', "http://localhost/basicCRUD.html");
     } else if (menuIndex == "1-5") {
-        // 用户信息界面
-        $("#center").panel('refresh', "http://localhost/basicCRUD.html");
+        // 报销项目信息界面
+        title = '报销项目信息维护';
+        content = createFrame("/expenseTypeMaster");
     } else if (menuIndex == "1-6") {
         // 成本一级分类信息界面
-        title = '成本一级分类信息界面';
+        title = '成本一级分类信息维护';
         content = createFrame("/classificationLevelOneMaster");
     } else if (menuIndex == "1-7") {
         // 成本二级分类信息界面
-        title = '成本一级分类信息界面';
+        title = '成本一级分类信息维护';
         content = createFrame("/classificationLevelTwoMaster");
     } else if (menuIndex == "1-8") {
         // 度量衡信息维护
