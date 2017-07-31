@@ -13,9 +13,9 @@ $(function () {
 function jumpMenu(menuIndex) {
     var content, title;
     if (menuIndex == "1-1") {
-        // 用户信息界面
-        title = '原材料维护';
-        content = createFrame("/materialMaster");
+        // 原材料分类
+        title = '原材料分类维护';
+        content = createFrame("/materialTypeMaster");
     } else if (menuIndex == "1-2") {
         // 用户信息界面
         $("#center").panel('refresh', "http://localhost/basicCRUD.html");
