@@ -56,6 +56,10 @@ public class UserBeanSqlProvider {
             sql.VALUES("CONTACT", "#{contact,jdbcType=VARCHAR}");
         }
         
+        if (record.getIdNumber() != null) {
+            sql.VALUES("ID_NUMBER", "#{idNumber,jdbcType=CHAR}");
+        }
+        
         if (record.getsCreator() != null) {
             sql.VALUES("S_CREATOR", "#{sCreator,jdbcType=CHAR}");
         }
@@ -89,6 +93,7 @@ public class UserBeanSqlProvider {
         sql.SELECT("POST");
         sql.SELECT("DEPARTMENT");
         sql.SELECT("CONTACT");
+        sql.SELECT("ID_NUMBER");
         sql.SELECT("S_CREATOR");
         sql.SELECT("S_CREATE_DATE");
         sql.SELECT("S_OPERATOR");
@@ -142,6 +147,10 @@ public class UserBeanSqlProvider {
             sql.SET("CONTACT = #{record.contact,jdbcType=VARCHAR}");
         }
         
+        if (record.getIdNumber() != null) {
+            sql.SET("ID_NUMBER = #{record.idNumber,jdbcType=CHAR}");
+        }
+        
         if (record.getsCreator() != null) {
             sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         }
@@ -174,6 +183,7 @@ public class UserBeanSqlProvider {
         sql.SET("POST = #{record.post,jdbcType=CHAR}");
         sql.SET("DEPARTMENT = #{record.department,jdbcType=CHAR}");
         sql.SET("CONTACT = #{record.contact,jdbcType=VARCHAR}");
+        sql.SET("ID_NUMBER = #{record.idNumber,jdbcType=CHAR}");
         sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         sql.SET("S_CREATE_DATE = #{record.sCreateDate,jdbcType=TIMESTAMP}");
         sql.SET("S_OPERATOR = #{record.sOperator,jdbcType=CHAR}");
@@ -214,6 +224,10 @@ public class UserBeanSqlProvider {
         
         if (record.getContact() != null) {
             sql.SET("CONTACT = #{contact,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getIdNumber() != null) {
+            sql.SET("ID_NUMBER = #{idNumber,jdbcType=CHAR}");
         }
         
         if (record.getsCreator() != null) {

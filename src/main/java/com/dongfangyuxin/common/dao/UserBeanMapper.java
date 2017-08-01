@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
+
 @Mapper
 public interface UserBeanMapper {
     @SelectProvider(type=UserBeanSqlProvider.class, method="countByExample")
@@ -25,12 +26,12 @@ public interface UserBeanMapper {
         "insert into user (CODE, NAME, ",
         "SEX, AGE, POST, ",
         "DEPARTMENT, CONTACT, ",
-        "S_CREATOR, S_CREATE_DATE, ",
+        "ID_NUMBER, S_CREATOR, S_CREATE_DATE, ",
         "S_OPERATOR, S_OPERATOR_DATE)",
         "values (#{code,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, ",
         "#{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{post,jdbcType=CHAR}, ",
         "#{department,jdbcType=CHAR}, #{contact,jdbcType=VARCHAR}, ",
-        "#{sCreator,jdbcType=CHAR}, #{sCreateDate,jdbcType=TIMESTAMP}, ",
+        "#{idNumber,jdbcType=CHAR}, #{sCreator,jdbcType=CHAR}, #{sCreateDate,jdbcType=TIMESTAMP}, ",
         "#{sOperator,jdbcType=CHAR}, #{sOperatorDate,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
@@ -50,6 +51,7 @@ public interface UserBeanMapper {
         @Result(column="POST", property="post", jdbcType=JdbcType.CHAR),
         @Result(column="DEPARTMENT", property="department", jdbcType=JdbcType.CHAR),
         @Result(column="CONTACT", property="contact", jdbcType=JdbcType.VARCHAR),
+        @Result(column="ID_NUMBER", property="idNumber", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATE_DATE", property="sCreateDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="S_OPERATOR", property="sOperator", jdbcType=JdbcType.CHAR),
@@ -67,6 +69,7 @@ public interface UserBeanMapper {
         @Result(column="POST", property="post", jdbcType=JdbcType.CHAR),
         @Result(column="DEPARTMENT", property="department", jdbcType=JdbcType.CHAR),
         @Result(column="CONTACT", property="contact", jdbcType=JdbcType.VARCHAR),
+        @Result(column="ID_NUMBER", property="idNumber", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATE_DATE", property="sCreateDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="S_OPERATOR", property="sOperator", jdbcType=JdbcType.CHAR),
@@ -76,7 +79,7 @@ public interface UserBeanMapper {
 
     @Select({
         "select",
-        "ID, CODE, NAME, SEX, AGE, POST, DEPARTMENT, CONTACT, S_CREATOR, S_CREATE_DATE, ",
+        "ID, CODE, NAME, SEX, AGE, POST, DEPARTMENT, CONTACT, ID_NUMBER, S_CREATOR, S_CREATE_DATE, ",
         "S_OPERATOR, S_OPERATOR_DATE",
         "from user",
         "where ID = #{id,jdbcType=INTEGER}"
@@ -90,6 +93,7 @@ public interface UserBeanMapper {
         @Result(column="POST", property="post", jdbcType=JdbcType.CHAR),
         @Result(column="DEPARTMENT", property="department", jdbcType=JdbcType.CHAR),
         @Result(column="CONTACT", property="contact", jdbcType=JdbcType.VARCHAR),
+        @Result(column="ID_NUMBER", property="idNumber", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATE_DATE", property="sCreateDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="S_OPERATOR", property="sOperator", jdbcType=JdbcType.CHAR),
@@ -115,6 +119,7 @@ public interface UserBeanMapper {
           "POST = #{post,jdbcType=CHAR},",
           "DEPARTMENT = #{department,jdbcType=CHAR},",
           "CONTACT = #{contact,jdbcType=VARCHAR},",
+          "ID_NUMBER = #{idNumber,jdbcType=CHAR},",
           "S_CREATOR = #{sCreator,jdbcType=CHAR},",
           "S_CREATE_DATE = #{sCreateDate,jdbcType=TIMESTAMP},",
           "S_OPERATOR = #{sOperator,jdbcType=CHAR},",

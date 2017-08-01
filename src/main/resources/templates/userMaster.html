@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户信息一览</title>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/metro/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/color.css"/>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/icon.css"/>
+    <script type="text/javascript" src="plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="plugins/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="sagittarius/userMaster.js"></script>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'center'">
+    <table id="dg" class="easyui-datagrid" style="width:95%;height:95%">
+    </table>
+    <!-- datagrid功能菜单 -->
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUnit()">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUnit()">编辑</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="removeUnit()">删除</a>
+    </div>
+    <!--编辑窗口 -->
+    <div id="dlg" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg-buttons">
+        <form id="fm" method="post" novalidate="novalidate" style="margin:0;padding:20px 50px">
+            <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">用户信息维护</div>
+            <div style="margin-bottom:10px" hidden="hidden">
+                <input name="id" class="easyui-textbox" label="主键" style="width:100%"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="code" class="easyui-textbox" required="true" label="编号" style="width:100%"
+                       data-options="validType:['length[0,10]']"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="name" class="easyui-textbox" required="true" label="姓名" style="width:100%"
+                       data-options="validType:['length[0,15]']"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="sex" class="easyui-combobox" required="true" style="width:100%" label="性别"
+                       data-options="valueField: 'code',textField: 'value',data: [{code: 'F',value: '男'},{code: 'M',value: '女'	}]"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="age" class="easyui-numberbox" required="true" label="年龄" style="width:100%"
+                       data-options="max:99, precision:0, min:0"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="post" class="easyui-combobox" required="true" style="width:100%" label="职位"
+                       data-options="valueField: 'code',textField: 'value', url:'/???'"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="department" class="easyui-combobox" required="true" style="width:100%" label="所属部门"
+                       data-options="valueField: 'code',textField: 'value', url:'/???'"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="contact" class="easyui-textbox" required="true" label="联系电话" style="width:100%"
+                       data-options="validType:['length[0,30]']"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="contact" class="easyui-textbox" required="true" label="身份证号" style="width:100%"
+                       data-options="validType:['length[0,18]']"/>
+            </div>
+        </form>
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+    </div>
+    <div>
+        <input id="editType" hidden="hidden"/>
+    </div>
+</div>
+</body>
+</html>

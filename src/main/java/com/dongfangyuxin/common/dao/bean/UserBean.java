@@ -20,6 +20,8 @@ public class UserBean implements Serializable {
 
     private String contact;
 
+    private String idNumber;
+
     private String sCreator;
 
     private Date sCreateDate;
@@ -92,6 +94,14 @@ public class UserBean implements Serializable {
 
     public void setContact(String contact) {
         this.contact = contact == null ? null : contact.trim();
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber == null ? null : idNumber.trim();
     }
 
     public String getsCreator() {

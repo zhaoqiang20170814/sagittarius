@@ -20,8 +20,9 @@ function jumpMenu(menuIndex) {
         // 用户信息界面
         $("#center").panel('refresh', "http://localhost/basicCRUD.html");
     } else if (menuIndex == "1-3") {
-        // 用户信息界面
-        $("#center").panel('refresh', "http://localhost/basicCRUD.html");
+        // 用户信息维护
+        title = '用户信息维护';
+        content = createFrame("/userMaster");
     } else if (menuIndex == "1-4") {
         // 用户信息界面
         $("#center").panel('refresh', "http://localhost/basicCRUD.html");
