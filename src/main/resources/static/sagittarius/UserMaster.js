@@ -3,6 +3,15 @@
  */
 
 $(function () {
+    // 加载字典项
+    var dataDic;
+    $.ajax({
+        url: "/commonController/loadDataDicAll",
+        async: false,
+        success: function (result) {
+            dataDic = eval(result);
+        }
+    });
     // 加载数据表格
     $('#dg').datagrid({
         fit: true,
@@ -56,7 +65,10 @@ $(function () {
             align: 'center',
             halign: 'center',
             formatter: function (value) {
-                // TODO
+                for (var i = 0; i < dataDic.POST.length; i++) {
+                    if (dataDic.POST[i].dictCode == value)
+                        return dataDic.POST[i].dictCodeName;
+                }
                 return value;
             },
             sortable: false
@@ -67,7 +79,10 @@ $(function () {
             align: 'center',
             halign: 'center',
             formatter: function (value) {
-                // TODO
+                for (var i = 0; i < dataDic.DEPARTMENT.length; i++) {
+                    if (dataDic.DEPARTMENT[i].dictCode == value)
+                        return dataDic.DEPARTMENT[i].dictCodeName;
+                }
                 return value;
             },
             sortable: false
@@ -101,6 +116,8 @@ $(function () {
         onLoadSuccess: function (data) {
         }
     });
+    $("#post").combobox("loadData", dataDic.POST);
+    $("#department).combobox("loadData", dataDic.DEPARTMENT);
 })
 /**
  * 新增单位

@@ -16,4 +16,10 @@ public class GlobalConstants {
      * 系统用户
      */
     public static final String SYSTEM_USER = "999999999";
+
+    /**
+     * 有效无效
+     */
+    public static final String VALID = "0";
+    public static final String INVALID = "1";
 }
