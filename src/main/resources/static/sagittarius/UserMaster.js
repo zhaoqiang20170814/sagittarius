@@ -94,7 +94,7 @@ $(function () {
             halign: 'center',
             sortable: false
         }, {
-            field: 'contact',
+            field: 'idNumber',
             title: '身份证号',
             width: 150,
             align: 'center',
@@ -117,7 +117,7 @@ $(function () {
         }
     });
     $("#post").combobox("loadData", dataDic.POST);
-    $("#department).combobox("loadData", dataDic.DEPARTMENT);
+    $("#department").combobox("loadData", dataDic.DEPARTMENT);
 })
 /**
  * 新增单位
