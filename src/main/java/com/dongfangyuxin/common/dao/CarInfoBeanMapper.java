@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
+
 @Mapper
 public interface CarInfoBeanMapper {
     @SelectProvider(type=CarInfoBeanSqlProvider.class, method="countByExample")

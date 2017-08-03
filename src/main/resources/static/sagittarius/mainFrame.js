@@ -24,8 +24,9 @@ function jumpMenu(menuIndex) {
         title = '用户信息维护';
         content = createFrame("/userMaster");
     } else if (menuIndex == "1-4") {
-        // 用户信息界面
-        $("#center").panel('refresh', "http://localhost/basicCRUD.html");
+        // 车辆信息维护
+        title = '车辆信息维护';
+        content = createFrame("/carMaster");
     } else if (menuIndex == "1-5") {
         // 报销项目信息界面
         title = '报销项目信息维护';
