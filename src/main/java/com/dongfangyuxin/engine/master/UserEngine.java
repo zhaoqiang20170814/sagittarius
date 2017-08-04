@@ -41,6 +41,19 @@ public class UserEngine {
     }
 
     /**
+     * 查询用户信息信息（全部）
+     *
+     * @param condition 查询条件
+     * @param page      分页信息
+     * @return 用户信息信息List
+     */
+    public List<UserBean> getDataAll() {
+        // 取得用户信息信息
+        List<UserBean> dataList = userBeanMapper.selectByExample(new UserBeanExample());
+        return dataList;
+    }
+
+    /**
      * 查询用户信息数据信息
      *
      * @param condition 查询条件

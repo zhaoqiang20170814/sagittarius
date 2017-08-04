@@ -33,7 +33,7 @@ $(function () {
         pagination: true,
         pageSize: 20,
         pageList: [10, 20, 30, 40, 50],
-        singleSelect: false, // 不允许复选
+        singleSelect: true, // 不允许复选
         striped: true,
         checkOnSelect: false,
         onLoadError: function () {

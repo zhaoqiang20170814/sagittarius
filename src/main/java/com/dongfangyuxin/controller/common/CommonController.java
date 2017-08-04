@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.dongfangyuxin.common.dao.bean.DataDicBean;
 import com.dongfangyuxin.common.util.DataDicCache;
 import com.dongfangyuxin.service.master.ClassificationLevelOneMasterService;
+import com.dongfangyuxin.service.master.UserMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,8 @@ public class CommonController {
 
     @Autowired
     private ClassificationLevelOneMasterService classificationLevelOneMasterService;
+    @Autowired
+    private UserMasterService userMasterService;
 
     /**
      * 成本一级分类ComboBox
@@ -31,8 +34,20 @@ public class CommonController {
      */
     @RequestMapping(value = "combobox/classificationLevelOne", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String load(HttpServletRequest request, HttpServletResponse response) {
+    public String loadClassificationLevelOne(HttpServletRequest request, HttpServletResponse response) {
         String result = JSON.toJSONString(classificationLevelOneMasterService.getClassificationLevelOneAllInfo());
+        return result;
+    }
+
+    /**
+     * 员工信息ComboBox
+     *
+     * @return
+     */
+    @RequestMapping(value = "combobox/userInfo", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String loadUserInfo(HttpServletRequest request, HttpServletResponse response) {
+        String result = JSON.toJSONString(userMasterService.getDataInfoAll());
         return result;
     }
 

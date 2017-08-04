@@ -38,6 +38,19 @@ public class UserMasterService {
     }
 
     /**
+     * 取得用户信息（所有）
+     *
+     * @param condition 查询条件
+     * @return 用户信息
+     */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public List<UserBean> getDataInfoAll() {
+        // 查询用户信息
+        List<UserBean> dataList = userEngine.getDataAll();
+        return dataList;
+    }
+
+    /**
      * 取得用户信息数量
      *
      * @param condition 查询条件

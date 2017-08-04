@@ -12,53 +12,83 @@ $(function () {
             dataDic = eval(result);
         }
     });
+    // 员工信息
+    var userInfo;
+    $.ajax({
+        url: "/commonController/combobox/userInfo",
+        async: false,
+        success: function (result) {
+            userInfo = eval(result);
+        }
+    });
     // 加载数据表格
     $('#dg').datagrid({
         fit: true,
         toolbar: '#toolbar',
-        url: '/carMaster/load',
+        url: '/projectInfoMaster/load',
         columns: [[{
             field: 'id',
             title: '主键',
             hidden: true,
         }, {
-            field: 'code',
-            title: '车牌号',
+            field: 'name',
+            title: '项目名',
             width: 100,
             align: 'center',
             halign: 'center',
-            sortable: false
-        }, {
-            field: 'type',
-            title: '车辆类别',
-            width: 100,
-            align: 'center',
-            halign: 'center',
-            formatter: function (value) {
-                for (var i = 0; i < dataDic.POST.length; i++) {
-                    if (dataDic.CAR_TYPE[i].dictCode == value)
-                        return dataDic.CAR_TYPE[i].dictCodeName;
-                }
-                return value;
-            },
             sortable: false
         }, {
             field: 'status',
-            title: '车辆状态',
+            title: '项目状态',
             width: 100,
             align: 'center',
             halign: 'center',
             formatter: function (value) {
-                for (var i = 0; i < dataDic.POST.length; i++) {
-                    if (dataDic.CAR_STATUS[i].dictCode == value)
-                        return dataDic.CAR_STATUS[i].dictCodeName;
+                for (var i = 0; i < dataDic.PROJECT_STATUS.length; i++) {
+                    if (dataDic.PROJECT_STATUS[i].dictCode == value)
+                        return dataDic.PROJECT_STATUS[i].dictCodeName;
                 }
                 return value;
             },
             sortable: false
         }, {
-            field: 'memo',
-            title: '备注',
+            field: 'owner',
+            title: '项目负责人',
+            width: 100,
+            align: 'center',
+            halign: 'center',
+            formatter: function (value) {
+                for (var i = 0; i < dataDic.POST.length; i++) {
+                    if (userInfo[i].code == value)
+                        return userInfo[i].name;
+                }
+                return value;
+            },
+            sortable: false
+        }, {
+            field: 'address',
+            title: '项目地址',
+            width: 500,
+            align: 'left',
+            halign: 'center',
+            sortable: false
+        }, {
+            field: 'startTime',
+            title: '项目开始时间',
+            width: 500,
+            align: 'left',
+            halign: 'center',
+            sortable: false
+        }, {
+            field: 'programBudget',
+            title: '项目预算',
+            width: 500,
+            align: 'left',
+            halign: 'center',
+            sortable: false
+        }, {
+            field: 'realtimeCost',
+            title: '项目实时成本',
             width: 500,
             align: 'left',
             halign: 'center',
@@ -79,8 +109,8 @@ $(function () {
         onLoadSuccess: function (data) {
         }
     });
-    $("#type").combobox("loadData", dataDic.CAR_TYPE);
-    $("#status").combobox("loadData", dataDic.CAR_STATUS);
+    $("#status").combobox("loadData", dataDic.PROJECT_STATUS);
+    $("#owner").combobox("loadData", userInfo);
 })
 /**
  * 新增单位
@@ -109,7 +139,7 @@ function removeUnit() {
     if (row) {
         $.messager.confirm('Confirm', '您是否确定要删除此条数据?(' + row.code + ')', function (r) {
             if (r) {
-                $.post('/carMaster/remove', {id: row.id}, function (result) {
+                $.post('/projectInfoMaster/remove', {id: row.id}, function (result) {
                     if (result.success) {
                         $('#dg').datagrid('reload');    // reload the user data
                     } else {
@@ -133,9 +163,9 @@ function saveUser() {
     var editType = $('#editType').val();
     var realurl;
     if (editType == 'new') {
-        realurl = '/carMaster/add';
+        realurl = '/projectInfoMaster/add';
     } else if (editType == 'edit') {
-        realurl = '/carMaster/edit';
+        realurl = '/projectInfoMaster/edit';
     }
     $('#fm').form('submit', {
         url: realurl,

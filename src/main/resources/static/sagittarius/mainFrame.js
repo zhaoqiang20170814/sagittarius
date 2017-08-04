@@ -43,6 +43,10 @@ function jumpMenu(menuIndex) {
         // 度量衡信息维护
         title = '度量衡信息维护';
         content = createFrame("/unitMaster");
+    } else if (menuIndex == "1-9") {
+        // 项目信息维护
+        title = '项目信息维护';
+        content = createFrame("/projectInfoMaster");
     }
     $('#mainPanel').panel({
         title: title,
