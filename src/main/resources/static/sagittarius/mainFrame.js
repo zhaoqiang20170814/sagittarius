@@ -32,13 +32,13 @@ function jumpMenu(menuIndex) {
         title = '报销项目信息维护';
         content = createFrame("/expenseTypeMaster");
     } else if (menuIndex == "1-6") {
-        // 成本一级分类信息界面
-        title = '成本一级分类信息维护';
-        content = createFrame("/classificationLevelOneMaster");
+        // 成本分类信息界面
+        title = '成本分类信息维护';
+        content = createFrame("/costTypeMaster");
     } else if (menuIndex == "1-7") {
-        // 成本二级分类信息界面
-        title = '成本一级分类信息维护';
-        content = createFrame("/classificationLevelTwoMaster");
+        // 成本项目信息界面
+        title = '成本项目信息维护';
+        content = createFrame("/costItemMaster");
     } else if (menuIndex == "1-8") {
         // 度量衡信息维护
         title = '度量衡信息维护';

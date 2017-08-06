@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>成本二级分类信息一览</title>
+    <title>成本一级分类信息一览</title>
     <link rel="stylesheet" type="text/css" href="plugins/themes/metro/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="plugins/themes/color.css"/>
     <link rel="stylesheet" type="text/css" href="plugins/themes/icon.css"/>
     <script type="text/javascript" src="plugins/jquery.min.js"></script>
     <script type="text/javascript" src="plugins/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="sagittarius/classificationLevelTwoMaster.js"></script>
+    <script type="text/javascript" src="sagittarius/costTypeMaster.js"></script>
 </head>
 <body class="easyui-layout">
 <div data-options="region:'center'">
@@ -23,7 +23,7 @@
     <!--编辑窗口 -->
     <div id="dlg" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg-buttons">
         <form id="fm" method="post" novalidate="novalidate" style="margin:0;padding:20px 50px">
-            <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">成本二级分类信息维护</div>
+            <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">成本一级分类信息维护</div>
             <div style="margin-bottom:10px" hidden="hidden">
                 <input name="id" class="easyui-textbox" label="主键" style="width:100%"/>
             </div>
@@ -33,14 +33,6 @@
             <div style="margin-bottom:10px">
                 <input name="name" class="easyui-textbox" required="true" label="分类名称" style="width:100%"/>
             </div>
-            <div style="margin-bottom:10px">
-                <input name="parent" class="easyui-combobox" required="true" label="父分类" style="width:100%" data-options="
-                    url:'/commonController/combobox/classificationLevelOne',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'"/>
-            </div>
         </form>
     </div>
     <div id="dlg-buttons">
@@ -49,7 +41,6 @@
     </div>
     <div>
         <input id="editType" hidden="hidden"/>
-        <input id="classificationLevelOneInfoList" type="hidden" th:value="${classificationLevelOne}"/>
     </div>
 </div>
 </body>

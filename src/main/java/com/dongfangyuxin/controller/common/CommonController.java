@@ -3,7 +3,7 @@ package com.dongfangyuxin.controller.common;
 import com.alibaba.fastjson.JSON;
 import com.dongfangyuxin.common.dao.bean.DataDicBean;
 import com.dongfangyuxin.common.util.DataDicCache;
-import com.dongfangyuxin.service.master.ClassificationLevelOneMasterService;
+import com.dongfangyuxin.service.master.CostTypeMasterService;
 import com.dongfangyuxin.service.master.UserMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ import java.util.Map;
 public class CommonController {
 
     @Autowired
-    private ClassificationLevelOneMasterService classificationLevelOneMasterService;
+    private CostTypeMasterService costTypeMasterService;
     @Autowired
     private UserMasterService userMasterService;
 
@@ -35,7 +35,7 @@ public class CommonController {
     @RequestMapping(value = "combobox/classificationLevelOne", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String loadClassificationLevelOne(HttpServletRequest request, HttpServletResponse response) {
-        String result = JSON.toJSONString(classificationLevelOneMasterService.getClassificationLevelOneAllInfo());
+        String result = JSON.toJSONString(costTypeMasterService.getDataAll());
         return result;
     }
 

@@ -1,9 +1,8 @@
 package com.dongfangyuxin.controller.master;
 
 import com.dongfangyuxin.common.dao.bean.ClassificationLevelOneBean;
-import com.dongfangyuxin.common.dao.bean.UnitBean;
 import com.dongfangyuxin.controller.common.BaseAction;
-import com.dongfangyuxin.service.master.ClassificationLevelOneMasterService;
+import com.dongfangyuxin.service.master.CostTypeMasterService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +21,13 @@ import java.util.Map;
  * 成本一级分类信息表
  */
 @Controller
-@RequestMapping(value = "/classificationLevelOneMaster")
-public class ClassificationLevelOneController extends BaseAction {
+@RequestMapping(value = "/costTypeMaster")
+public class CostTypeController extends BaseAction {
     // 日志
-    private static final Logger LOGGER = LogManager.getLogger(ClassificationLevelOneController.class);
+    private static final Logger LOGGER = LogManager.getLogger(CostTypeController.class);
     // 成本一级分类维护相关服务
     @Autowired
-    private ClassificationLevelOneMasterService classificationLevelOneMasterService;
+    private CostTypeMasterService costTypeMasterService;
 
     /**
      * 度量衡界面
@@ -38,7 +37,7 @@ public class ClassificationLevelOneController extends BaseAction {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String htmlPage(Map<String, Object> map) {
-        return "classificationLevelOneMaster";
+        return "costTypeMaster";
     }
 
     /**
@@ -54,9 +53,9 @@ public class ClassificationLevelOneController extends BaseAction {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         // 查询度量衡信息
-        resultMap.put("rows", classificationLevelOneMasterService.getClassificationLevelOneInfo(null, paging(page, rows)));
+        resultMap.put("rows", costTypeMasterService.getData(null, paging(page, rows)));
         // 数据条数
-        resultMap.put("total", classificationLevelOneMasterService.getClassificationLevelOneCountInfo(null));
+        resultMap.put("total", costTypeMasterService.getDataCount(null));
         // 返回度量衡信息
         return resultMap;
     }
@@ -77,7 +76,7 @@ public class ClassificationLevelOneController extends BaseAction {
         ClassificationLevelOneBean classificationLevelOneBean = new ClassificationLevelOneBean();
         classificationLevelOneBean.setCode(code);
         classificationLevelOneBean.setName(name);
-        long key = classificationLevelOneMasterService.addClassificationLevelOneInfo(classificationLevelOneBean);
+        long key = costTypeMasterService.addData(classificationLevelOneBean);
         // 返回度量衡信息
         return convertReponse(resultMap, true, null);
     }
@@ -99,7 +98,7 @@ public class ClassificationLevelOneController extends BaseAction {
         classificationLevelOneBean.setId(id);
         classificationLevelOneBean.setCode(code);
         classificationLevelOneBean.setName(name);
-        int key = classificationLevelOneMasterService.editClassificationLevelOneInfo(classificationLevelOneBean);
+        int key = costTypeMasterService.editData(classificationLevelOneBean);
         // 返回度量衡信息
         return convertReponse(resultMap, true, null);
     }
@@ -119,7 +118,7 @@ public class ClassificationLevelOneController extends BaseAction {
         // 数据设定
         ClassificationLevelOneBean classificationLevelOneBean = new ClassificationLevelOneBean();
         classificationLevelOneBean.setId(id);
-        int key = classificationLevelOneMasterService.removeClassificationLevelOneInfo(classificationLevelOneBean);
+        int key = costTypeMasterService.removeData(classificationLevelOneBean);
         // 返回度量衡信息
         return convertReponse(resultMap, true, null);
     }

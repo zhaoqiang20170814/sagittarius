@@ -9,7 +9,7 @@ $(function () {
     $('#dg').datagrid({
         fit: true,
         toolbar: '#toolbar',
-        url: '/classificationLevelTwoMaster/load',
+        url: '/costItemMaster/load',
         columns: [[{
             field: 'id',
             title: '主键',
@@ -86,7 +86,7 @@ function removeUnit() {
     if (row) {
         $.messager.confirm('Confirm', '您是否确定要删除此条数据?(' + row.code + ')', function (r) {
             if (r) {
-                $.post('/classificationLevelTwoMaster/remove', {id: row.id}, function (result) {
+                $.post('/costItemMaster/remove', {id: row.id}, function (result) {
                     if (result.success) {
                         $('#dg').datagrid('reload');    // reload the user data
                     } else {
@@ -110,9 +110,9 @@ function saveUser() {
     var editType = $('#editType').val();
     var realurl;
     if (editType == 'new') {
-        realurl = '/classificationLevelTwoMaster/add';
+        realurl = '/costItemMaster/add';
     } else if (editType == 'edit') {
-        realurl = '/classificationLevelTwoMaster/edit';
+        realurl = '/costItemMaster/edit';
     }
     $('#fm').form('submit', {
         url: realurl,

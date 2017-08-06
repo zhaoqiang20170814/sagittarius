@@ -12,15 +12,15 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 成本二级分类表相关操作
+ * 成本项目表相关操作
  *
  * @author dl 2017/07/20 1.0.1
  * @version 1.0.1
  */
 @Component
-public class ClassificationLevelTwoEngine {
+public class CostItemEngine {
 
-    // 成本二级分类信息表DAO
+    // 成本项目信息表DAO
     @Autowired
     private ClassificationLevelTwoBeanMapper classificationLevelTwoBeanMapper;
 
@@ -31,7 +31,7 @@ public class ClassificationLevelTwoEngine {
      * @param page      分页信息
      * @return 度量衡信息List
      */
-    public List<ClassificationLevelTwoBean> getClassificationLevelTwo(ClassificationLevelTwoBeanExample condition, Page page) {
+    public List<ClassificationLevelTwoBean> getData(ClassificationLevelTwoBeanExample condition, Page page) {
         // 设置分页信息
         RowBounds rowBounds = new RowBounds(page.getOffset(), page.getLimit());
         // 取得数据信息
@@ -45,7 +45,7 @@ public class ClassificationLevelTwoEngine {
      * @param condition 查询条件
      * @return 度量衡信息List ClassificationLevelTwo
      */
-    public long getClassificationLevelTwoCount(ClassificationLevelTwoBeanExample condition) {
+    public long getDataCount(ClassificationLevelTwoBeanExample condition) {
         // 取得数据数量信息
         long dataList = classificationLevelTwoBeanMapper.countByExample(condition);
         return dataList;
@@ -57,7 +57,7 @@ public class ClassificationLevelTwoEngine {
      * @param data 数据
      * @return 度量衡信息List ClassificationLevelTwo
      */
-    public long addClassificationLevelTwo(ClassificationLevelTwoBean data) {
+    public long addData(ClassificationLevelTwoBean data) {
         // 设置数据库后4项
         Utils.setEntityCreateAndOperInfo(data);
         // 新增数据信息
@@ -71,7 +71,7 @@ public class ClassificationLevelTwoEngine {
      * @param data 数据
      * @return 度量衡信息List ClassificationLevelTwo
      */
-    public int editClassificationLevelTwo(ClassificationLevelTwoBean data) {
+    public int editData(ClassificationLevelTwoBean data) {
         // 设置数据库后4项
         Utils.setEntityOperInfo(data);
         // 修改度量衡信息
@@ -85,7 +85,7 @@ public class ClassificationLevelTwoEngine {
      * @param data 数据
      * @return 度量衡信息List ClassificationLevelTwo
      */
-    public int removeClassificationLevelTwo(ClassificationLevelTwoBean data) {
+    public int removeData(ClassificationLevelTwoBean data) {
         // 删除数据信息
         int updateCnt = classificationLevelTwoBeanMapper.deleteByPrimaryKey(data.getId());
         return updateCnt;

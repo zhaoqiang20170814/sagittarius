@@ -3,8 +3,8 @@ package com.dongfangyuxin.controller.master;
 import com.alibaba.fastjson.JSON;
 import com.dongfangyuxin.common.dao.bean.ClassificationLevelTwoBean;
 import com.dongfangyuxin.controller.common.BaseAction;
-import com.dongfangyuxin.service.master.ClassificationLevelOneMasterService;
-import com.dongfangyuxin.service.master.ClassificationLevelTwoMasterService;
+import com.dongfangyuxin.service.master.CostTypeMasterService;
+import com.dongfangyuxin.service.master.CostItemMasterService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +24,16 @@ import java.util.Map;
  * 成本二级分类信息表
  */
 @Controller
-@RequestMapping(value = "/classificationLevelTwoMaster")
-public class ClassificationLeveTwoController extends BaseAction {
+@RequestMapping(value = "/costItemMaster")
+public class CostItemController extends BaseAction {
     // 日志
-    private static final Logger LOGGER = LogManager.getLogger(ClassificationLeveTwoController.class);
+    private static final Logger LOGGER = LogManager.getLogger(CostItemController.class);
     // 成本一级分类维护相关服务
     @Autowired
-    private ClassificationLevelOneMasterService classificationLevelOneMasterService;
+    private CostTypeMasterService costTypeMasterService;
     // 成本一级分类维护相关服务
     @Autowired
-    private ClassificationLevelTwoMasterService classificationLevelTwoMasterService;
+    private CostItemMasterService costItemMasterService;
 
     /**
      * 度量衡界面
@@ -44,8 +44,8 @@ public class ClassificationLeveTwoController extends BaseAction {
     @RequestMapping(method = RequestMethod.GET)
     public String htmlPage(Model model) {
         // 获得成本一级分类
-        model.addAttribute("classificationLevelOne", JSON.toJSONString(classificationLevelOneMasterService.getClassificationLevelOneAllInfo()));
-        return "classificationLevelTwoMaster";
+        model.addAttribute("classificationLevelOne", JSON.toJSONString(costTypeMasterService.getDataAll()));
+        return "costItemMaster";
     }
 
     /**
@@ -61,9 +61,9 @@ public class ClassificationLeveTwoController extends BaseAction {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         // 查询度量衡信息
-        resultMap.put("rows", classificationLevelTwoMasterService.getClassificationLevelTwoInfo(null, paging(page, rows)));
+        resultMap.put("rows", costItemMasterService.getData(null, paging(page, rows)));
         // 数据条数
-        resultMap.put("total", classificationLevelTwoMasterService.getClassificationLevelTwoCountInfo(null));
+        resultMap.put("total", costItemMasterService.getDataCount(null));
         // 返回度量衡信息
         return resultMap;
     }
@@ -85,7 +85,7 @@ public class ClassificationLeveTwoController extends BaseAction {
         classificationLevelTwoBean.setCode(code);
         classificationLevelTwoBean.setName(name);
         classificationLevelTwoBean.setParent(parent);
-        long key = classificationLevelTwoMasterService.addClassificationLevelTwoInfo(classificationLevelTwoBean);
+        long key = costItemMasterService.addData(classificationLevelTwoBean);
         // 返回度量衡信息
         return convertReponse(resultMap, true, null);
     }
@@ -108,7 +108,7 @@ public class ClassificationLeveTwoController extends BaseAction {
         classificationLevelTwoBean.setCode(code);
         classificationLevelTwoBean.setName(name);
         classificationLevelTwoBean.setParent(parent);
-        int key = classificationLevelTwoMasterService.editClassificationLevelTwoInfo(classificationLevelTwoBean);
+        int key = costItemMasterService.editData(classificationLevelTwoBean);
         // 返回度量衡信息
         return convertReponse(resultMap, true, null);
     }
@@ -128,7 +128,7 @@ public class ClassificationLeveTwoController extends BaseAction {
         // 数据设定
         ClassificationLevelTwoBean classificationLevelTwoBean = new ClassificationLevelTwoBean();
         classificationLevelTwoBean.setId(id);
-        int key = classificationLevelTwoMasterService.removeClassificationLevelTwoInfo(classificationLevelTwoBean);
+        int key = costItemMasterService.removeData(classificationLevelTwoBean);
         // 返回度量衡信息
         return convertReponse(resultMap, true, null);
     }

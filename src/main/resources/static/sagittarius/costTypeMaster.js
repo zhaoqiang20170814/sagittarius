@@ -7,7 +7,7 @@ $(function () {
     $('#dg').datagrid({
         fit: true,
         toolbar: '#toolbar',
-        url: '/classificationLevelOneMaster/load',
+        url: '/costTypeMaster/load',
         columns: [[{
             field: 'id',
             title: '主键',
@@ -70,7 +70,7 @@ function removeUnit() {
     if (row) {
         $.messager.confirm('Confirm', '您是否确定要删除此条数据?(' + row.code + ')', function (r) {
             if (r) {
-                $.post('/classificationLevelOneMaster/remove', {id: row.id}, function (result) {
+                $.post('/costTypeMaster/remove', {id: row.id}, function (result) {
                     if (result.success) {
                         $('#dg').datagrid('reload');    // reload the user data
                     } else {
@@ -94,9 +94,9 @@ function saveUser() {
     var editType = $('#editType').val();
     var realurl;
     if (editType == 'new') {
-        realurl = '/classificationLevelOneMaster/add';
+        realurl = '/costTypeMaster/add';
     } else if (editType == 'edit') {
-        realurl = '/classificationLevelOneMaster/edit';
+        realurl = '/costTypeMaster/edit';
     }
     $('#fm').form('submit', {
         url: realurl,
