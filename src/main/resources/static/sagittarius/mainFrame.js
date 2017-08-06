@@ -13,12 +13,13 @@ $(function () {
 function jumpMenu(menuIndex) {
     var content, title;
     if (menuIndex == "1-1") {
-        // 原材料分类
-        title = '原材料分类维护';
-        content = createFrame("/materialTypeMaster");
+        // 原材料一级分类维护
+        title = '原材料一级分类维护';
+        content = createFrame("/materialTypeLevelOneMaster");
     } else if (menuIndex == "1-2") {
-        // 用户信息界面
-        $("#center").panel('refresh', "http://localhost/basicCRUD.html");
+        // 原材料二级分类维护
+        title = '原材料二级分类维护';
+        content = createFrame("/materialTypeLevelTwoMaster");
     } else if (menuIndex == "1-3") {
         // 用户信息维护
         title = '用户信息维护';

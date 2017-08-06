@@ -1,32 +1,32 @@
 package com.dongfangyuxin.common.dao;
 
-import com.dongfangyuxin.common.dao.bean.MaterialTypeBean;
-import com.dongfangyuxin.common.dao.bean.MaterialTypeBeanExample.Criteria;
-import com.dongfangyuxin.common.dao.bean.MaterialTypeBeanExample.Criterion;
-import com.dongfangyuxin.common.dao.bean.MaterialTypeBeanExample;
+import com.dongfangyuxin.common.dao.bean.MaterialTypeLevelOneBean;
+import com.dongfangyuxin.common.dao.bean.MaterialTypeLevelOneBeanExample.Criteria;
+import com.dongfangyuxin.common.dao.bean.MaterialTypeLevelOneBeanExample.Criterion;
+import com.dongfangyuxin.common.dao.bean.MaterialTypeLevelOneBeanExample;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.jdbc.SQL;
 
-public class MaterialTypeBeanSqlProvider {
+public class MaterialTypeLevelOneBeanSqlProvider {
 
-    public String countByExample(MaterialTypeBeanExample example) {
+    public String countByExample(MaterialTypeLevelOneBeanExample example) {
         SQL sql = new SQL();
-        sql.SELECT("count(*)").FROM("material_type");
+        sql.SELECT("count(*)").FROM("material_type_level_1");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String deleteByExample(MaterialTypeBeanExample example) {
+    public String deleteByExample(MaterialTypeLevelOneBeanExample example) {
         SQL sql = new SQL();
-        sql.DELETE_FROM("material_type");
+        sql.DELETE_FROM("material_type_level_1");
         applyWhere(sql, example, false);
         return sql.toString();
     }
 
-    public String insertSelective(MaterialTypeBean record) {
+    public String insertSelective(MaterialTypeLevelOneBean record) {
         SQL sql = new SQL();
-        sql.INSERT_INTO("material_type");
+        sql.INSERT_INTO("material_type_level_1");
         
         if (record.getCode() != null) {
             sql.VALUES("CODE", "#{code,jdbcType=CHAR}");
@@ -34,6 +34,10 @@ public class MaterialTypeBeanSqlProvider {
         
         if (record.getName() != null) {
             sql.VALUES("NAME", "#{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRemark() != null) {
+            sql.VALUES("REMARK", "#{remark,jdbcType=VARCHAR}");
         }
         
         if (record.getsCreator() != null) {
@@ -55,7 +59,7 @@ public class MaterialTypeBeanSqlProvider {
         return sql.toString();
     }
 
-    public String selectByExample(MaterialTypeBeanExample example) {
+    public String selectByExample(MaterialTypeLevelOneBeanExample example) {
         SQL sql = new SQL();
         if (example != null && example.isDistinct()) {
             sql.SELECT_DISTINCT("ID");
@@ -64,11 +68,12 @@ public class MaterialTypeBeanSqlProvider {
         }
         sql.SELECT("CODE");
         sql.SELECT("NAME");
+        sql.SELECT("REMARK");
         sql.SELECT("S_CREATOR");
         sql.SELECT("S_CREATE_DATE");
         sql.SELECT("S_OPERATOR");
         sql.SELECT("S_OPERATOR_DATE");
-        sql.FROM("material_type");
+        sql.FROM("material_type_level_1");
         applyWhere(sql, example, false);
         
         if (example != null && example.getOrderByClause() != null) {
@@ -79,11 +84,11 @@ public class MaterialTypeBeanSqlProvider {
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
-        MaterialTypeBean record = (MaterialTypeBean) parameter.get("record");
-        MaterialTypeBeanExample example = (MaterialTypeBeanExample) parameter.get("example");
+        MaterialTypeLevelOneBean record = (MaterialTypeLevelOneBean) parameter.get("record");
+        MaterialTypeLevelOneBeanExample example = (MaterialTypeLevelOneBeanExample) parameter.get("example");
         
         SQL sql = new SQL();
-        sql.UPDATE("material_type");
+        sql.UPDATE("material_type_level_1");
         
         if (record.getId() != null) {
             sql.SET("ID = #{record.id,jdbcType=INTEGER}");
@@ -95,6 +100,10 @@ public class MaterialTypeBeanSqlProvider {
         
         if (record.getName() != null) {
             sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRemark() != null) {
+            sql.SET("REMARK = #{record.remark,jdbcType=VARCHAR}");
         }
         
         if (record.getsCreator() != null) {
@@ -119,24 +128,25 @@ public class MaterialTypeBeanSqlProvider {
 
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
-        sql.UPDATE("material_type");
+        sql.UPDATE("material_type_level_1");
         
         sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         sql.SET("CODE = #{record.code,jdbcType=CHAR}");
         sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("REMARK = #{record.remark,jdbcType=VARCHAR}");
         sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         sql.SET("S_CREATE_DATE = #{record.sCreateDate,jdbcType=TIMESTAMP}");
         sql.SET("S_OPERATOR = #{record.sOperator,jdbcType=CHAR}");
         sql.SET("S_OPERATOR_DATE = #{record.sOperatorDate,jdbcType=TIMESTAMP}");
         
-        MaterialTypeBeanExample example = (MaterialTypeBeanExample) parameter.get("example");
+        MaterialTypeLevelOneBeanExample example = (MaterialTypeLevelOneBeanExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
     }
 
-    public String updateByPrimaryKeySelective(MaterialTypeBean record) {
+    public String updateByPrimaryKeySelective(MaterialTypeLevelOneBean record) {
         SQL sql = new SQL();
-        sql.UPDATE("material_type");
+        sql.UPDATE("material_type_level_1");
         
         if (record.getCode() != null) {
             sql.SET("CODE = #{code,jdbcType=CHAR}");
@@ -144,6 +154,10 @@ public class MaterialTypeBeanSqlProvider {
         
         if (record.getName() != null) {
             sql.SET("NAME = #{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getRemark() != null) {
+            sql.SET("REMARK = #{remark,jdbcType=VARCHAR}");
         }
         
         if (record.getsCreator() != null) {
@@ -167,7 +181,7 @@ public class MaterialTypeBeanSqlProvider {
         return sql.toString();
     }
 
-    protected void applyWhere(SQL sql, MaterialTypeBeanExample example, boolean includeExamplePhrase) {
+    protected void applyWhere(SQL sql, MaterialTypeLevelOneBeanExample example, boolean includeExamplePhrase) {
         if (example == null) {
             return;
         }

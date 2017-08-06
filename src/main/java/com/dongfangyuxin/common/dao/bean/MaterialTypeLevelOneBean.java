@@ -3,12 +3,14 @@ package com.dongfangyuxin.common.dao.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class MaterialTypeBean implements Serializable {
+public class MaterialTypeLevelOneBean implements Serializable {
     private Integer id;
 
     private String code;
 
     private String name;
+
+    private String remark;
 
     private String sCreator;
 
@@ -42,6 +44,14 @@ public class MaterialTypeBean implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public String getsCreator() {
