@@ -58,8 +58,6 @@ $(function () {
         onLoadSuccess: function (data) {
         }
     });
-    $("#type").combobox("loadData", dataDic.CAR_TYPE);
-    $("#status").combobox("loadData", dataDic.CAR_STATUS);
 })
 /**
  * 新增单位
