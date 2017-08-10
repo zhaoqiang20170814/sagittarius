@@ -25,7 +25,7 @@ public class MaterialTypeLevelOneEngine {
     private MaterialTypeLevelOneBeanMapper materialTypeLevelOneBeanMapper;
 
     /**
-     * 查询原材料一级分类信息信息
+     * 查询原材料一级分类信息信息(分页)
      *
      * @param condition 查询条件
      * @param page      分页信息
@@ -36,6 +36,19 @@ public class MaterialTypeLevelOneEngine {
         RowBounds rowBounds = new RowBounds(page.getOffset(), page.getLimit());
         // 取得原材料一级分类信息信息
         List<MaterialTypeLevelOneBean> dataList = materialTypeLevelOneBeanMapper.selectByExampleWithRowbounds(condition, rowBounds);
+        return dataList;
+    }
+
+    /**
+     * 查询原材料一级分类信息信息
+     *
+     * @param condition 查询条件
+     * @param page      分页信息
+     * @return 原材料一级分类信息信息List
+     */
+    public List<MaterialTypeLevelOneBean> getData() {
+        // 取得原材料一级分类信息信息
+        List<MaterialTypeLevelOneBean> dataList = materialTypeLevelOneBeanMapper.selectByExample(new MaterialTypeLevelOneBeanExample());
         return dataList;
     }
 

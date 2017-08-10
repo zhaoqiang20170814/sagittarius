@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.dongfangyuxin.common.dao.bean.DataDicBean;
 import com.dongfangyuxin.common.util.DataDicCache;
 import com.dongfangyuxin.service.master.CostTypeMasterService;
+import com.dongfangyuxin.service.master.MaterialTypeLevelOneMasterService;
 import com.dongfangyuxin.service.master.UserMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class CommonController {
     private CostTypeMasterService costTypeMasterService;
     @Autowired
     private UserMasterService userMasterService;
+    @Autowired
+    private MaterialTypeLevelOneMasterService materialTypeLevelOneMasterService;
 
     /**
      * 成本一级分类ComboBox
@@ -39,6 +42,17 @@ public class CommonController {
         return result;
     }
 
+    /**
+     * 原材料一级分类ComboBox
+     *
+     * @return
+     */
+    @RequestMapping(value = "combobox/materialTypeLevelOne", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String loadMaterialTypeLevelOne(HttpServletRequest request, HttpServletResponse response) {
+        String result = JSON.toJSONString(materialTypeLevelOneMasterService.getDataAll());
+        return result;
+    }
     /**
      * 员工信息ComboBox
      *
