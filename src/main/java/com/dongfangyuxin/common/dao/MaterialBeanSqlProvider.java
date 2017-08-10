@@ -36,6 +36,10 @@ public class MaterialBeanSqlProvider {
             sql.VALUES("NAME", "#{name,jdbcType=VARCHAR}");
         }
         
+        if (record.getType() != null) {
+            sql.VALUES("TYPE", "#{type,jdbcType=CHAR}");
+        }
+        
         if (record.getUnit() != null) {
             sql.VALUES("UNIT", "#{unit,jdbcType=CHAR}");
         }
@@ -76,6 +80,7 @@ public class MaterialBeanSqlProvider {
         }
         sql.SELECT("CODE");
         sql.SELECT("NAME");
+        sql.SELECT("TYPE");
         sql.SELECT("UNIT");
         sql.SELECT("PRICE");
         sql.SELECT("IMAGE");
@@ -110,6 +115,10 @@ public class MaterialBeanSqlProvider {
         
         if (record.getName() != null) {
             sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getType() != null) {
+            sql.SET("TYPE = #{record.type,jdbcType=CHAR}");
         }
         
         if (record.getUnit() != null) {
@@ -151,6 +160,7 @@ public class MaterialBeanSqlProvider {
         sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         sql.SET("CODE = #{record.code,jdbcType=CHAR}");
         sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("TYPE = #{record.type,jdbcType=CHAR}");
         sql.SET("UNIT = #{record.unit,jdbcType=CHAR}");
         sql.SET("PRICE = #{record.price,jdbcType=DECIMAL}");
         sql.SET("IMAGE = #{record.image,jdbcType=VARCHAR}");
@@ -174,6 +184,10 @@ public class MaterialBeanSqlProvider {
         
         if (record.getName() != null) {
             sql.SET("NAME = #{name,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getType() != null) {
+            sql.SET("TYPE = #{type,jdbcType=CHAR}");
         }
         
         if (record.getUnit() != null) {

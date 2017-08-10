@@ -48,6 +48,10 @@ function jumpMenu(menuIndex) {
         // 项目信息维护
         title = '项目信息维护';
         content = createFrame("/projectInfoMaster");
+    } else if (menuIndex == "1-10") {
+        // 原料信息维护
+        title = '原料信息维护';
+        content = createFrame("/materialMaster");
     }
     $('#mainPanel').panel({
         title: title,

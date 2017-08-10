@@ -1,68 +1,61 @@
 <!DOCTYPE html>
-<html
-        xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
+    <title>原材料信息一览</title>
     <link rel="stylesheet" type="text/css" href="plugins/themes/metro/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="plugins/themes/color.css"/>
     <link rel="stylesheet" type="text/css" href="plugins/themes/icon.css"/>
     <script type="text/javascript" src="plugins/jquery.min.js"></script>
     <script type="text/javascript" src="plugins/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="sagittarius/mainFrame.js"></script>
+    <script type="text/javascript" src="sagittarius/materialMaster.js"></script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'north',minHeight:'50px'">
-    <table class="function-btn-area" style="width: 100%">
-        <tbody>
-        <tr>
-            <td style="width: 100%">
-                <div align="right">
-                    <!--<a class="easyui-linkbutton" href="javascript:void(0)" onclick="workorderAddFrame()">新增工单</a>-->
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 <div data-options="region:'center'">
-    <table id="dg" title="原材料一览" class="easyui-datagrid" style="width:100%;height:100%"
-           url="/materialMaster/init"
-           toolbar="#toolbar" pagination="true"
-           rownumbers="true" fitColumns="true" singleSelect="true">
-        <thead>
-        <tr>
-            <th data-options="field:'code',width:100,align:'right'">原料编号</th>
-            <th data-options="field:'name',width:100,align:'right'">原料名称</th>
-            <th data-options="field:'unit',width:100,align:'right'">单位</th>
-            <th data-options="field:'price',width:100,align:'right'">单价</th>
-        </tr>
-        </thead>
+    <table id="dg" class="easyui-datagrid" style="width:95%;height:95%">
     </table>
     <!-- datagrid功能菜单 -->
     <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="new()">新增</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="edit()">编辑</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="remove()">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUnit()">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUnit()">编辑</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="removeUnit()">删除</a>
     </div>
-    <!--&lt;!&ndash;编辑窗口 &ndash;&gt;-->
-    <!--<div id="dlg" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg-buttons">-->
-    <!--<form id="fm" method="post" novalidate="novalidate" style="margin:0;padding:20px 50px">-->
-    <!--<div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">原材料信息维护</div>-->
-    <!--<div style="margin-bottom:10px">-->
-    <!--<input name="firstname" class="easyui-textbox" required="true" label="First Name:" style="width:100%"/>-->
-    <!--</div>-->
-    <!--<div style="margin-bottom:10px">-->
-    <!--<input name="lastname" class="easyui-textbox" required="true" label="Last Name:" style="width:100%"/>-->
-    <!--</div>-->
-    <!--<div style="margin-bottom:10px">-->
-    <!--<input name="phone" class="easyui-textbox" required="true" label="Phone:" style="width:100%"/>-->
-    <!--</div>-->
-    <!--<div style="margin-bottom:10px">-->
-    <!--<input name="email" class="easyui-textbox" required="true" validType="email" label="Email:"-->
-    <!--style="width:100%"/>-->
-    <!--</div>-->
-    <!--</form>-->
-    <!--</div>-->
+    <!--编辑窗口 -->
+    <div id="dlg" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg-buttons">
+        <form id="fm" method="post" novalidate="novalidate" style="margin:0;padding:20px 50px">
+            <div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc">原材料信息维护</div>
+            <div style="margin-bottom:10px" hidden="hidden">
+                <input name="id" class="easyui-textbox" label="主键" style="width:100%"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="code" class="easyui-textbox" required="true" label="原材料编号" style="width:100%"
+                       data-options="validType:['length[0,10]']"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="name" class="easyui-combobox" required="true" label="原材料名称" style="width:100%"
+                       data-options="valueField: 'dictCode',textField: 'dictCodeName'"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="type" name="type" class="easyui-combobox" required="true" style="width:100%" label="原材料分类"
+                       data-options="valueField: 'dictCode',textField: 'dictCodeName'"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input id="unit" name="unit" class="easyui-combobox" required="true" style="width:100%" label="单位"
+                       data-options="valueField: 'dictCode',textField: 'dictCodeName'"/>
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="price" class="easyui-numberbox" required="true" label="单价" style="width:100%"
+                       data-options="min:0, precision:2, max:999999, value:0, groupSeparator:','"/>
+            </div>
+        </form>
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+    </div>
+    <div>
+        <input id="editType" hidden="hidden"/>
+    </div>
 </div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
+
 @Mapper
 public interface MaterialBeanMapper {
     @SelectProvider(type=MaterialBeanSqlProvider.class, method="countByExample")
@@ -23,12 +24,12 @@ public interface MaterialBeanMapper {
 
     @Insert({
         "insert into material (CODE, NAME, ",
-        "UNIT, PRICE, IMAGE, ",
-        "S_CREATOR, S_CREATE_DATE, ",
+        "TYPE, UNIT, PRICE, ",
+        "IMAGE, S_CREATOR, S_CREATE_DATE, ",
         "S_OPERATOR, S_OPERATOR_DATE)",
         "values (#{code,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, ",
-        "#{unit,jdbcType=CHAR}, #{price,jdbcType=DECIMAL}, #{image,jdbcType=VARCHAR}, ",
-        "#{sCreator,jdbcType=CHAR}, #{sCreateDate,jdbcType=TIMESTAMP}, ",
+        "#{type,jdbcType=CHAR}, #{unit,jdbcType=CHAR}, #{price,jdbcType=DECIMAL}, ",
+        "#{image,jdbcType=VARCHAR}, #{sCreator,jdbcType=CHAR}, #{sCreateDate,jdbcType=TIMESTAMP}, ",
         "#{sOperator,jdbcType=CHAR}, #{sOperatorDate,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
@@ -43,6 +44,7 @@ public interface MaterialBeanMapper {
         @Result(column="ID", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="CODE", property="code", jdbcType=JdbcType.CHAR),
         @Result(column="NAME", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="TYPE", property="type", jdbcType=JdbcType.CHAR),
         @Result(column="UNIT", property="unit", jdbcType=JdbcType.CHAR),
         @Result(column="PRICE", property="price", jdbcType=JdbcType.DECIMAL),
         @Result(column="IMAGE", property="image", jdbcType=JdbcType.VARCHAR),
@@ -58,6 +60,7 @@ public interface MaterialBeanMapper {
         @Result(column="ID", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="CODE", property="code", jdbcType=JdbcType.CHAR),
         @Result(column="NAME", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="TYPE", property="type", jdbcType=JdbcType.CHAR),
         @Result(column="UNIT", property="unit", jdbcType=JdbcType.CHAR),
         @Result(column="PRICE", property="price", jdbcType=JdbcType.DECIMAL),
         @Result(column="IMAGE", property="image", jdbcType=JdbcType.VARCHAR),
@@ -70,7 +73,8 @@ public interface MaterialBeanMapper {
 
     @Select({
         "select",
-        "ID, CODE, NAME, UNIT, PRICE, IMAGE, S_CREATOR, S_CREATE_DATE, S_OPERATOR, S_OPERATOR_DATE",
+        "ID, CODE, NAME, TYPE, UNIT, PRICE, IMAGE, S_CREATOR, S_CREATE_DATE, S_OPERATOR, ",
+        "S_OPERATOR_DATE",
         "from material",
         "where ID = #{id,jdbcType=INTEGER}"
     })
@@ -78,6 +82,7 @@ public interface MaterialBeanMapper {
         @Result(column="ID", property="id", jdbcType=JdbcType.INTEGER, id=true),
         @Result(column="CODE", property="code", jdbcType=JdbcType.CHAR),
         @Result(column="NAME", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="TYPE", property="type", jdbcType=JdbcType.CHAR),
         @Result(column="UNIT", property="unit", jdbcType=JdbcType.CHAR),
         @Result(column="PRICE", property="price", jdbcType=JdbcType.DECIMAL),
         @Result(column="IMAGE", property="image", jdbcType=JdbcType.VARCHAR),
@@ -101,6 +106,7 @@ public interface MaterialBeanMapper {
         "update material",
         "set CODE = #{code,jdbcType=CHAR},",
           "NAME = #{name,jdbcType=VARCHAR},",
+          "TYPE = #{type,jdbcType=CHAR},",
           "UNIT = #{unit,jdbcType=CHAR},",
           "PRICE = #{price,jdbcType=DECIMAL},",
           "IMAGE = #{image,jdbcType=VARCHAR},",
