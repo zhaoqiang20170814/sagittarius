@@ -75,21 +75,21 @@ $(function () {
         }, {
             field: 'startTime',
             title: '项目开始时间',
-            width: 500,
+            width: 100,
             align: 'left',
             halign: 'center',
             sortable: false
         }, {
             field: 'programBudget',
             title: '项目预算',
-            width: 500,
+            width: 100,
             align: 'left',
             halign: 'center',
             sortable: false
         }, {
             field: 'realtimeCost',
             title: '项目实时成本',
-            width: 500,
+            width: 100,
             align: 'left',
             halign: 'center',
             sortable: false

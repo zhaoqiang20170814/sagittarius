@@ -45,13 +45,13 @@ function jumpMenu(menuIndex) {
         title = '度量衡信息维护';
         content = createFrame("/unitMaster");
     } else if (menuIndex == "1-9") {
-        // 项目信息维护
-        title = '项目信息维护';
-        content = createFrame("/projectInfoMaster");
-    } else if (menuIndex == "1-10") {
         // 原料信息维护
         title = '原料信息维护';
         content = createFrame("/materialMaster");
+    } else if (menuIndex == "2-1") {
+        // 项目信息维护
+        title = '项目信息维护';
+        content = createFrame("/projectInfoMaster");
     }
     $('#mainPanel').panel({
         title: title,
