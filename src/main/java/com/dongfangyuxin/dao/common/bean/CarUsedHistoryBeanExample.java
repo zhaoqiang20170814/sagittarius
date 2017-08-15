@@ -555,6 +555,136 @@ public class CarUsedHistoryBeanExample {
             return (Criteria) this;
         }
 
+        public Criteria andRemarkIsNull() {
+            addCriterion("REMARK is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIsNotNull() {
+            addCriterion("REMARK is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("REMARK =", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotEqualTo(String value) {
+            addCriterion("REMARK <>", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThan(String value) {
+            addCriterion("REMARK >", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("REMARK >=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThan(String value) {
+            addCriterion("REMARK <", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
+            addCriterion("REMARK <=", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLike(String value) {
+            addCriterion("REMARK like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("REMARK not like", value, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkIn(List<String> values) {
+            addCriterion("REMARK in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotIn(List<String> values) {
+            addCriterion("REMARK not in", values, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkBetween(String value1, String value2) {
+            addCriterion("REMARK between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkNotBetween(String value1, String value2) {
+            addCriterion("REMARK not between", value1, value2, "remark");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerIsNull() {
+            addCriterion("ODOMETER is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerIsNotNull() {
+            addCriterion("ODOMETER is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerEqualTo(Integer value) {
+            addCriterion("ODOMETER =", value, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerNotEqualTo(Integer value) {
+            addCriterion("ODOMETER <>", value, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerGreaterThan(Integer value) {
+            addCriterion("ODOMETER >", value, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ODOMETER >=", value, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerLessThan(Integer value) {
+            addCriterion("ODOMETER <", value, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerLessThanOrEqualTo(Integer value) {
+            addCriterion("ODOMETER <=", value, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerIn(List<Integer> values) {
+            addCriterion("ODOMETER in", values, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerNotIn(List<Integer> values) {
+            addCriterion("ODOMETER not in", values, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerBetween(Integer value1, Integer value2) {
+            addCriterion("ODOMETER between", value1, value2, "odometer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOdometerNotBetween(Integer value1, Integer value2) {
+            addCriterion("ODOMETER not between", value1, value2, "odometer");
+            return (Criteria) this;
+        }
+
         public Criteria andSCreatorIsNull() {
             addCriterion("S_CREATOR is null");
             return (Criteria) this;
@@ -827,6 +957,11 @@ public class CarUsedHistoryBeanExample {
 
         public Criteria andOperatorLikeInsensitive(String value) {
             addCriterion("upper(OPERATOR) like", value.toUpperCase(), "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarkLikeInsensitive(String value) {
+            addCriterion("upper(REMARK) like", value.toUpperCase(), "remark");
             return (Criteria) this;
         }
 

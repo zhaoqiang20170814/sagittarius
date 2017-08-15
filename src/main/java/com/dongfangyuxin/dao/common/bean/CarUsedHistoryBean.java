@@ -18,6 +18,10 @@ public class CarUsedHistoryBean implements Serializable {
 
     private Integer useQuantity;
 
+    private String remark;
+
+    private Integer odometer;
+
     private String sCreator;
 
     private Date sCreateDate;
@@ -82,6 +86,22 @@ public class CarUsedHistoryBean implements Serializable {
 
     public void setUseQuantity(Integer useQuantity) {
         this.useQuantity = useQuantity;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public Integer getOdometer() {
+        return odometer;
+    }
+
+    public void setOdometer(Integer odometer) {
+        this.odometer = odometer;
     }
 
     public String getsCreator() {

@@ -25,14 +25,18 @@ public interface ProjectInfoBeanMapper {
     @Insert({
         "insert into project_info (NAME, STATUS, ",
         "OWNER, ADDRESS, START_TIME, ",
-        "PROGRAM_BUDGET, REALTIME_COST, ",
-        "S_CREATOR, S_CREATE_DATE, ",
-        "S_OPERATOR, S_OPERATOR_DATE)",
+        "IMAGE_URL1, IMAGE_URL2, ",
+        "IMAGE_URL3, PROGRAM_BUDGET, ",
+        "REALTIME_COST, S_CREATOR, ",
+        "S_CREATE_DATE, S_OPERATOR, ",
+        "S_OPERATOR_DATE)",
         "values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, ",
         "#{owner,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, ",
-        "#{programBudget,jdbcType=DECIMAL}, #{realtimeCost,jdbcType=DECIMAL}, ",
-        "#{sCreator,jdbcType=CHAR}, #{sCreateDate,jdbcType=TIMESTAMP}, ",
-        "#{sOperator,jdbcType=CHAR}, #{sOperatorDate,jdbcType=TIMESTAMP})"
+        "#{imageUrl1,jdbcType=VARCHAR}, #{imageUrl2,jdbcType=VARCHAR}, ",
+        "#{imageUrl3,jdbcType=VARCHAR}, #{programBudget,jdbcType=DECIMAL}, ",
+        "#{realtimeCost,jdbcType=DECIMAL}, #{sCreator,jdbcType=CHAR}, ",
+        "#{sCreateDate,jdbcType=TIMESTAMP}, #{sOperator,jdbcType=CHAR}, ",
+        "#{sOperatorDate,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Integer.class)
     int insert(ProjectInfoBean record);
@@ -49,6 +53,9 @@ public interface ProjectInfoBeanMapper {
         @Result(column="OWNER", property="owner", jdbcType=JdbcType.CHAR),
         @Result(column="ADDRESS", property="address", jdbcType=JdbcType.VARCHAR),
         @Result(column="START_TIME", property="startTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="IMAGE_URL1", property="imageUrl1", jdbcType=JdbcType.VARCHAR),
+        @Result(column="IMAGE_URL2", property="imageUrl2", jdbcType=JdbcType.VARCHAR),
+        @Result(column="IMAGE_URL3", property="imageUrl3", jdbcType=JdbcType.VARCHAR),
         @Result(column="PROGRAM_BUDGET", property="programBudget", jdbcType=JdbcType.DECIMAL),
         @Result(column="REALTIME_COST", property="realtimeCost", jdbcType=JdbcType.DECIMAL),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
@@ -66,6 +73,9 @@ public interface ProjectInfoBeanMapper {
         @Result(column="OWNER", property="owner", jdbcType=JdbcType.CHAR),
         @Result(column="ADDRESS", property="address", jdbcType=JdbcType.VARCHAR),
         @Result(column="START_TIME", property="startTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="IMAGE_URL1", property="imageUrl1", jdbcType=JdbcType.VARCHAR),
+        @Result(column="IMAGE_URL2", property="imageUrl2", jdbcType=JdbcType.VARCHAR),
+        @Result(column="IMAGE_URL3", property="imageUrl3", jdbcType=JdbcType.VARCHAR),
         @Result(column="PROGRAM_BUDGET", property="programBudget", jdbcType=JdbcType.DECIMAL),
         @Result(column="REALTIME_COST", property="realtimeCost", jdbcType=JdbcType.DECIMAL),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
@@ -77,8 +87,8 @@ public interface ProjectInfoBeanMapper {
 
     @Select({
         "select",
-        "ID, NAME, STATUS, OWNER, ADDRESS, START_TIME, PROGRAM_BUDGET, REALTIME_COST, ",
-        "S_CREATOR, S_CREATE_DATE, S_OPERATOR, S_OPERATOR_DATE",
+        "ID, NAME, STATUS, OWNER, ADDRESS, START_TIME, IMAGE_URL1, IMAGE_URL2, IMAGE_URL3, ",
+        "PROGRAM_BUDGET, REALTIME_COST, S_CREATOR, S_CREATE_DATE, S_OPERATOR, S_OPERATOR_DATE",
         "from project_info",
         "where ID = #{id,jdbcType=INTEGER}"
     })
@@ -89,6 +99,9 @@ public interface ProjectInfoBeanMapper {
         @Result(column="OWNER", property="owner", jdbcType=JdbcType.CHAR),
         @Result(column="ADDRESS", property="address", jdbcType=JdbcType.VARCHAR),
         @Result(column="START_TIME", property="startTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="IMAGE_URL1", property="imageUrl1", jdbcType=JdbcType.VARCHAR),
+        @Result(column="IMAGE_URL2", property="imageUrl2", jdbcType=JdbcType.VARCHAR),
+        @Result(column="IMAGE_URL3", property="imageUrl3", jdbcType=JdbcType.VARCHAR),
         @Result(column="PROGRAM_BUDGET", property="programBudget", jdbcType=JdbcType.DECIMAL),
         @Result(column="REALTIME_COST", property="realtimeCost", jdbcType=JdbcType.DECIMAL),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
@@ -114,6 +127,9 @@ public interface ProjectInfoBeanMapper {
           "OWNER = #{owner,jdbcType=CHAR},",
           "ADDRESS = #{address,jdbcType=VARCHAR},",
           "START_TIME = #{startTime,jdbcType=TIMESTAMP},",
+          "IMAGE_URL1 = #{imageUrl1,jdbcType=VARCHAR},",
+          "IMAGE_URL2 = #{imageUrl2,jdbcType=VARCHAR},",
+          "IMAGE_URL3 = #{imageUrl3,jdbcType=VARCHAR},",
           "PROGRAM_BUDGET = #{programBudget,jdbcType=DECIMAL},",
           "REALTIME_COST = #{realtimeCost,jdbcType=DECIMAL},",
           "S_CREATOR = #{sCreator,jdbcType=CHAR},",

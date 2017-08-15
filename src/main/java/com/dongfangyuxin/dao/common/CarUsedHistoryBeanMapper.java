@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
+
 @Mapper
 public interface CarUsedHistoryBeanMapper {
     @SelectProvider(type=CarUsedHistoryBeanSqlProvider.class, method="countByExample")
@@ -25,11 +26,13 @@ public interface CarUsedHistoryBeanMapper {
         "insert into car_used_history (CAR_NUMBER, TASK_CODE, ",
         "OPERATOR, USE_TIME, ",
         "RETURN_TIME, USE_QUANTITY, ",
+        "REMARK, ODOMETER, ",
         "S_CREATOR, S_CREATE_DATE, ",
         "S_OPERATOR, S_OPERATOR_DATE)",
         "values (#{carNumber,jdbcType=CHAR}, #{taskCode,jdbcType=CHAR}, ",
         "#{operator,jdbcType=CHAR}, #{useTime,jdbcType=TIMESTAMP}, ",
         "#{returnTime,jdbcType=TIMESTAMP}, #{useQuantity,jdbcType=INTEGER}, ",
+        "#{remark,jdbcType=VARCHAR}, #{odometer,jdbcType=INTEGER}, ",
         "#{sCreator,jdbcType=CHAR}, #{sCreateDate,jdbcType=TIMESTAMP}, ",
         "#{sOperator,jdbcType=CHAR}, #{sOperatorDate,jdbcType=TIMESTAMP})"
     })
@@ -49,6 +52,8 @@ public interface CarUsedHistoryBeanMapper {
         @Result(column="USE_TIME", property="useTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="RETURN_TIME", property="returnTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="USE_QUANTITY", property="useQuantity", jdbcType=JdbcType.INTEGER),
+        @Result(column="REMARK", property="remark", jdbcType=JdbcType.VARCHAR),
+        @Result(column="ODOMETER", property="odometer", jdbcType=JdbcType.INTEGER),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATE_DATE", property="sCreateDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="S_OPERATOR", property="sOperator", jdbcType=JdbcType.CHAR),
@@ -65,6 +70,8 @@ public interface CarUsedHistoryBeanMapper {
         @Result(column="USE_TIME", property="useTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="RETURN_TIME", property="returnTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="USE_QUANTITY", property="useQuantity", jdbcType=JdbcType.INTEGER),
+        @Result(column="REMARK", property="remark", jdbcType=JdbcType.VARCHAR),
+        @Result(column="ODOMETER", property="odometer", jdbcType=JdbcType.INTEGER),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATE_DATE", property="sCreateDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="S_OPERATOR", property="sOperator", jdbcType=JdbcType.CHAR),
@@ -74,8 +81,8 @@ public interface CarUsedHistoryBeanMapper {
 
     @Select({
         "select",
-        "ID, CAR_NUMBER, TASK_CODE, OPERATOR, USE_TIME, RETURN_TIME, USE_QUANTITY, S_CREATOR, ",
-        "S_CREATE_DATE, S_OPERATOR, S_OPERATOR_DATE",
+        "ID, CAR_NUMBER, TASK_CODE, OPERATOR, USE_TIME, RETURN_TIME, USE_QUANTITY, REMARK, ",
+        "ODOMETER, S_CREATOR, S_CREATE_DATE, S_OPERATOR, S_OPERATOR_DATE",
         "from car_used_history",
         "where ID = #{id,jdbcType=INTEGER}"
     })
@@ -87,6 +94,8 @@ public interface CarUsedHistoryBeanMapper {
         @Result(column="USE_TIME", property="useTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="RETURN_TIME", property="returnTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="USE_QUANTITY", property="useQuantity", jdbcType=JdbcType.INTEGER),
+        @Result(column="REMARK", property="remark", jdbcType=JdbcType.VARCHAR),
+        @Result(column="ODOMETER", property="odometer", jdbcType=JdbcType.INTEGER),
         @Result(column="S_CREATOR", property="sCreator", jdbcType=JdbcType.CHAR),
         @Result(column="S_CREATE_DATE", property="sCreateDate", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="S_OPERATOR", property="sOperator", jdbcType=JdbcType.CHAR),
@@ -111,6 +120,8 @@ public interface CarUsedHistoryBeanMapper {
           "USE_TIME = #{useTime,jdbcType=TIMESTAMP},",
           "RETURN_TIME = #{returnTime,jdbcType=TIMESTAMP},",
           "USE_QUANTITY = #{useQuantity,jdbcType=INTEGER},",
+          "REMARK = #{remark,jdbcType=VARCHAR},",
+          "ODOMETER = #{odometer,jdbcType=INTEGER},",
           "S_CREATOR = #{sCreator,jdbcType=CHAR},",
           "S_CREATE_DATE = #{sCreateDate,jdbcType=TIMESTAMP},",
           "S_OPERATOR = #{sOperator,jdbcType=CHAR},",

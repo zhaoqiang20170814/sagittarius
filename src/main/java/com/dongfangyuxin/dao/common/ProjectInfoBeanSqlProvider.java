@@ -48,6 +48,18 @@ public class ProjectInfoBeanSqlProvider {
             sql.VALUES("START_TIME", "#{startTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getImageUrl1() != null) {
+            sql.VALUES("IMAGE_URL1", "#{imageUrl1,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getImageUrl2() != null) {
+            sql.VALUES("IMAGE_URL2", "#{imageUrl2,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getImageUrl3() != null) {
+            sql.VALUES("IMAGE_URL3", "#{imageUrl3,jdbcType=VARCHAR}");
+        }
+        
         if (record.getProgramBudget() != null) {
             sql.VALUES("PROGRAM_BUDGET", "#{programBudget,jdbcType=DECIMAL}");
         }
@@ -87,6 +99,9 @@ public class ProjectInfoBeanSqlProvider {
         sql.SELECT("OWNER");
         sql.SELECT("ADDRESS");
         sql.SELECT("START_TIME");
+        sql.SELECT("IMAGE_URL1");
+        sql.SELECT("IMAGE_URL2");
+        sql.SELECT("IMAGE_URL3");
         sql.SELECT("PROGRAM_BUDGET");
         sql.SELECT("REALTIME_COST");
         sql.SELECT("S_CREATOR");
@@ -134,6 +149,18 @@ public class ProjectInfoBeanSqlProvider {
             sql.SET("START_TIME = #{record.startTime,jdbcType=TIMESTAMP}");
         }
         
+        if (record.getImageUrl1() != null) {
+            sql.SET("IMAGE_URL1 = #{record.imageUrl1,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getImageUrl2() != null) {
+            sql.SET("IMAGE_URL2 = #{record.imageUrl2,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getImageUrl3() != null) {
+            sql.SET("IMAGE_URL3 = #{record.imageUrl3,jdbcType=VARCHAR}");
+        }
+        
         if (record.getProgramBudget() != null) {
             sql.SET("PROGRAM_BUDGET = #{record.programBudget,jdbcType=DECIMAL}");
         }
@@ -172,6 +199,9 @@ public class ProjectInfoBeanSqlProvider {
         sql.SET("OWNER = #{record.owner,jdbcType=CHAR}");
         sql.SET("ADDRESS = #{record.address,jdbcType=VARCHAR}");
         sql.SET("START_TIME = #{record.startTime,jdbcType=TIMESTAMP}");
+        sql.SET("IMAGE_URL1 = #{record.imageUrl1,jdbcType=VARCHAR}");
+        sql.SET("IMAGE_URL2 = #{record.imageUrl2,jdbcType=VARCHAR}");
+        sql.SET("IMAGE_URL3 = #{record.imageUrl3,jdbcType=VARCHAR}");
         sql.SET("PROGRAM_BUDGET = #{record.programBudget,jdbcType=DECIMAL}");
         sql.SET("REALTIME_COST = #{record.realtimeCost,jdbcType=DECIMAL}");
         sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
@@ -206,6 +236,18 @@ public class ProjectInfoBeanSqlProvider {
         
         if (record.getStartTime() != null) {
             sql.SET("START_TIME = #{startTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getImageUrl1() != null) {
+            sql.SET("IMAGE_URL1 = #{imageUrl1,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getImageUrl2() != null) {
+            sql.SET("IMAGE_URL2 = #{imageUrl2,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getImageUrl3() != null) {
+            sql.SET("IMAGE_URL3 = #{imageUrl3,jdbcType=VARCHAR}");
         }
         
         if (record.getProgramBudget() != null) {

@@ -52,6 +52,14 @@ public class CarUsedHistoryBeanSqlProvider {
             sql.VALUES("USE_QUANTITY", "#{useQuantity,jdbcType=INTEGER}");
         }
         
+        if (record.getRemark() != null) {
+            sql.VALUES("REMARK", "#{remark,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOdometer() != null) {
+            sql.VALUES("ODOMETER", "#{odometer,jdbcType=INTEGER}");
+        }
+        
         if (record.getsCreator() != null) {
             sql.VALUES("S_CREATOR", "#{sCreator,jdbcType=CHAR}");
         }
@@ -84,6 +92,8 @@ public class CarUsedHistoryBeanSqlProvider {
         sql.SELECT("USE_TIME");
         sql.SELECT("RETURN_TIME");
         sql.SELECT("USE_QUANTITY");
+        sql.SELECT("REMARK");
+        sql.SELECT("ODOMETER");
         sql.SELECT("S_CREATOR");
         sql.SELECT("S_CREATE_DATE");
         sql.SELECT("S_OPERATOR");
@@ -133,6 +143,14 @@ public class CarUsedHistoryBeanSqlProvider {
             sql.SET("USE_QUANTITY = #{record.useQuantity,jdbcType=INTEGER}");
         }
         
+        if (record.getRemark() != null) {
+            sql.SET("REMARK = #{record.remark,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOdometer() != null) {
+            sql.SET("ODOMETER = #{record.odometer,jdbcType=INTEGER}");
+        }
+        
         if (record.getsCreator() != null) {
             sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         }
@@ -164,6 +182,8 @@ public class CarUsedHistoryBeanSqlProvider {
         sql.SET("USE_TIME = #{record.useTime,jdbcType=TIMESTAMP}");
         sql.SET("RETURN_TIME = #{record.returnTime,jdbcType=TIMESTAMP}");
         sql.SET("USE_QUANTITY = #{record.useQuantity,jdbcType=INTEGER}");
+        sql.SET("REMARK = #{record.remark,jdbcType=VARCHAR}");
+        sql.SET("ODOMETER = #{record.odometer,jdbcType=INTEGER}");
         sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         sql.SET("S_CREATE_DATE = #{record.sCreateDate,jdbcType=TIMESTAMP}");
         sql.SET("S_OPERATOR = #{record.sOperator,jdbcType=CHAR}");
@@ -200,6 +220,14 @@ public class CarUsedHistoryBeanSqlProvider {
         
         if (record.getUseQuantity() != null) {
             sql.SET("USE_QUANTITY = #{useQuantity,jdbcType=INTEGER}");
+        }
+        
+        if (record.getRemark() != null) {
+            sql.SET("REMARK = #{remark,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getOdometer() != null) {
+            sql.SET("ODOMETER = #{odometer,jdbcType=INTEGER}");
         }
         
         if (record.getsCreator() != null) {
