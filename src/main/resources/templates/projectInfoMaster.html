@@ -19,6 +19,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUnit()">新增</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUnit()">编辑</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="removeUnit()">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="" plain="true" onclick="viewProjectDrawing()">查看项目图纸</a>
     </div>
     <!--编辑窗口 -->
     <div id="dlg" class="easyui-dialog" style="width:400px" closed="true" buttons="#dlg-buttons">
@@ -60,6 +61,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
     </div>
+    <div id="projectDrawing"></div>
     <div>
         <input id="editType" hidden="hidden"/>
     </div>

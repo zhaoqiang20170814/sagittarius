@@ -1,9 +1,9 @@
 package com.dongfangyuxin.service.master;
 
-import com.dongfangyuxin.common.dao.bean.UnitBean;
-import com.dongfangyuxin.common.dao.bean.UnitBeanExample;
+import com.dongfangyuxin.dao.common.bean.UnitBean;
+import com.dongfangyuxin.dao.common.bean.UnitBeanExample;
 import com.dongfangyuxin.controller.common.Page;
-import com.dongfangyuxin.engine.master.UnitEngine;
+import com.dongfangyuxin.engine.common.UnitEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

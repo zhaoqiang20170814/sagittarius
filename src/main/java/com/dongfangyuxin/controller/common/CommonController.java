@@ -1,7 +1,7 @@
 package com.dongfangyuxin.controller.common;
 
 import com.alibaba.fastjson.JSON;
-import com.dongfangyuxin.common.dao.bean.DataDicBean;
+import com.dongfangyuxin.dao.common.bean.DataDicBean;
 import com.dongfangyuxin.common.util.DataDicCache;
 import com.dongfangyuxin.service.master.CostTypeMasterService;
 import com.dongfangyuxin.service.master.MaterialTypeLevelOneMasterService;

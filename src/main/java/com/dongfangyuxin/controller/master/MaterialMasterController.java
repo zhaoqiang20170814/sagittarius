@@ -1,7 +1,6 @@
 package com.dongfangyuxin.controller.master;
 
-import com.dongfangyuxin.common.dao.bean.CarInfoBean;
-import com.dongfangyuxin.common.dao.bean.MaterialBean;
+import com.dongfangyuxin.dao.common.bean.MaterialBean;
 import com.dongfangyuxin.controller.common.BaseAction;
 import com.dongfangyuxin.service.master.MaterialMasterService;
 import org.apache.log4j.LogManager;

@@ -188,3 +188,13 @@ function saveUser() {
         }
     });
 }
+
+/**
+ * 查看项目图纸
+ */
+function viewProjectDrawing() {
+    // 取得选择的行
+    var row = $('#dg').datagrid('getSelected');
+    // 跳转到工程图纸界面
+    parent.refreshMainPanel(row.name + "项目图纸", parent.createFrame('/projectDrawingMaster?projectCode=' + row.id));
+}

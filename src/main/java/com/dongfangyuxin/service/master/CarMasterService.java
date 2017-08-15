@@ -1,9 +1,9 @@
 package com.dongfangyuxin.service.master;
 
-import com.dongfangyuxin.common.dao.bean.CarInfoBean;
-import com.dongfangyuxin.common.dao.bean.CarInfoBeanExample;
+import com.dongfangyuxin.dao.common.bean.CarInfoBean;
+import com.dongfangyuxin.dao.common.bean.CarInfoBeanExample;
 import com.dongfangyuxin.controller.common.Page;
-import com.dongfangyuxin.engine.master.CarEngine;
+import com.dongfangyuxin.engine.common.CarEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

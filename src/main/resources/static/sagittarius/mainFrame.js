@@ -53,13 +53,23 @@ function jumpMenu(menuIndex) {
         title = '项目信息维护';
         content = createFrame("/projectInfoMaster");
     }
-    $('#mainPanel').panel({
-        title: title,
-        content: content
-    });
+    // 刷新主界面
+    refreshMainPanel(title, content);
 }
 
 function createFrame(url) {
     var s = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
     return s;
+}
+
+/**
+ * 刷新主界面
+ * @param title
+ * @param content
+ */
+function refreshMainPanel(title, content) {
+    $('#mainPanel').panel({
+        title: title,
+        content: content
+    });
 }

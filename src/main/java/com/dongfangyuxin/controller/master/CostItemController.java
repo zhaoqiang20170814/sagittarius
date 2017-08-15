@@ -1,7 +1,7 @@
 package com.dongfangyuxin.controller.master;
 
 import com.alibaba.fastjson.JSON;
-import com.dongfangyuxin.common.dao.bean.ClassificationLevelTwoBean;
+import com.dongfangyuxin.dao.common.bean.ClassificationLevelTwoBean;
 import com.dongfangyuxin.controller.common.BaseAction;
 import com.dongfangyuxin.service.master.CostTypeMasterService;
 import com.dongfangyuxin.service.master.CostItemMasterService;

@@ -1,7 +1,6 @@
 package com.dongfangyuxin.controller.master;
 
-import com.dongfangyuxin.common.dao.bean.MaterialTypeLevelOneBean;
-import com.dongfangyuxin.common.dao.bean.MaterialTypeLevelTwoBean;
+import com.dongfangyuxin.dao.common.bean.MaterialTypeLevelTwoBean;
 import com.dongfangyuxin.controller.common.BaseAction;
 import com.dongfangyuxin.service.master.MaterialTypeLevelTwoMasterService;
 import org.apache.log4j.LogManager;

@@ -1,9 +1,9 @@
 package com.dongfangyuxin.common.util;
 
 import com.dongfangyuxin.common.constants.GlobalConstants;
-import com.dongfangyuxin.common.dao.DataDicBeanMapper;
-import com.dongfangyuxin.common.dao.bean.DataDicBean;
-import com.dongfangyuxin.common.dao.bean.DataDicBeanExample;
+import com.dongfangyuxin.dao.common.DataDicBeanMapper;
+import com.dongfangyuxin.dao.common.bean.DataDicBean;
+import com.dongfangyuxin.dao.common.bean.DataDicBeanExample;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.dongfangyuxin.controller.master;
 
-import com.dongfangyuxin.common.dao.bean.ExpenseTypeInfoBean;
+import com.dongfangyuxin.dao.common.bean.ExpenseTypeInfoBean;
 import com.dongfangyuxin.controller.common.BaseAction;
 import com.dongfangyuxin.service.master.ExpenseTypeMasterService;
 import org.apache.log4j.LogManager;

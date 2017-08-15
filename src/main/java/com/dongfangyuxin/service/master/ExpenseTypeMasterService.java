@@ -1,9 +1,9 @@
 package com.dongfangyuxin.service.master;
 
-import com.dongfangyuxin.common.dao.bean.ExpenseTypeInfoBean;
-import com.dongfangyuxin.common.dao.bean.ExpenseTypeInfoBeanExample;
+import com.dongfangyuxin.dao.common.bean.ExpenseTypeInfoBean;
+import com.dongfangyuxin.dao.common.bean.ExpenseTypeInfoBeanExample;
 import com.dongfangyuxin.controller.common.Page;
-import com.dongfangyuxin.engine.master.ExpenseTypeEngine;
+import com.dongfangyuxin.engine.common.ExpenseTypeEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
