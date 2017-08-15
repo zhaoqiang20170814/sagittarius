@@ -2,10 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dongfangyuxin.dao.sample.Sample">
 
-    <select id="getUserName" resultType="java.lang.String" parameterType="java.util.Map">
-        SELECT USER.NAME
-        FROM USER
-        WHERE USER.CODE = #{code}
+    <select id="getMaterial" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT	material.CODE,
+                    material.NAME,
+                    material.IMAGE,
+                    material.PRICE,
+                    inventory_info.QUANTITY,
+                    inventory_info.AMOUNT,
+                    unit.NAME
+        FROM		material
+        JOIN 		inventory_info ON material.CODE = inventory_info.MATERIAL_CODE
+      LEFT JOIN unit ON material.UNIT = unit.CODE
     </select>
 
 </mapper>

@@ -6,5 +6,5 @@ import java.util.Map;
 
 @Mapper
 public interface Sample {
-    String getUserName(Map<String, Object> parameterMap);
+    Map<String, Object> getMaterial(Map<String, Object> parameterMap);
 }
