@@ -35,16 +35,18 @@ public class CostItemController extends BaseAction {
     @Autowired
     private CostItemMasterService costItemMasterService;
 
+
     /**
      * 度量衡界面
      *
-     * @param map
+     * @param model
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
     public String htmlPage(Model model) {
         // 获得成本一级分类
         model.addAttribute("classificationLevelOne", JSON.toJSONString(costTypeMasterService.getDataAll()));
+        int a;
         return "costItemMaster";
     }
 
