@@ -37,6 +37,12 @@ public class MaterialMasterService {
         return dataList;
     }
 
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public List<MaterialBean> getMaterialInfo(MaterialBeanExample condition) {
+        List<MaterialBean> dataList = materialEngine.getMaterial(condition);
+        return dataList;
+    }
+
     /**
      * 取得原材料信息数量
      *
@@ -53,7 +59,7 @@ public class MaterialMasterService {
     /**
      * 增加原材料信息
      *
-     * @param condition 查询条件
+     * @param data 查询条件
      * @return 原材料信息
      */
     @Transactional(propagation = Propagation.REQUIRED)

@@ -52,6 +52,18 @@ function jumpMenu(menuIndex) {
         // 项目信息维护
         title = '项目信息维护';
         content = createFrame("/projectInfoMaster");
+    }else if (menuIndex == "2-2") {
+        // 项目信息维护
+        title = '项目开工确认';
+        content = createFrame("/startConfirm");
+    }else if (menuIndex == "2-3") {
+        // 项目信息维护
+        title = '项目完工确认';
+        content = createFrame("/completeConfirm");
+    }else if (menuIndex == "4-1") {
+        // 项目信息维护
+        title = '项目报销';
+        content = createFrame("/expense");
     }
     // 刷新主界面
     refreshMainPanel(title, content);

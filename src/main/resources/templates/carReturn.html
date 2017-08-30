@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>还车页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="plugins/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="sagittarius/vue.js"></script>
+    <script src="sagittarius/vue-resource.js"></script>
+</head>
+<body>
+<h1 style="text-align: left;border-bottom: 2px solid lightgrey;margin-left: 20px">还车</h1>
+<form class="form-inline" role="form">
+<div style="margin-left: 40px;font-size: larger">
+    <span style="font-size: x-large;">所属任务</span>
+    <select id="taskCombobox" class="form-control"  v-on:change="selectOnchang($event)">
+        <option value="">请选择要处理的任务</option>
+        <option value="{{taskItem.id}}" v-for="taskItem in taskList">{{taskItem.name}}</option>
+    </select>
+</div>
+
+<div style="margin-left: 40px;margin-top: 20px;font-size: x-large">任务信息</div>
+<div style="margin-bottom: 20px;margin-top:20px;margin-left: 40px;font-size: larger">
+    <label>项目负责人</label>
+    <input readonly="true"  type="text" class="form-control" v-model="taskPerson"></input>
+    <label style="margin-left: 20px;">施工地点</label>
+    <input readonly="true" id="place" type="text" class="form-control" v-model="taskPlace"></input>
+    <label style="margin-left: 20px;">施工开始日期</label>
+    <input readonly="true" id="startData" type="text" class="form-control" v-model="taskStart" ></input>
+</div>
+
+</form>
+
+<div class="container" style="margin-left: 40px;border-bottom: 2px solid lightgrey;margin-top: 30px;width: 100%">
+    <span style="font-size: x-large;">所借车辆一览</span>
+    <button class="btn  btn-success" style="position:absolute;right: 300px;" data-toggle="modal" data-target="#example">确认还车</button>
+</div>
+
+<form class="form-inline" role="form">
+<div v-for="carItem in carList" v-if="carItem.taskCode===taskid" style="margin-top: 10px;margin-left: 40px;width: 100%;font-size: medium">
+    <img src="{{carItem.imageUrl}}" style="max-height:70px;max-width:70px;"></img>
+    <span>车牌号:{{carItem.carNumber}}</span>
+    <input type="text" class="form-control" placeholder="请填写里程表读数"  value="{{carItem.odometer}}"></input>
+    <input type="text" class="form-control" placeholder="请填写油费" value="{{carItem.oilamount}}"></input>
+    <input type="text" class="form-control" placeholder="请填写备注" value="{{carItem.remark}}"></input>
+</div>
+</form>
+
+<div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 20%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    提示信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                确认还车
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="save">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script th:inline="javascript">
+        var menulist = new Vue({
+            el: 'body',
+            data: {
+                carList:[[${carArray}]],
+                taskList: [[${taskArray}]],
+                items:[],
+                taskid:'',
+                taskPlace:'',
+                taskPerson:'',
+                taskStart:'',
+                taskEnd:''
+            },
+            // 在 `methods` 对象中定义方法
+            methods: {
+                selectOnchang: function (event) {
+                    menulist.taskid=event.target.value
+                    menulist.taskList.forEach(function (item,index,input) {
+
+                        if( input[index].id==event.target.value){
+
+                            menulist.taskPerson=input[index].owner
+                            menulist.taskStart=input[index].startTime
+                            menulist.taskStatus=input[index].status
+                            menulist.taskPlace=input[index].address
+                        }
+
+                    })
+                },
+                save: function () {
+                    if(this.taskid==""){
+                        alert("请先选择要处理的任务！")
+                    }else{
+                        menulist.carList.forEach(function (item,index,input) {
+                            if(input[index].owner){
+
+                            }
+                        })
+                    }
+                    location.reload()
+                }
+            }
+        })
+</script>
+</body>
+</html>

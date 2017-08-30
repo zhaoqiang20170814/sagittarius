@@ -1,8 +1,9 @@
-package com.dongfangyuxin.service.project;
+package com.dongfangyuxin.service.business;
 
-import com.dongfangyuxin.dao.common.bean.ProjectInfoBean;
-import com.dongfangyuxin.dao.common.bean.ProjectInfoBeanExample;
+import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBean;
+import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBeanExample;
 import com.dongfangyuxin.controller.common.Page;
+import com.dongfangyuxin.engine.business.CarUsedHistoryEngine;
 import com.dongfangyuxin.engine.common.ProjectInfoEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,11 @@ import java.util.List;
  * @version 1.0.1
  */
 @Service
-public class ProjectInfoMasterService {
+public class CarUsedHistoryService {
 
     // 项目表相关操作
     @Autowired
-    private ProjectInfoEngine projectInfoEngine;
+    private CarUsedHistoryEngine carUsedHistoryEngine;
 
     /**
      * 取得项目信息
@@ -31,9 +32,9 @@ public class ProjectInfoMasterService {
      * @return 项目信息
      */
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<ProjectInfoBean> getDataInfo(ProjectInfoBeanExample condition, Page page) {
+    public List<CarUsedHistoryBean> getDataInfo(CarUsedHistoryBeanExample condition, Page page) {
         // 查询项目信息
-        List<ProjectInfoBean> dataList = projectInfoEngine.getData(condition, page);
+        List<CarUsedHistoryBean> dataList = carUsedHistoryEngine.getData(condition, page);
         return dataList;
     }
 
@@ -43,23 +44,10 @@ public class ProjectInfoMasterService {
      * @return 报销分类信息
      */
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<ProjectInfoBean> getAllInfo(ProjectInfoBeanExample condition) {
+    public List<CarUsedHistoryBean> getAllInfo() {
         // 查询报销分类信息
-        List<ProjectInfoBean> dataList = projectInfoEngine.getAllData(condition);
+        List<CarUsedHistoryBean> dataList = carUsedHistoryEngine.getAllData();
         return dataList;
-    }
-
-    /**
-     * 取得项目信息数量
-     *
-     * @param condition 查询条件
-     * @return 项目信息
-     */
-    @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public long getCountInfo(ProjectInfoBeanExample condition) {
-        // 查询项目信息
-        long dataCnt = projectInfoEngine.getCount(condition);
-        return dataCnt;
     }
 
     /**
@@ -69,9 +57,9 @@ public class ProjectInfoMasterService {
      * @return 项目信息
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public long addDataInfo(ProjectInfoBean data) {
+    public long addDataInfo(CarUsedHistoryBean data) {
         // 查询项目信息
-        long key = projectInfoEngine.addData(data);
+        long key = carUsedHistoryEngine.addData(data);
         return key;
     }
 
@@ -82,9 +70,9 @@ public class ProjectInfoMasterService {
      * @return 项目信息
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public int editDataInfo(ProjectInfoBean data) {
+    public int editDataInfo(CarUsedHistoryBean data) {
         // 查询项目信息
-        int key = projectInfoEngine.editData(data);
+        int key = carUsedHistoryEngine.editData(data);
         return key;
     }
 
@@ -95,9 +83,9 @@ public class ProjectInfoMasterService {
      * @return 项目信息
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public int removeDataInfo(ProjectInfoBean data) {
+    public int removeDataInfo(CarUsedHistoryBean data) {
         // 查询项目信息
-        int key = projectInfoEngine.removeData(data);
+        int key = carUsedHistoryEngine.removeData(data);
         return key;
     }
 }

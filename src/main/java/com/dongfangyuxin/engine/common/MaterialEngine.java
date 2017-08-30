@@ -40,6 +40,17 @@ public class MaterialEngine {
     }
 
     /**
+     * 查询原材料信息
+     *
+     * @param condition 查询条件
+     * @return 原材料信息List
+     */
+    public List<MaterialBean> getMaterial(MaterialBeanExample condition) {
+        List<MaterialBean> dataList = materialBeanMapper.selectByExample(condition);
+        return dataList;
+    }
+
+    /**
      * 查询原材料信息数据信息
      *
      * @param condition 查询条件

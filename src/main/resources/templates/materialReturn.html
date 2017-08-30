@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>退料页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="plugins/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="sagittarius/vue.js"></script>
+    <script src="sagittarius/vue-resource.js"></script>
+</head>
+<body>
+<h1 style="text-align: left;border-bottom: 2px solid lightgrey;margin-left: 20px">退料</h1>
+<form class="form-inline" role="form">
+<div style="margin-left: 40px;font-size: larger">
+    <span style="font-size: x-large;">所属任务</span>
+    <select id="taskCombobox" class="form-control"  v-on:change="selectOnchang($event)">
+        <option value="1">请选择要处理的任务</option>
+        <option value="{{taskItem.id}}" v-for="taskItem in taskList">{{taskItem.name}}</option>
+    </select>
+</div>
+
+<div style="margin-left: 40px;margin-top: 20px;font-size: x-large">任务信息</div>
+<div style="margin-bottom: 20px;margin-top:20px;margin-left: 40px;font-size: larger">
+    <label>项目负责人</label>
+    <input readonly="true"  type="text" class="form-control" v-model="taskPerson"></input>
+    <label style="margin-left: 20px;">施工地点</label>
+    <input readonly="true" id="place" type="text" class="form-control" v-model="taskPlace"></input>
+    <label style="margin-left: 20px;">施工开始日期</label>
+    <input readonly="true" id="startData" type="text" class="form-control" v-model="taskStart" ></input>
+</div>
+</form>
+
+<div class="container" style="margin-left: 40px;border-bottom: 2px solid lightgrey;margin-top: 30px;width: 100%">
+    <span style="font-size: x-large;">退料详情</span>
+    <button class="btn  btn-success" style="position:absolute;right: 400px;" v-on:click="add($event)">添加退料</button>
+    <button class="btn  btn-info" style="position:absolute;right: 300px;" data-toggle="modal" data-target="#example">确认退料</button>
+
+</div>
+
+<form class="form-inline" role="form">
+<div v-for="item in items" style="margin-top: 10px;margin-left: 40px;width: 100%;font-size: medium">
+    <select id="martialCombobox" class="form-control" style="width: 20%"  v-model="item.materialCode">
+        <option selected="selected">请选择退换材料</option>
+        <option value="{{thirdItem.code}}" v-for="thirdItem in thirdLevelList">{{thirdItem.name}}</option>
+    </select>
+    <input type="text" class="form-control" placeholder="请输入退料数量"  v-model="item.quantity"></input>
+    <select id="returnReason" class="form-control" style="width: 20%"  v-model="item.reason">
+        <option selected="selected">请选择退料原因</option>
+        <option value="2">剩余材料</option>
+        <option value="1">损坏</option>
+    </select>
+
+</div>
+</form>
+
+<div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 20%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    提示信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                确认提交该退料记录
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="save">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script th:inline="javascript">
+        var menulist = new Vue({
+            el: 'body',
+            data: {
+                thirdLevelList: [[${thirdArray}]],
+                taskList: [[${taskArray}]],
+                items:[],
+                taskid:'',
+                taskPlace:'',
+                taskPerson:'',
+                taskStart:'',
+                taskStatus:''
+            },
+            // 在 `methods` 对象中定义方法
+            methods: {
+
+                add: function (event) {
+                    if( menulist.taskid==''){
+                        return
+                    }
+                    this.items.push({
+                        materialCode:'',
+                        quantity: 0,
+                        reason: ''
+                    })
+                },
+                selectOnchang: function (event) {
+                    menulist.taskid=event.target.value
+                    menulist.taskList.forEach(function (item,index,input) {
+                        if( input[index].id==event.target.value){
+
+                            menulist.taskPerson=input[index].owner
+                            menulist.taskStart=input[index].startTime
+                            menulist.taskStatus=input[index].status
+                            menulist.taskPlace=input[index].address
+
+                        }
+
+                    })
+                },
+                remove: function (itemIndex) {
+                    this.items.splice(itemIndex, 1)
+                },
+                save: function () {
+                    $.ajax({
+                        url: "/materialReturn/add",
+                        data: {taskCode:this.taskid, dataList:JSON.stringify(this.items)},
+                        async: false,
+                        success: function (result) {
+                            location.reload()
+                        }
+                    });
+                }
+            }
+        })
+</script>
+</body>
+</html>

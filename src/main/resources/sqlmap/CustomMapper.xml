@@ -2,10 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dongfangyuxin.dao.sample.Sample">
 
-    <select id="getUserName" resultType="java.lang.String" parameterType="java.util.Map">
-        SELECT USER.NAME
-        FROM USER
-        WHERE USER.CODE = #{code}
+    <select id="getUserName" resultType="com.dongfangyuxin.common.vo.ThirdLevelVo" parameterType="java.lang.String">
+        SELECT
+	      material.CODE as levelId,
+          material.NAME as levelName,
+          material.TYPE as parentlevelId,
+          material.IMAGE as imageUrl,
+          inventory_info.QUANTITY as stockQuantity
+        FROM material LEFT JOIN inventory_info ON material.CODE = inventory_info.MATERIAL_CODE
     </select>
 
 </mapper>

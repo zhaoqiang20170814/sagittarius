@@ -40,6 +40,17 @@ public class ProjectInfoEngine {
     }
 
     /**
+     * 查询数据信息
+     *
+     * @return 度量衡信息List
+     */
+    public List<ProjectInfoBean> getAllData(ProjectInfoBeanExample condition) {
+        // 取得数据信息
+        List<ProjectInfoBean> dataList = projectInfoBeanMapper.selectByExample(condition);
+        return dataList;
+    }
+
+    /**
      * 查询车辆信息数据信息
      *
      * @param condition 查询条件

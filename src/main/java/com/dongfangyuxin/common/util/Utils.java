@@ -2,14 +2,22 @@ package com.dongfangyuxin.common.util;
 
 import com.dongfangyuxin.common.constants.GlobalConstants;
 import org.apache.commons.beanutils.BeanUtils;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.type.TypeFactory;
+import org.codehaus.jackson.type.JavaType;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by dongl on 2017/7/26.
  */
 public class Utils {
 
+    private static ObjectMapper objectMapper = new ObjectMapper();
     /**
      * @param entity
      * @return
@@ -83,5 +91,34 @@ public class Utils {
         // 更新信息设定
         setEntityOperInfo(entity);
         return entity;
+    }
+
+    /**
+     * 获取UUID
+     * @return
+     */
+    public static String getDefaultUuid() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    /**
+     * 获取领料单ID
+     * @return   getUuid
+     */
+    public static String getOrderIdByUuid() {
+        int uuidHashCode = getDefaultUuid().hashCode();
+        if (uuidHashCode < 0)
+            uuidHashCode = -uuidHashCode;
+        return (new StringBuilder(String.valueOf(1)))
+                .append(String.format("%010d", new Object[] { Integer.valueOf(uuidHashCode) })).toString();
+    }
+
+    public static <T> List<T> deserializeList(String json, Class<T> clazz) {
+        JavaType javaType = TypeFactory.collectionType(List.class, clazz);
+        try {
+            return objectMapper.readValue(json, javaType);
+        } catch (IOException e) {
+        }
+        return new ArrayList<T>();
     }
 }

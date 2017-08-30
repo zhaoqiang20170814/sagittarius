@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>完工确认页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="plugins/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="sagittarius/vue.js"></script>
+    <script src="sagittarius/vue-resource.js"></script>
+</head>
+<body>
+<h2 style="text-align: left;border-bottom: 2px solid lightgrey;margin-left: 20px">完工确认</h2>
+    <div>
+        <table class="table table-hover" style="margin-left: 30px">
+            <thead>
+            <tr>
+                <th>工程名称</th>
+                <th>施工地点</th>
+                <th>负责人</th>
+                <th>工程开始时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="taskItem in taskList">
+                <th>{{taskItem.name}}</th>
+                <th>{{taskItem.address}}</th>
+                <th>{{taskItem.owner}}</th>
+                <th>{{taskItem.startTime}}</th>
+                <th><button class="btn  btn-success" data-toggle="modal" data-target="#example" v-on:click="taskid=taskItem.id,taskName=taskItem.name">完工</button></th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+<div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 20%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    提示信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                {{taskName}}确认完工
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="save">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script th:inline="javascript">
+    var menulist = new Vue({
+        el: 'body',
+        data: {
+            taskList: [[${taskArray}]],
+            taskid:'',
+            taskName:''
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            save: function () {
+                $.ajax({
+                    url: "/completeConfirm/add",
+                    data: {taskCode:this.taskid},
+                    async: false,
+                    success: function (result) {
+                        location.reload()
+                    }
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

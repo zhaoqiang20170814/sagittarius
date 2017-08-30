@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>图纸浏览页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="plugins/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="sagittarius/vue.js"></script>
+    <script src="sagittarius/vue-resource.js"></script>
+</head>
+<body>
+<form class="form-inline" role="form">
+<div style="margin-left: 40px;font-size: large">
+    <span >所属任务</span>
+    <select id="taskCombobox" class="form-control"  v-on:change="selectOnchang($event)">
+        <option value="1">请选择要处理的任务</option>
+        <option value="{{taskItem.taskId}}" v-for="taskItem in taskList">{{taskItem.taskName}}</option>
+    </select>
+</div>
+
+<div style="margin-left: 40px;font-size: medium">
+    <label>项目负责人</label>
+    <input readonly="true"  type="text" class="form-control" v-model="taskPerson"></input>
+    <label style="margin-left: 20px;">施工地点</label>
+    <input readonly="true" id="place" type="text" class="form-control" v-model="taskPlace"></input>
+    <label style="margin-left: 20px;">施工开始日期</label>
+    <input readonly="true" id="startData" type="text" class="form-control" v-model="taskStart" ></input>a
+</div>
+<div style="margin-left: 40px;font-size: medium">
+    <label style="margin-right: 10px">施工开始日期</label>
+    <input readonly="true" id="startData" type="text" class="form-control" v-model="taskStart" ></input>
+    <label style="margin-left: 30px;margin-right: 20px">施工结束日期</label>
+    <input readonly="true" id="endData" type="text" class="form-control" v-model="taskEnd" ></input>
+</div>
+</form>
+
+<div class="container" style="margin-left: 40px;border-bottom: 2px solid lightgrey;margin-top: 30px;width: 100%">
+    <img style="max-height:200px;max-width:200px;" src="img/011.jpg"></img>
+</div>
+<div>
+    <button>上一张</button>
+    <button>下一张</button>
+</div>
+
+<script th:inline="javascript">
+        var menulist = new Vue({
+            el: 'body',
+            data: {
+                pictureList:[[${pictureArray}]],
+                taskList: [[${taskArray}]],
+                items:[],
+                taskid:'',
+                taskPlace:'',
+                taskPerson:'',
+                taskStart:'',
+                taskEnd:''
+            },
+            // 在 `methods` 对象中定义方法
+            methods: {
+                selectOnchang: function (event) {
+                    menulist.taskid=event.target.value
+                    menulist.taskList.forEach(function (item,index,input) {
+
+                        if( input[index].taskId==event.target.value){
+
+                            menulist.taskPerson=input[index].taskPerson
+                            menulist.taskStart=input[index].taskStart
+                            menulist.taskPlace=input[index].taskPlace
+                            menulist.taskEnd=input[index].taskEnd
+                        }
+
+                    })
+                },
+                save: function () {
+                    location.reload()
+                }
+            }
+        })
+</script>
+</body>
+</html>
