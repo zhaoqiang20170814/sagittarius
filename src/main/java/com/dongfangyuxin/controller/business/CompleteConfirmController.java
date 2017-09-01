@@ -42,7 +42,7 @@ public class CompleteConfirmController extends BaseAction {
     public String completeConfirm(Model model) {
         logger.info("进入请求了");
         ProjectInfoBeanExample condition = new ProjectInfoBeanExample();
-        condition.createCriteria().andStatusEqualTo("001");
+        condition.createCriteria().andStatusEqualTo("004");
         List<ProjectInfoBean> taskArray= projectInfoMasterService.getAllInfo(condition);
         model.addAttribute("taskArray", taskArray);
         return "completeConfirm";
@@ -63,7 +63,7 @@ public class CompleteConfirmController extends BaseAction {
         condition.createCriteria().andIdEqualTo(Integer.parseInt(taskCode));
         List<ProjectInfoBean> projectInfoList=projectInfoMasterService.getAllInfo(condition);
         if(null!=projectInfoList){
-            projectInfoList.get(0).setStatus("003");
+            projectInfoList.get(0).setStatus("005");
             projectInfoMasterService.editDataInfo(projectInfoList.get(0));
         }
 

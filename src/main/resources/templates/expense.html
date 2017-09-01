@@ -111,7 +111,7 @@
                         if( input[index].id==event.target.value){
 
                             menulist.taskPerson=input[index].owner
-                            menulist.taskStart=input[index].startTime
+                            menulist.taskStart=new Date(input[index].startTime).toLocaleString()
                             menulist.taskStatus=input[index].status
                             menulist.taskPlace=input[index].address
                         }

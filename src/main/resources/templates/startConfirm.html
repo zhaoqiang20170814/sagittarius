@@ -25,7 +25,7 @@
                 <th>{{taskItem.name}}</th>
                 <th>{{taskItem.address}}</th>
                 <th>{{taskItem.owner}}</th>
-                <th>{{taskItem.startTime}}</th>
+                <th >{{ new Date(taskItem.startTime).toLocaleString()}}</th>
                 <th><button class="btn  btn-success" data-toggle="modal" data-target="#example" v-on:click="taskid=taskItem.id,taskName=taskItem.name">开工</button></th>
             </tr>
             </tbody>

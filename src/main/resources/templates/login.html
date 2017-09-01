@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
     <script src="plugins/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="sagittarius/vue.js"></script>
+    <script src="sagittarius/vue-resource.js"></script>
 </head>
 <style>
     body{
@@ -18,17 +20,43 @@
 <form class="form-inline" role="form">
 <div class="input-group">
     <span class="input-group-addon" id="basic-addon1">@</span>
-    <input id="userName" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1"></input>
+    <input id="userName" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1" v-model="userName"></input>
 </div>
 
 <!--下面是密码输入框-->
 <div class="input-group">
     <span class="input-group-addon" id="basic-addon2">@</span>
-    <input id="passWord" type="text" class="form-control" placeholder="密码" aria-describedby="basic-addon1"></input>
+    <input id="passWord" type="text" class="form-control" placeholder="密码" aria-describedby="basic-addon1" v-model="password"></input>
 </div>
 
 <!--下面是登陆按钮,包括颜色控制-->
-<button type="button" style="width:280px;" class="btn btn-default">登 录</button>
+    <div style="margin-top: 30px;">
+<button type="button" style="width:240px;" class="btn btn-default" v-on:click="logon">登 录</button>
+    </div>
 </form>
+
+<script th:inline="javascript">
+    var menulist = new Vue({
+        el: 'body',
+        data: {
+            userName:'',
+            password:''
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            logon: function () {
+                $.ajax({
+                    url: "/login/logincheck",
+                    data: {userName:this.userName, password:this.password},
+                    async: false,
+                    success: function (result) {
+                        location.reload()
+                    }
+                });
+
+            }
+        }
+    })
+</script>
 </body>
 </html>

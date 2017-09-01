@@ -57,7 +57,7 @@ public class ExpenseController extends BaseAction {
         List<ExpenseTypeInfoBean> volist= expenseTypeMasterService.getExpenseTypeAllInfo();
 
         ProjectInfoBeanExample condition = new ProjectInfoBeanExample();
-        condition.createCriteria().andStatusNotEqualTo("001");
+        condition.createCriteria().andStatusEqualTo("002");
         List<ProjectInfoBean> taskArray= projectInfoMasterService.getAllInfo(condition);
 
         model.addAttribute("taskArray", taskArray);

@@ -54,7 +54,7 @@ public class MaterialReturnController extends BaseAction {
     public String materialReturn(Model model) {
         List<MaterialBean> thirdArray= materialMasterService.getMaterialInfo(null);
         ProjectInfoBeanExample condition = new ProjectInfoBeanExample();
-        condition.createCriteria().andStatusNotEqualTo("001");
+        condition.createCriteria().andStatusNotEqualTo("001").andStatusNotEqualTo("005");
         List<ProjectInfoBean> taskArray= projectInfoMasterService.getAllInfo(condition);
         model.addAttribute("thirdArray", thirdArray);
         model.addAttribute("taskArray", taskArray);
