@@ -40,13 +40,12 @@ public class UserMasterService {
     /**
      * 取得用户信息（所有）
      *
-     * @param condition 查询条件
      * @return 用户信息
      */
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<UserBean> getDataInfoAll() {
+    public List<UserBean> getDataInfoAll(UserBeanExample condition) {
         // 查询用户信息
-        List<UserBean> dataList = userEngine.getDataAll();
+        List<UserBean> dataList = userEngine.getDataAll(condition);
         return dataList;
     }
 
@@ -66,7 +65,7 @@ public class UserMasterService {
     /**
      * 增加用户信息
      *
-     * @param condition 查询条件
+     * @param data 查询条件
      * @return 用户信息
      */
     @Transactional(propagation = Propagation.REQUIRED)

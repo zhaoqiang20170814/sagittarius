@@ -50,7 +50,13 @@
                     data: {userName:this.userName, password:this.password},
                     async: false,
                     success: function (result) {
-                        location.reload()
+                        if(result.success){
+                            var url="mainFrame.html?name="+result.data["name"]+"&amp;authority="+result.data["authority"]
+                            location.href=url
+                        }else{
+                            location.reload()
+                        }
+
                     }
                 });
 

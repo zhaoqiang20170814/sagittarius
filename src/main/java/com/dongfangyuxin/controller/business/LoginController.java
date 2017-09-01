@@ -3,12 +3,12 @@ package com.dongfangyuxin.controller.business;
 import com.dongfangyuxin.common.util.Utils;
 import com.dongfangyuxin.common.vo.MaterialRetrunVo;
 import com.dongfangyuxin.controller.common.BaseAction;
-import com.dongfangyuxin.dao.common.bean.InventoryInfoBean;
-import com.dongfangyuxin.dao.common.bean.InventoryInfoBeanExample;
-import com.dongfangyuxin.dao.common.bean.MaterialReturningDetailBean;
-import com.dongfangyuxin.dao.common.bean.MaterialReturningSlipBean;
+import com.dongfangyuxin.dao.common.bean.*;
+import com.dongfangyuxin.service.business.ExpenseInfoDetailService;
+import com.dongfangyuxin.service.master.UserMasterService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +32,8 @@ public class LoginController extends BaseAction {
 
     private Logger logger = LogManager.getLogger(LoginController.class);
 
+    @Autowired
+    private UserMasterService userMasterService;
     /**
      * 测试hello
      *
@@ -57,7 +59,18 @@ public class LoginController extends BaseAction {
 
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
-
-        return convertReponse(resultMap, true, null);
+        UserBeanExample condition = new UserBeanExample();
+        condition.createCriteria().andCodeEqualTo(userName);
+        List<UserBean> taskArray= userMasterService.getDataInfoAll(condition);
+        boolean checkresult=true;
+        if(taskArray.size()!=1){
+            checkresult=false;
+        }else{
+            checkresult=true;
+            resultMap.put("name",taskArray.get(0).getName());
+            resultMap.put("authority",taskArray.get(0).getPost());
+        }
+//        resultMap.put("rows", carMasterService.getDataInfo(null, paging(page, rows)));
+        return convertReponse(resultMap, checkresult, null);
     }
 }

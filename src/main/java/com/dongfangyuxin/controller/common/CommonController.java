@@ -61,7 +61,7 @@ public class CommonController {
     @RequestMapping(value = "combobox/userInfo", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String loadUserInfo(HttpServletRequest request, HttpServletResponse response) {
-        String result = JSON.toJSONString(userMasterService.getDataInfoAll());
+        String result = JSON.toJSONString(userMasterService.getDataInfoAll(null));
         return result;
     }
 
