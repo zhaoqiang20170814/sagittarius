@@ -3,6 +3,8 @@ package com.dongfangyuxin.service.business;
 import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBean;
 import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBeanExample;
 import com.dongfangyuxin.controller.common.Page;
+import com.dongfangyuxin.dao.common.bean.InventoryInfoBean;
+import com.dongfangyuxin.dao.common.bean.InventoryInfoBeanExample;
 import com.dongfangyuxin.engine.business.CarUsedHistoryEngine;
 import com.dongfangyuxin.engine.common.ProjectInfoEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,19 @@ public class CarUsedHistoryService {
     public List<CarUsedHistoryBean> getDataInfo(CarUsedHistoryBeanExample condition, Page page) {
         // 查询项目信息
         List<CarUsedHistoryBean> dataList = carUsedHistoryEngine.getData(condition, page);
+        return dataList;
+    }
+
+    /**
+     * 库存信息表
+     *
+     * @param condition 查询条件
+     * @return 库存信息
+     */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public List<CarUsedHistoryBean> getDataByCondition(CarUsedHistoryBeanExample condition) {
+        // 查询原材料信息
+        List<CarUsedHistoryBean> dataList = carUsedHistoryEngine.getDataByCondition(condition);
         return dataList;
     }
 

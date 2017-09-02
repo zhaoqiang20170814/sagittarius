@@ -27,63 +27,55 @@ public class ProjectInfoBeanSqlProvider {
     public String insertSelective(ProjectInfoBean record) {
         SQL sql = new SQL();
         sql.INSERT_INTO("project_info");
-        
+
         if (record.getName() != null) {
             sql.VALUES("NAME", "#{name,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getStatus() != null) {
             sql.VALUES("STATUS", "#{status,jdbcType=CHAR}");
         }
-        
+
         if (record.getOwner() != null) {
             sql.VALUES("OWNER", "#{owner,jdbcType=CHAR}");
         }
-        
+
+        if (record.getMember() != null) {
+            sql.VALUES("MEMBER", "#{member,jdbcType=CHAR}");
+        }
+
         if (record.getAddress() != null) {
             sql.VALUES("ADDRESS", "#{address,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getStartTime() != null) {
             sql.VALUES("START_TIME", "#{startTime,jdbcType=TIMESTAMP}");
         }
-        
-        if (record.getImageUrl1() != null) {
-            sql.VALUES("IMAGE_URL1", "#{imageUrl1,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getImageUrl2() != null) {
-            sql.VALUES("IMAGE_URL2", "#{imageUrl2,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getImageUrl3() != null) {
-            sql.VALUES("IMAGE_URL3", "#{imageUrl3,jdbcType=VARCHAR}");
-        }
-        
+
         if (record.getProgramBudget() != null) {
             sql.VALUES("PROGRAM_BUDGET", "#{programBudget,jdbcType=DECIMAL}");
         }
-        
+
         if (record.getRealtimeCost() != null) {
             sql.VALUES("REALTIME_COST", "#{realtimeCost,jdbcType=DECIMAL}");
         }
-        
+
         if (record.getsCreator() != null) {
             sql.VALUES("S_CREATOR", "#{sCreator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreateDate() != null) {
             sql.VALUES("S_CREATE_DATE", "#{sCreateDate,jdbcType=TIMESTAMP}");
         }
-        
+
         if (record.getsOperator() != null) {
             sql.VALUES("S_OPERATOR", "#{sOperator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsOperatorDate() != null) {
             sql.VALUES("S_OPERATOR_DATE", "#{sOperatorDate,jdbcType=TIMESTAMP}");
         }
-        
+
         return sql.toString();
     }
 
@@ -97,11 +89,9 @@ public class ProjectInfoBeanSqlProvider {
         sql.SELECT("NAME");
         sql.SELECT("STATUS");
         sql.SELECT("OWNER");
+        sql.SELECT("MEMBER");
         sql.SELECT("ADDRESS");
         sql.SELECT("START_TIME");
-        sql.SELECT("IMAGE_URL1");
-        sql.SELECT("IMAGE_URL2");
-        sql.SELECT("IMAGE_URL3");
         sql.SELECT("PROGRAM_BUDGET");
         sql.SELECT("REALTIME_COST");
         sql.SELECT("S_CREATOR");
@@ -110,81 +100,73 @@ public class ProjectInfoBeanSqlProvider {
         sql.SELECT("S_OPERATOR_DATE");
         sql.FROM("project_info");
         applyWhere(sql, example, false);
-        
+
         if (example != null && example.getOrderByClause() != null) {
             sql.ORDER_BY(example.getOrderByClause());
         }
-        
+
         return sql.toString();
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
         ProjectInfoBean record = (ProjectInfoBean) parameter.get("record");
         ProjectInfoBeanExample example = (ProjectInfoBeanExample) parameter.get("example");
-        
+
         SQL sql = new SQL();
         sql.UPDATE("project_info");
-        
+
         if (record.getId() != null) {
             sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         }
-        
+
         if (record.getName() != null) {
             sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getStatus() != null) {
             sql.SET("STATUS = #{record.status,jdbcType=CHAR}");
         }
-        
+
         if (record.getOwner() != null) {
             sql.SET("OWNER = #{record.owner,jdbcType=CHAR}");
         }
-        
+
+        if (record.getMember() != null) {
+            sql.SET("MEMBER = #{record.member,jdbcType=CHAR}");
+        }
+
         if (record.getAddress() != null) {
             sql.SET("ADDRESS = #{record.address,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getStartTime() != null) {
             sql.SET("START_TIME = #{record.startTime,jdbcType=TIMESTAMP}");
         }
-        
-        if (record.getImageUrl1() != null) {
-            sql.SET("IMAGE_URL1 = #{record.imageUrl1,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getImageUrl2() != null) {
-            sql.SET("IMAGE_URL2 = #{record.imageUrl2,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getImageUrl3() != null) {
-            sql.SET("IMAGE_URL3 = #{record.imageUrl3,jdbcType=VARCHAR}");
-        }
-        
+
         if (record.getProgramBudget() != null) {
             sql.SET("PROGRAM_BUDGET = #{record.programBudget,jdbcType=DECIMAL}");
         }
-        
+
         if (record.getRealtimeCost() != null) {
             sql.SET("REALTIME_COST = #{record.realtimeCost,jdbcType=DECIMAL}");
         }
-        
+
         if (record.getsCreator() != null) {
             sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreateDate() != null) {
             sql.SET("S_CREATE_DATE = #{record.sCreateDate,jdbcType=TIMESTAMP}");
         }
-        
+
         if (record.getsOperator() != null) {
             sql.SET("S_OPERATOR = #{record.sOperator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsOperatorDate() != null) {
             sql.SET("S_OPERATOR_DATE = #{record.sOperatorDate,jdbcType=TIMESTAMP}");
         }
-        
+
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -192,23 +174,21 @@ public class ProjectInfoBeanSqlProvider {
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
         sql.UPDATE("project_info");
-        
+
         sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
         sql.SET("STATUS = #{record.status,jdbcType=CHAR}");
         sql.SET("OWNER = #{record.owner,jdbcType=CHAR}");
+        sql.SET("MEMBER = #{record.member,jdbcType=CHAR}");
         sql.SET("ADDRESS = #{record.address,jdbcType=VARCHAR}");
         sql.SET("START_TIME = #{record.startTime,jdbcType=TIMESTAMP}");
-        sql.SET("IMAGE_URL1 = #{record.imageUrl1,jdbcType=VARCHAR}");
-        sql.SET("IMAGE_URL2 = #{record.imageUrl2,jdbcType=VARCHAR}");
-        sql.SET("IMAGE_URL3 = #{record.imageUrl3,jdbcType=VARCHAR}");
         sql.SET("PROGRAM_BUDGET = #{record.programBudget,jdbcType=DECIMAL}");
         sql.SET("REALTIME_COST = #{record.realtimeCost,jdbcType=DECIMAL}");
         sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         sql.SET("S_CREATE_DATE = #{record.sCreateDate,jdbcType=TIMESTAMP}");
         sql.SET("S_OPERATOR = #{record.sOperator,jdbcType=CHAR}");
         sql.SET("S_OPERATOR_DATE = #{record.sOperatorDate,jdbcType=TIMESTAMP}");
-        
+
         ProjectInfoBeanExample example = (ProjectInfoBeanExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
@@ -217,65 +197,57 @@ public class ProjectInfoBeanSqlProvider {
     public String updateByPrimaryKeySelective(ProjectInfoBean record) {
         SQL sql = new SQL();
         sql.UPDATE("project_info");
-        
+
         if (record.getName() != null) {
             sql.SET("NAME = #{name,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getStatus() != null) {
             sql.SET("STATUS = #{status,jdbcType=CHAR}");
         }
-        
+
         if (record.getOwner() != null) {
             sql.SET("OWNER = #{owner,jdbcType=CHAR}");
         }
-        
+
+        if (record.getMember() != null) {
+            sql.SET("MEMBER = #{member,jdbcType=CHAR}");
+        }
+
         if (record.getAddress() != null) {
             sql.SET("ADDRESS = #{address,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getStartTime() != null) {
             sql.SET("START_TIME = #{startTime,jdbcType=TIMESTAMP}");
         }
-        
-        if (record.getImageUrl1() != null) {
-            sql.SET("IMAGE_URL1 = #{imageUrl1,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getImageUrl2() != null) {
-            sql.SET("IMAGE_URL2 = #{imageUrl2,jdbcType=VARCHAR}");
-        }
-        
-        if (record.getImageUrl3() != null) {
-            sql.SET("IMAGE_URL3 = #{imageUrl3,jdbcType=VARCHAR}");
-        }
-        
+
         if (record.getProgramBudget() != null) {
             sql.SET("PROGRAM_BUDGET = #{programBudget,jdbcType=DECIMAL}");
         }
-        
+
         if (record.getRealtimeCost() != null) {
             sql.SET("REALTIME_COST = #{realtimeCost,jdbcType=DECIMAL}");
         }
-        
+
         if (record.getsCreator() != null) {
             sql.SET("S_CREATOR = #{sCreator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreateDate() != null) {
             sql.SET("S_CREATE_DATE = #{sCreateDate,jdbcType=TIMESTAMP}");
         }
-        
+
         if (record.getsOperator() != null) {
             sql.SET("S_OPERATOR = #{sOperator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsOperatorDate() != null) {
             sql.SET("S_OPERATOR_DATE = #{sOperatorDate,jdbcType=TIMESTAMP}");
         }
-        
+
         sql.WHERE("ID = #{id,jdbcType=INTEGER}");
-        
+
         return sql.toString();
     }
 
@@ -283,7 +255,7 @@ public class ProjectInfoBeanSqlProvider {
         if (example == null) {
             return;
         }
-        
+
         String parmPhrase1;
         String parmPhrase1_th;
         String parmPhrase2;
@@ -305,7 +277,7 @@ public class ProjectInfoBeanSqlProvider {
             parmPhrase3 = "#{oredCriteria[%d].allCriteria[%d].value[%d]}";
             parmPhrase3_th = "#{oredCriteria[%d].allCriteria[%d].value[%d],typeHandler=%s}";
         }
-        
+
         StringBuilder sb = new StringBuilder();
         List<Criteria> oredCriteria = example.getOredCriteria();
         boolean firstCriteria = true;
@@ -317,7 +289,7 @@ public class ProjectInfoBeanSqlProvider {
                 } else {
                     sb.append(" or ");
                 }
-                
+
                 sb.append('(');
                 List<Criterion> criterions = criteria.getAllCriteria();
                 boolean firstCriterion = true;
@@ -328,7 +300,7 @@ public class ProjectInfoBeanSqlProvider {
                     } else {
                         sb.append(" and ");
                     }
-                    
+
                     if (criterion.isNoValue()) {
                         sb.append(criterion.getCondition());
                     } else if (criterion.isSingleValue()) {
@@ -366,7 +338,7 @@ public class ProjectInfoBeanSqlProvider {
                 sb.append(')');
             }
         }
-        
+
         if (sb.length() > 0) {
             sql.WHERE(sb.toString());
         }

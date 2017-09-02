@@ -27,55 +27,59 @@ public class UserBeanSqlProvider {
     public String insertSelective(UserBean record) {
         SQL sql = new SQL();
         sql.INSERT_INTO("user");
-        
+
         if (record.getCode() != null) {
             sql.VALUES("CODE", "#{code,jdbcType=CHAR}");
         }
-        
+
         if (record.getName() != null) {
             sql.VALUES("NAME", "#{name,jdbcType=VARCHAR}");
         }
-        
+
+        if (record.getPassword() != null) {
+            sql.VALUES("PASSWORD", "#{password,jdbcType=VARCHAR}");
+        }
+
         if (record.getSex() != null) {
             sql.VALUES("SEX", "#{sex,jdbcType=CHAR}");
         }
-        
+
         if (record.getAge() != null) {
             sql.VALUES("AGE", "#{age,jdbcType=INTEGER}");
         }
-        
+
         if (record.getPost() != null) {
             sql.VALUES("POST", "#{post,jdbcType=CHAR}");
         }
-        
+
         if (record.getDepartment() != null) {
             sql.VALUES("DEPARTMENT", "#{department,jdbcType=CHAR}");
         }
-        
+
         if (record.getContact() != null) {
             sql.VALUES("CONTACT", "#{contact,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getIdNumber() != null) {
             sql.VALUES("ID_NUMBER", "#{idNumber,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreator() != null) {
             sql.VALUES("S_CREATOR", "#{sCreator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreateDate() != null) {
             sql.VALUES("S_CREATE_DATE", "#{sCreateDate,jdbcType=TIMESTAMP}");
         }
-        
+
         if (record.getsOperator() != null) {
             sql.VALUES("S_OPERATOR", "#{sOperator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsOperatorDate() != null) {
             sql.VALUES("S_OPERATOR_DATE", "#{sOperatorDate,jdbcType=TIMESTAMP}");
         }
-        
+
         return sql.toString();
     }
 
@@ -88,6 +92,7 @@ public class UserBeanSqlProvider {
         }
         sql.SELECT("CODE");
         sql.SELECT("NAME");
+        sql.SELECT("PASSWORD");
         sql.SELECT("SEX");
         sql.SELECT("AGE");
         sql.SELECT("POST");
@@ -100,73 +105,77 @@ public class UserBeanSqlProvider {
         sql.SELECT("S_OPERATOR_DATE");
         sql.FROM("user");
         applyWhere(sql, example, false);
-        
+
         if (example != null && example.getOrderByClause() != null) {
             sql.ORDER_BY(example.getOrderByClause());
         }
-        
+
         return sql.toString();
     }
 
     public String updateByExampleSelective(Map<String, Object> parameter) {
         UserBean record = (UserBean) parameter.get("record");
         UserBeanExample example = (UserBeanExample) parameter.get("example");
-        
+
         SQL sql = new SQL();
         sql.UPDATE("user");
-        
+
         if (record.getId() != null) {
             sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         }
-        
+
         if (record.getCode() != null) {
             sql.SET("CODE = #{record.code,jdbcType=CHAR}");
         }
-        
+
         if (record.getName() != null) {
             sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
         }
-        
+
+        if (record.getPassword() != null) {
+            sql.SET("PASSWORD = #{record.password,jdbcType=VARCHAR}");
+        }
+
         if (record.getSex() != null) {
             sql.SET("SEX = #{record.sex,jdbcType=CHAR}");
         }
-        
+
         if (record.getAge() != null) {
             sql.SET("AGE = #{record.age,jdbcType=INTEGER}");
         }
-        
+
         if (record.getPost() != null) {
             sql.SET("POST = #{record.post,jdbcType=CHAR}");
         }
-        
+
         if (record.getDepartment() != null) {
             sql.SET("DEPARTMENT = #{record.department,jdbcType=CHAR}");
         }
-        
+
         if (record.getContact() != null) {
             sql.SET("CONTACT = #{record.contact,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getIdNumber() != null) {
             sql.SET("ID_NUMBER = #{record.idNumber,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreator() != null) {
             sql.SET("S_CREATOR = #{record.sCreator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreateDate() != null) {
             sql.SET("S_CREATE_DATE = #{record.sCreateDate,jdbcType=TIMESTAMP}");
         }
-        
+
         if (record.getsOperator() != null) {
             sql.SET("S_OPERATOR = #{record.sOperator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsOperatorDate() != null) {
             sql.SET("S_OPERATOR_DATE = #{record.sOperatorDate,jdbcType=TIMESTAMP}");
         }
-        
+
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -174,10 +183,11 @@ public class UserBeanSqlProvider {
     public String updateByExample(Map<String, Object> parameter) {
         SQL sql = new SQL();
         sql.UPDATE("user");
-        
+
         sql.SET("ID = #{record.id,jdbcType=INTEGER}");
         sql.SET("CODE = #{record.code,jdbcType=CHAR}");
         sql.SET("NAME = #{record.name,jdbcType=VARCHAR}");
+        sql.SET("PASSWORD = #{record.password,jdbcType=VARCHAR}");
         sql.SET("SEX = #{record.sex,jdbcType=CHAR}");
         sql.SET("AGE = #{record.age,jdbcType=INTEGER}");
         sql.SET("POST = #{record.post,jdbcType=CHAR}");
@@ -188,7 +198,7 @@ public class UserBeanSqlProvider {
         sql.SET("S_CREATE_DATE = #{record.sCreateDate,jdbcType=TIMESTAMP}");
         sql.SET("S_OPERATOR = #{record.sOperator,jdbcType=CHAR}");
         sql.SET("S_OPERATOR_DATE = #{record.sOperatorDate,jdbcType=TIMESTAMP}");
-        
+
         UserBeanExample example = (UserBeanExample) parameter.get("example");
         applyWhere(sql, example, true);
         return sql.toString();
@@ -197,57 +207,61 @@ public class UserBeanSqlProvider {
     public String updateByPrimaryKeySelective(UserBean record) {
         SQL sql = new SQL();
         sql.UPDATE("user");
-        
+
         if (record.getCode() != null) {
             sql.SET("CODE = #{code,jdbcType=CHAR}");
         }
-        
+
         if (record.getName() != null) {
             sql.SET("NAME = #{name,jdbcType=VARCHAR}");
         }
-        
+
+        if (record.getPassword() != null) {
+            sql.SET("PASSWORD = #{password,jdbcType=VARCHAR}");
+        }
+
         if (record.getSex() != null) {
             sql.SET("SEX = #{sex,jdbcType=CHAR}");
         }
-        
+
         if (record.getAge() != null) {
             sql.SET("AGE = #{age,jdbcType=INTEGER}");
         }
-        
+
         if (record.getPost() != null) {
             sql.SET("POST = #{post,jdbcType=CHAR}");
         }
-        
+
         if (record.getDepartment() != null) {
             sql.SET("DEPARTMENT = #{department,jdbcType=CHAR}");
         }
-        
+
         if (record.getContact() != null) {
             sql.SET("CONTACT = #{contact,jdbcType=VARCHAR}");
         }
-        
+
         if (record.getIdNumber() != null) {
             sql.SET("ID_NUMBER = #{idNumber,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreator() != null) {
             sql.SET("S_CREATOR = #{sCreator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsCreateDate() != null) {
             sql.SET("S_CREATE_DATE = #{sCreateDate,jdbcType=TIMESTAMP}");
         }
-        
+
         if (record.getsOperator() != null) {
             sql.SET("S_OPERATOR = #{sOperator,jdbcType=CHAR}");
         }
-        
+
         if (record.getsOperatorDate() != null) {
             sql.SET("S_OPERATOR_DATE = #{sOperatorDate,jdbcType=TIMESTAMP}");
         }
-        
+
         sql.WHERE("ID = #{id,jdbcType=INTEGER}");
-        
+
         return sql.toString();
     }
 
@@ -255,7 +269,7 @@ public class UserBeanSqlProvider {
         if (example == null) {
             return;
         }
-        
+
         String parmPhrase1;
         String parmPhrase1_th;
         String parmPhrase2;
@@ -277,7 +291,7 @@ public class UserBeanSqlProvider {
             parmPhrase3 = "#{oredCriteria[%d].allCriteria[%d].value[%d]}";
             parmPhrase3_th = "#{oredCriteria[%d].allCriteria[%d].value[%d],typeHandler=%s}";
         }
-        
+
         StringBuilder sb = new StringBuilder();
         List<Criteria> oredCriteria = example.getOredCriteria();
         boolean firstCriteria = true;
@@ -289,7 +303,7 @@ public class UserBeanSqlProvider {
                 } else {
                     sb.append(" or ");
                 }
-                
+
                 sb.append('(');
                 List<Criterion> criterions = criteria.getAllCriteria();
                 boolean firstCriterion = true;
@@ -300,7 +314,7 @@ public class UserBeanSqlProvider {
                     } else {
                         sb.append(" and ");
                     }
-                    
+
                     if (criterion.isNoValue()) {
                         sb.append(criterion.getCondition());
                     } else if (criterion.isSingleValue()) {
@@ -338,7 +352,7 @@ public class UserBeanSqlProvider {
                 sb.append(')');
             }
         }
-        
+
         if (sb.length() > 0) {
             sql.WHERE(sb.toString());
         }

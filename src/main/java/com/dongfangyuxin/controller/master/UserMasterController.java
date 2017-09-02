@@ -1,7 +1,7 @@
 package com.dongfangyuxin.controller.master;
 
-import com.dongfangyuxin.dao.common.bean.UserBean;
 import com.dongfangyuxin.controller.common.BaseAction;
+import com.dongfangyuxin.dao.common.bean.UserBean;
 import com.dongfangyuxin.service.master.UserMasterService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -74,8 +74,8 @@ public class UserMasterController extends BaseAction {
     @RequestMapping(value = "add", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> add(HttpServletRequest request, HttpServletResponse response, @RequestParam String code,
-                                   @RequestParam String name, @RequestParam String sex, @RequestParam int age,
-                                   @RequestParam String post, @RequestParam String department,
+                                   @RequestParam String name, @RequestParam String password, @RequestParam String sex,
+                                   @RequestParam int age, @RequestParam String post, @RequestParam String department,
                                    @RequestParam String contact, @RequestParam String idNumber) {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
@@ -85,6 +85,8 @@ public class UserMasterController extends BaseAction {
         userBean.setCode(code);
         // 用户姓名
         userBean.setName(name);
+        // 密码
+        userBean.setPassword(password);
         // 性别
         userBean.setSex(sex);
         // 年龄
@@ -112,9 +114,9 @@ public class UserMasterController extends BaseAction {
     @RequestMapping(value = "edit", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> edit(HttpServletRequest request, HttpServletResponse response, @RequestParam int id,
-                                    @RequestParam String code, @RequestParam String name, @RequestParam String sex,
-                                    @RequestParam int age, @RequestParam String post, @RequestParam String department,
-                                    @RequestParam String contact, @RequestParam String idNumber) {
+                                    @RequestParam String code, @RequestParam String name, @RequestParam String password,
+                                    @RequestParam String sex, @RequestParam int age, @RequestParam String post,
+                                    @RequestParam String department, @RequestParam String contact, @RequestParam String idNumber) {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         // 数据设定
@@ -125,6 +127,8 @@ public class UserMasterController extends BaseAction {
         userBean.setCode(code);
         // 用户姓名
         userBean.setName(name);
+        // 密码
+        userBean.setPassword(password);
         // 性别
         userBean.setSex(sex);
         // 年龄

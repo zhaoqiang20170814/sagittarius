@@ -29,6 +29,13 @@ $(function () {
             halign: 'center',
             sortable: false
         }, {
+            field: 'name',
+            title: '姓名',
+            width: 150,
+            align: 'center',
+            halign: 'center',
+            sortable: false
+        }, {
             field: 'sex',
             title: '性别',
             width: 150,

@@ -41,6 +41,10 @@
                        data-options="valueField: 'code',textField: 'name'"/>
             </div>
             <div style="margin-bottom:10px">
+                <input id="member" name="member" class="easyui-combobox" style="width:100%;" required="true" label="项目参与人"
+                       data-options="valueField:'code',textField:'name',multiple:true,panelHeight:'auto'"/>
+            </div>
+            <div style="margin-bottom:10px">
                 <input name="address" class="easyui-textbox" required="true" label="项目地址" style="width:100%"
                        data-options="validType:['length[0,300]']"/>
             </div>

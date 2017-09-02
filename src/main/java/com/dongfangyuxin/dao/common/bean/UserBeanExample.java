@@ -305,6 +305,76 @@ public class UserBeanExample {
             return (Criteria) this;
         }
 
+        public Criteria andPasswordIsNull() {
+            addCriterion("PASSWORD is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordIsNotNull() {
+            addCriterion("PASSWORD is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordEqualTo(String value) {
+            addCriterion("PASSWORD =", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordNotEqualTo(String value) {
+            addCriterion("PASSWORD <>", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordGreaterThan(String value) {
+            addCriterion("PASSWORD >", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordGreaterThanOrEqualTo(String value) {
+            addCriterion("PASSWORD >=", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordLessThan(String value) {
+            addCriterion("PASSWORD <", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordLessThanOrEqualTo(String value) {
+            addCriterion("PASSWORD <=", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordLike(String value) {
+            addCriterion("PASSWORD like", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordNotLike(String value) {
+            addCriterion("PASSWORD not like", value, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordIn(List<String> values) {
+            addCriterion("PASSWORD in", values, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordNotIn(List<String> values) {
+            addCriterion("PASSWORD not in", values, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordBetween(String value1, String value2) {
+            addCriterion("PASSWORD between", value1, value2, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordNotBetween(String value1, String value2) {
+            addCriterion("PASSWORD not between", value1, value2, "password");
+            return (Criteria) this;
+        }
+
         public Criteria andSexIsNull() {
             addCriterion("SEX is null");
             return (Criteria) this;
@@ -982,6 +1052,11 @@ public class UserBeanExample {
 
         public Criteria andNameLikeInsensitive(String value) {
             addCriterion("upper(NAME) like", value.toUpperCase(), "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andPasswordLikeInsensitive(String value) {
+            addCriterion("upper(PASSWORD) like", value.toUpperCase(), "password");
             return (Criteria) this;
         }
 

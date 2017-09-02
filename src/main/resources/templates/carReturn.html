@@ -104,11 +104,15 @@
                     if(this.taskid==""){
                         alert("请先选择要处理的任务！")
                     }else{
-                        menulist.carList.forEach(function (item,index,input) {
-                            if(input[index].owner){
-
+                        $.ajax({
+                            url: "/carReturn/save",
+                            data: {taskCode:this.taskid},
+                            async: false,
+                            success: function (result) {
+                                location.reload()
                             }
-                        })
+                        });
+
                     }
                     location.reload()
                 }

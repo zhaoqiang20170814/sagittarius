@@ -1,8 +1,8 @@
 package com.dongfangyuxin.controller.project;
 
+import com.dongfangyuxin.controller.common.BaseAction;
 import com.dongfangyuxin.dao.common.bean.CarInfoBean;
 import com.dongfangyuxin.dao.common.bean.ProjectInfoBean;
-import com.dongfangyuxin.controller.common.BaseAction;
 import com.dongfangyuxin.service.project.ProjectInfoMasterService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -77,8 +77,9 @@ public class ProjectInfoMasterController extends BaseAction {
     @RequestMapping(value = "add", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> add(HttpServletRequest request, HttpServletResponse response, @RequestParam String name,
-                                   @RequestParam String status, @RequestParam String owner, @RequestParam String address,
-                                   @RequestParam Date startTime, @RequestParam BigDecimal programBudget, @RequestParam BigDecimal realtimeCost) {
+                                   @RequestParam String status, @RequestParam String owner, @RequestParam String[] member,
+                                   @RequestParam String address, @RequestParam Date startTime, @RequestParam BigDecimal programBudget,
+                                   @RequestParam BigDecimal realtimeCost) {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         // 数据设定
@@ -89,6 +90,8 @@ public class ProjectInfoMasterController extends BaseAction {
         projectInfoBean.setStatus(status);
         // 项目负责人
         projectInfoBean.setOwner(owner);
+        // 项目参与人
+        projectInfoBean.setMember(String.join(",", member));
         // 项目地址
         projectInfoBean.setAddress(address);
         // 项目开始时间

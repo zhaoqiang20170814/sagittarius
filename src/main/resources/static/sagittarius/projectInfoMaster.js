@@ -58,11 +58,33 @@ $(function () {
             align: 'center',
             halign: 'center',
             formatter: function (value) {
-                for (var i = 0; i < dataDic.POST.length; i++) {
+                for (var i = 0; i < userInfo.length; i++) {
                     if (userInfo[i].code == value)
                         return userInfo[i].name;
                 }
                 return value;
+            },
+            sortable: false
+        }, {
+            field: 'member',
+            title: '项目参与人',
+            width: 100,
+            align: 'center',
+            halign: 'center',
+            formatter: function (value) {
+                if (value == null) {
+                    return "";
+                } else {
+                    var usercodeList = value.split(",");
+                    var usernameList = new Array();
+                    for (var j = 0; j < usercodeList.length; j++) {
+                        for (var i = 0; i < userInfo.length; i++) {
+                            if (userInfo[i].code == usercodeList[j])
+                                usernameList.push(userInfo[i].name);
+                        }
+                    }
+                    return usernameList.join(",");
+                }
             },
             sortable: false
         }, {
@@ -111,6 +133,7 @@ $(function () {
     });
     $("#status").combobox("loadData", dataDic.PROJECT_STATUS);
     $("#owner").combobox("loadData", userInfo);
+    $("#member").combobox("loadData", userInfo);
 })
 /**
  * 新增单位

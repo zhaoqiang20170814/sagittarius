@@ -1,8 +1,5 @@
 package com.dongfangyuxin.dao.common.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -16,15 +13,11 @@ public class ProjectInfoBean implements Serializable {
 
     private String owner;
 
+    private String member;
+
     private String address;
 
     private Date startTime;
-
-    private String imageUrl1;
-
-    private String imageUrl2;
-
-    private String imageUrl3;
 
     private BigDecimal programBudget;
 
@@ -72,6 +65,14 @@ public class ProjectInfoBean implements Serializable {
         this.owner = owner == null ? null : owner.trim();
     }
 
+    public String getMember() {
+        return member;
+    }
+
+    public void setMember(String member) {
+        this.member = member == null ? null : member.trim();
+    }
+
     public String getAddress() {
         return address;
     }
@@ -86,30 +87,6 @@ public class ProjectInfoBean implements Serializable {
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
-    }
-
-    public String getImageUrl1() {
-        return imageUrl1;
-    }
-
-    public void setImageUrl1(String imageUrl1) {
-        this.imageUrl1 = imageUrl1 == null ? null : imageUrl1.trim();
-    }
-
-    public String getImageUrl2() {
-        return imageUrl2;
-    }
-
-    public void setImageUrl2(String imageUrl2) {
-        this.imageUrl2 = imageUrl2 == null ? null : imageUrl2.trim();
-    }
-
-    public String getImageUrl3() {
-        return imageUrl3;
-    }
-
-    public void setImageUrl3(String imageUrl3) {
-        this.imageUrl3 = imageUrl3 == null ? null : imageUrl3.trim();
     }
 
     public BigDecimal getProgramBudget() {

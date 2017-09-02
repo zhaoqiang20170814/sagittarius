@@ -3,6 +3,8 @@ package com.dongfangyuxin.service.master;
 import com.dongfangyuxin.dao.common.bean.CarInfoBean;
 import com.dongfangyuxin.dao.common.bean.CarInfoBeanExample;
 import com.dongfangyuxin.controller.common.Page;
+import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBean;
+import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBeanExample;
 import com.dongfangyuxin.engine.common.CarEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,9 +53,22 @@ public class CarMasterService {
     }
 
     /**
-     * 增加车辆信息
+     * 库存信息表
      *
      * @param condition 查询条件
+     * @return 库存信息
+     */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public List<CarInfoBean> getDataByCondition(CarInfoBeanExample condition) {
+        // 查询原材料信息
+        List<CarInfoBean> dataList = carEngine.getDataByCondition(condition);
+        return dataList;
+    }
+
+    /**
+     * 增加车辆信息
+     *
+     * @param data 查询条件
      * @return 车辆信息
      */
     @Transactional(propagation = Propagation.REQUIRED)

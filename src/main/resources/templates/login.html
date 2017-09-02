@@ -3,8 +3,12 @@
 <head>
     <title>登录页面</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/metro/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/color.css"/>
+    <link rel="stylesheet" type="text/css" href="plugins/themes/icon.css"/>
     <script src="plugins/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="plugins/jquery.easyui.min.js"></script>
     <script src="sagittarius/vue.js"></script>
     <script src="sagittarius/vue-resource.js"></script>
 </head>
@@ -16,17 +20,17 @@
         width:20em;
     }
 </style>
-<body>
-<form class="form-inline" role="form">
+<body style="background-color: lightblue">
+<form class="form-inline" role="form" >
 <div class="input-group">
     <span class="input-group-addon" id="basic-addon1">@</span>
     <input id="userName" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1" v-model="userName"></input>
 </div>
 
 <!--下面是密码输入框-->
-<div class="input-group">
+<div class="input-group" style="margin-top: 20px">
     <span class="input-group-addon" id="basic-addon2">@</span>
-    <input id="passWord" type="text" class="form-control" placeholder="密码" aria-describedby="basic-addon1" v-model="password"></input>
+    <input id="passWord" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1" v-model="password"></input>
 </div>
 
 <!--下面是登陆按钮,包括颜色控制-->
@@ -54,7 +58,7 @@
                             var url="mainFrame.html?name="+result.data["name"]+"&amp;authority="+result.data["authority"]
                             location.href=url
                         }else{
-                            location.reload()
+                            $.messager.alert('错误',result.message);
                         }
 
                     }

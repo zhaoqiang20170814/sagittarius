@@ -60,17 +60,19 @@ public class LoginController extends BaseAction {
         // 请求结果
         Map<String, Object> resultMap = new HashMap<>();
         UserBeanExample condition = new UserBeanExample();
-        condition.createCriteria().andCodeEqualTo(userName);
+        condition.createCriteria().andCodeEqualTo(userName).andPasswordEqualTo(password);
         List<UserBean> taskArray= userMasterService.getDataInfoAll(condition);
         boolean checkresult=true;
+        String message="";
         if(taskArray.size()!=1){
             checkresult=false;
+            message="输入的用户名或密码错误";
         }else{
             checkresult=true;
             resultMap.put("name",taskArray.get(0).getName());
             resultMap.put("authority",taskArray.get(0).getPost());
         }
 //        resultMap.put("rows", carMasterService.getDataInfo(null, paging(page, rows)));
-        return convertReponse(resultMap, checkresult, null);
+        return convertReponse(resultMap, checkresult, message);
     }
 }

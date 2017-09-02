@@ -5,6 +5,8 @@ import com.dongfangyuxin.dao.common.bean.CarInfoBean;
 import com.dongfangyuxin.dao.common.bean.CarInfoBeanExample;
 import com.dongfangyuxin.common.util.Utils;
 import com.dongfangyuxin.controller.common.Page;
+import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBean;
+import com.dongfangyuxin.dao.common.bean.CarUsedHistoryBeanExample;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,6 +38,18 @@ public class CarEngine {
         RowBounds rowBounds = new RowBounds(page.getOffset(), page.getLimit());
         // 取得车辆信息信息
         List<CarInfoBean> dataList = carInfoBeanMapper.selectByExampleWithRowbounds(condition, rowBounds);
+        return dataList;
+    }
+
+    /**
+     * 查询库存信息表
+     *
+     * @param condition 查询条件
+     * @return 库存信息表List
+     */
+    public List<CarInfoBean> getDataByCondition(CarInfoBeanExample condition) {
+        // 取得原材料信息信息
+        List<CarInfoBean> dataList = carInfoBeanMapper.selectByExample(condition);
         return dataList;
     }
 

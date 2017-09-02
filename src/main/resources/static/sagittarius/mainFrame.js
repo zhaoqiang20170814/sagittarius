@@ -74,6 +74,30 @@ function createFrame(url) {
     return s;
 }
 
+
+
+var LocString=String(window.document.location.href);
+var loginName=decodeURI(GetQueryString("name"));
+var authority=GetQueryString("authority");
+
+window.onload=function(){
+
+    if(authority=="001"){
+        $("#masterDiv").hide();
+    }
+}
+
+
+window.onload=function(){
+
+}
+
+function GetQueryString(str){
+    var rs=new RegExp("(^|)"+str+"=([^&]*)(&|$)","gi").exec(LocString),tmp;
+    if(tmp=rs)return tmp[2];
+    return "没有这个参数";
+}
+
 /**
  * 刷新主界面
  * @param title
