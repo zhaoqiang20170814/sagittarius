@@ -12,4 +12,65 @@
         FROM material LEFT JOIN inventory_info ON material.CODE = inventory_info.MATERIAL_CODE
     </select>
 
+    <select id="getProjectName" resultType="com.dongfangyuxin.common.vo.ProjectInfo" parameterType="java.lang.String">
+            SELECT
+            material_requisition.`CODE`,
+            project_info.`NAME` as taskName,
+            material_requisition.COUNT,
+            material_requisition.OPERATOR,
+            material_requisition.OPERATING_TIME as operatingTime
+            FROM
+                material_requisition
+            LEFT JOIN project_info ON material_requisition.TASK_CODE = project_info.ID
+            ORDER BY material_requisition.OPERATING_TIME DESC
+    </select>
+
+    <select id="getReturn" resultType="com.dongfangyuxin.common.vo.ProjectInfo" parameterType="java.lang.String">
+       SELECT
+        material_returning_slip.`CODE`,
+        project_info.`NAME` as taskName,
+        material_returning_slip.COUNT,
+        material_returning_slip.OPERATOR,
+        material_returning_slip.OPERATING_TIME as operatingTime
+        FROM
+        material_returning_slip
+        LEFT JOIN project_info ON material_returning_slip.TASK_CODE = project_info.ID
+        ORDER BY material_returning_slip.OPERATING_TIME DESC
+    </select>
+
+    <select id="getMaterialName" resultType="java.lang.String" parameterType="java.util.Map">
+           SELECT
+        CONCAT_WS(',',material.`NAME`,material_requisition_detail.QUANTITY)
+        FROM
+            material_requisition_detail
+        JOIN material ON material_requisition_detail.TASK_CODE = material.`CODE`
+        where material_requisition_detail.`CODE`=#{code}
+    </select>
+
+    <select id="getReturnMaterialName" resultType="java.lang.String" parameterType="java.util.Map">
+        SELECT
+        CONCAT_WS(',',material.`NAME`,material_returning_detail.QUANTITY)
+        FROM
+        material_returning_detail
+        JOIN material ON material_returning_detail.TASK_CODE = material.`CODE`
+        where material_returning_detail.`CODE`=#{code}
+    </select>
+
+    <select id="getReceiveMaterial" resultType="com.dongfangyuxin.common.vo.MaterialRetrunVo" parameterType="java.util.Map">
+        SELECT
+            material.`CODE` AS materialCode,
+            material.`NAME` AS materialName,
+            material.IMAGE AS materialImage,
+            material_requisition_detail.QUANTITY AS selectQuantity,
+            0 AS backQuantity
+        FROM
+            material_requisition,
+            material_requisition_detail,
+            material
+        WHERE
+            material_requisition.`CODE` = material_requisition_detail.`CODE`
+        AND material_requisition_detail.TASK_CODE = material.`CODE`
+        AND material_requisition.TASK_CODE = #{code}
+    </select>
+
 </mapper>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <title>退料信息一览页面</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <script src="plugins/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="sagittarius/vue.js"></script>
+    <script src="sagittarius/vue-resource.js"></script>
+</head>
+<body>
+<h2 style="text-align: left;border-bottom: 2px solid lightgrey;margin-left: 20px">退料信息一览</h2>
+    <div>
+        <table class="table table-hover" style="margin-left: 30px">
+            <thead>
+            <tr>
+                <th>所属项目</th>
+                <th>退料数量</th>
+                <th>退料人</th>
+                <th>退料时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="summaryItem in summaryList">
+                <th>{{summaryItem.taskName}}</th>
+                <th>{{summaryItem.count}}</th>
+                <th>{{summaryItem.operator}}</th>
+                <th>{{new Date(summaryItem.operatingTime).toLocaleString()}}</th>
+                <th><button class="btn  btn-info" data-toggle="modal" data-target="#example" v-on:click="getDetail(summaryItem.code)">详情</button></th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+<div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 30%;">
+        <div class="modal-content" style="height:  500px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    提示信息
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 350px;overflow-y: scroll">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>材料名称</th>
+                        <th>退料数量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="materialItem in detailList">
+                        <th>{{materialItem.name}}</th>
+                        <th>{{materialItem.quality}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script th:inline="javascript">
+    var menulist = new Vue({
+        el: 'body',
+        data: {
+            summaryList: [[${summaryArray}]],
+            detailList: []
+        },
+        methods: {
+            getDetail: function (summaryId) {
+                menulist.detailList=[];
+                $.ajax({
+                    url: "/returnMaterialView/getDetail",
+                    data: {summaryCode:summaryId},
+                    async: false,
+                    success: function (result) {
+                        if(result.success){
+                            result.data["detailArray"].forEach(function(value, index, array) {
+                                menulist.detailList.push({name:value.split(',')[0],quality:value.split(',')[1]})
+                            });
+                        }else{
+                            $.messager.alert('错误',result.message);
+                        }
+
+                    }
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

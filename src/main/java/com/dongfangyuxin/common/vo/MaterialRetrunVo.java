@@ -6,9 +6,13 @@ public class MaterialRetrunVo implements Serializable {
 
     private String materialCode;
 
-    private int quantity;
+    private String materialName;
 
-    private String reason;
+    private String materialImage;
+
+    private int selectQuantity;
+
+    private int backQuantity;
 
     public String getMaterialCode() {
         return materialCode;
@@ -18,19 +22,35 @@ public class MaterialRetrunVo implements Serializable {
         this.materialCode = materialCode;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getSelectQuantity() {
+        return selectQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setSelectQuantity(int selectQuantity) {
+        this.selectQuantity = selectQuantity;
     }
 
-    public String getReason() {
-        return reason;
+    public int getBackQuantity() {
+        return backQuantity;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setBackQuantity(int backQuantity) {
+        this.backQuantity = backQuantity;
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public String getMaterialImage() {
+        return materialImage;
+    }
+
+    public void setMaterialImage(String materialImage) {
+        this.materialImage = materialImage;
     }
 }

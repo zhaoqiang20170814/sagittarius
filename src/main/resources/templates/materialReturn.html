@@ -3,136 +3,133 @@
 <head>
     <title>退料页面</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-    <script src="plugins/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="sagittarius/vue.js"></script>
     <script src="sagittarius/vue-resource.js"></script>
+    <script type="text/javascript" src="sagittarius/jquery-1.4.4.min.js"></script>
+    <script language="javascript" src="sagittarius/jquery.jqprint-0.3.js"></script>
+
+    <style>
+        .hide{
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<h1 style="text-align: left;border-bottom: 2px solid lightgrey;margin-left: 20px">退料</h1>
-<form class="form-inline" role="form">
-<div style="margin-left: 40px;font-size: larger">
-    <span style="font-size: x-large;">所属任务</span>
-    <select id="taskCombobox" class="form-control"  v-on:change="selectOnchang($event)">
-        <option value="1">请选择要处理的任务</option>
-        <option value="{{taskItem.id}}" v-for="taskItem in taskList">{{taskItem.name}}</option>
-    </select>
-</div>
 
-<div style="margin-left: 40px;margin-top: 20px;font-size: x-large">任务信息</div>
-<div style="margin-bottom: 20px;margin-top:20px;margin-left: 40px;font-size: larger">
-    <label>项目负责人</label>
-    <input readonly="true"  type="text" class="form-control" v-model="taskPerson"></input>
-    <label style="margin-left: 20px;">施工地点</label>
-    <input readonly="true" id="place" type="text" class="form-control" v-model="taskPlace"></input>
-    <label style="margin-left: 20px;">施工开始日期</label>
-    <input readonly="true" id="startData" type="text" class="form-control" v-model="taskStart" ></input>
-</div>
-</form>
-
-<div class="container" style="margin-left: 40px;border-bottom: 2px solid lightgrey;margin-top: 30px;width: 100%">
-    <span style="font-size: x-large;">退料详情</span>
-    <button class="btn  btn-success" style="position:absolute;right: 400px;" v-on:click="add($event)">添加退料</button>
-    <button class="btn  btn-info" style="position:absolute;right: 300px;" data-toggle="modal" data-target="#example">确认退料</button>
-
-</div>
-
-<form class="form-inline" role="form">
-<div v-for="item in items" style="margin-top: 10px;margin-left: 40px;width: 100%;font-size: medium">
-    <select id="martialCombobox" class="form-control" style="width: 20%"  v-model="item.materialCode">
-        <option selected="selected">请选择退换材料</option>
-        <option value="{{thirdItem.code}}" v-for="thirdItem in thirdLevelList">{{thirdItem.name}}</option>
-    </select>
-    <input type="text" class="form-control" placeholder="请输入退料数量"  v-model="item.quantity"></input>
-    <select id="returnReason" class="form-control" style="width: 20%"  v-model="item.reason">
-        <option selected="selected">请选择退料原因</option>
-        <option value="2">剩余材料</option>
-        <option value="1">损坏</option>
-    </select>
-
-</div>
-</form>
-
-<div class="modal fade" id="example" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 20%">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    提示信息
-                </h4>
+<div id="confirmPage" style="margin-left: 400px;margin-top: 100px" :class="{hide:display==0}">
+    <div v-for="thirdLevel in materialReturnList" >
+        <div style="width:100%;margin: 0 auto ;margin-top: 20px;"  v-if="thirdLevel.backQuantity>0">
+            <div style="width:10%;float:left;"><img src="{{thirdLevel.materialImage}}" style="max-height:70px;max-width:70px;"></img></div>
+            <div style="width:28%;float:left;font-size: 20px">
+                <div style="margin-top: 5px"><span>{{thirdLevel.materialName}}</span></div>
+                <div style="margin-top: 5px;float:left;"><span class="text-muted">退料数量:{{thirdLevel.backQuantity}}</span></div>
             </div>
-            <div class="modal-body">
-                确认提交该退料记录
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消
-                </button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="save">
-                    确定
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div style="margin-top: 30px;">
+        <button class="btn btn-lg btn-success" v-on:click="print">确定</button>
+        <button class="btn btn-lg btn-danger" style="margin-left: 50px" v-on:click="changeDis">修改</button>
+    </div>
 </div>
 
-<script th:inline="javascript">
-        var menulist = new Vue({
-            el: 'body',
-            data: {
-                thirdLevelList: [[${thirdArray}]],
-                taskList: [[${taskArray}]],
-                items:[],
-                taskid:'',
-                taskPlace:'',
-                taskPerson:'',
-                taskStart:'',
-                taskStatus:''
-            },
-            // 在 `methods` 对象中定义方法
-            methods: {
+<div id="selectPage" :class="{hide:display==1}">
+    <div style="position: fixed;top: 0px;width: 100%;z-index:10;background: #fff;">
+        <h1 style="text-align: center;">任务1</h1>
+    </div>
+    <div style="min-height: 1000px;margin-top: 100px;margin-left: 50px">
+        <div v-for="thirdLevel in materialReturnList" style="margin-bottom: 10px">
+                <div style="width:10%;float:left;"><img src="{{thirdLevel.materialImage}}" style="max-height:70px;max-width:70px;"></img></div>
+                <div style="width:18%;float:left;font-size: 20px">
+                    <div style="margin-top: 5px"><span>{{thirdLevel.materialName}}</span></div>
+                    <div style="margin-top: 5px;float:left;"><span class="text-muted">领取数量:{{thirdLevel.selectQuantity}}&nbsp;&nbsp;&nbsp;退料数量:</span></div>
+                </div>
+                <div class="row" style="float:left;width: 50%;margin-top: 32px">
+                    <div class="input-group" >
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" v-if="thirdLevel.backQuantity>0" v-on:click="thirdLevel.backQuantity -= 1">-</button>
+                        </span>
+                            <input type="text" readonly="readonly" class="form-control" placeholder="0" style="text-align:center;font-size: 20px;width: 150px" value="{{thirdLevel.backQuantity}}"></input>
+                            <!--  <span class="input-group-btn">-->
+                              <button class="btn btn-default" type="button" v-if="thirdLevel.selectQuantity>thirdLevel.backQuantity" v-on:click="thirdLevel.backQuantity += 1">+</button>
+                            <!-- </span>-->
+                    </div>
+                </div>
 
-                add: function (event) {
-                    if( menulist.taskid==''){
-                        return
-                    }
-                    this.items.push({
-                        materialCode:'',
-                        quantity: 0,
-                        reason: ''
-                    })
-                },
-                selectOnchang: function (event) {
-                    menulist.taskid=event.target.value
-                    menulist.taskList.forEach(function (item,index,input) {
-                        if( input[index].id==event.target.value){
+                 <div style="clear: both"></div>
+             </div>
+         </div>
+         <div style="position:fixed; bottom:0; left: 0;width: 100%; height: 70px;">
+             <div style="background: black;float:left;height: 100%;width: 80%">
+                 <span>合计数量：10</span>
+             </div>
+             <button id="confirm"  style="width: 20%;background: green;float:left;height: 70px;
+                 line-height:70px;text-align: center;vertical-align: middle;font-size: x-large;font-weight: bold;color: white" v-on:click="changeDis">去退料
+             </button>
+         </div>
+     </div>
 
-                            menulist.taskPerson=input[index].owner
-                            menulist.taskStart=new Date(input[index].startTime).toLocaleString()
-                            menulist.taskStatus=input[index].status
-                            menulist.taskPlace=input[index].address
+     <div id="printDiv" style="display: none">
+         <h4>东方宇信领料单</h4>
+         <div>
+             <span>退料人:</span>
+         </div>
+         <div>
+             <span>退料时间：</span>
+             <span >{{currentTime}}</span>
+         </div>
+         <div>
+             <span>退料详情</span>
+         </div>
+         <div style="width: 30%">
+             <span>材料名称</span>
+             <span style="float: right">数量</span>
+         </div>
 
-                        }
+         <div v-for="thirdLevel in materialReturnList" >
+             <div style="width:100%;margin: 0 auto ;margin-top: 10px;"  v-if="thirdLevel.selectQuantity>0">
+                 <div style="width: 30%">
+                     <span>{{thirdLevel.materialName}}</span>
+                     <label style="float: right">{{thirdLevel.backQuantity}}</label>
+                 </div>
+             </div>
+             <div style="clear: both"></div>
+         </div>
+     </div>
 
-                    })
-                },
-                remove: function (itemIndex) {
-                    this.items.splice(itemIndex, 1)
-                },
-                save: function () {
-                    $.ajax({
-                        url: "/materialReturn/add",
-                        data: {taskCode:this.taskid, dataList:JSON.stringify(this.items)},
-                        async: false,
-                        success: function (result) {
-                            location.reload()
-                        }
-                    });
-                }
-            }
-        })
-</script>
-</body>
-</html>
+     <script th:inline="javascript">
+         var menulist = new Vue({
+             el: 'body',
+
+             data: {
+                 materialReturnList: [[${materialReturnArray}]],
+                 currentIndex: '99',
+                 display:0,
+                 currentTime:new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate()+" "+new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds()
+             },
+             // 在 `methods` 对象中定义方法
+             methods: {
+                 changeDis:function(){
+                     this.display == 1 ? this.display = 0 :this.display = 1;
+                 },
+                 print:function(){
+                     $.ajax({
+                         url: "/materialNavigation/add",
+                         data: {taskCode:'1', dataList:JSON.stringify(this.materialReturnList)},
+                         async: false,
+                         success: function (result) {
+                             $("#printDiv").show()
+                             $("#printDiv").jqprint();
+                             $("#printDiv").hide()
+                         }
+                     });
+                 }
+             }
+         })
+
+
+     </script>
+     </body>
+     </html>

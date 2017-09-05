@@ -23,10 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by dongl on 2017/6/26.
@@ -79,10 +76,10 @@ public class GetMaterialController extends BaseAction {
             InventoryInfoBeanExample condition = new InventoryInfoBeanExample();
             condition.createCriteria().andMaterialCodeEqualTo(vo.getLevelId());
             List<InventoryInfoBean> inventoryList=inventoryInfoService.getDataByCondition(condition);
-            if(null!=inventoryList){
-                inventoryList.get(0).setQuantity(inventoryList.get(0).getQuantity()-vo.getSelectQuantity());
-                inventoryInfoService.editDataInfo(inventoryList.get(0));
-            }
+//            if(null!=inventoryList){
+//                inventoryList.get(0).setQuantity(inventoryList.get(0).getQuantity()-vo.getSelectQuantity());
+//                inventoryInfoService.editDataInfo(inventoryList.get(0));
+//            }
         }
 
         // 请求结果
@@ -93,6 +90,7 @@ public class GetMaterialController extends BaseAction {
         materialRequisitionBean.setCode(orderCode);
         materialRequisitionBean.setCount(count);
         materialRequisitionBean.setTaskCode(taskCode);
+        materialRequisitionBean.setOperatingTime(new Date());
 
         long key = materialRequisitionService.addDataInfo(materialRequisitionBean);
         // 返回车辆信息

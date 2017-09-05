@@ -4,6 +4,7 @@ import com.dongfangyuxin.dao.common.bean.*;
 import com.dongfangyuxin.common.util.Utils;
 import com.dongfangyuxin.common.vo.*;
 import com.dongfangyuxin.controller.common.BaseAction;
+import com.dongfangyuxin.dao.sample.Sample;
 import com.dongfangyuxin.service.business.MaterialReturningDetailService;
 import com.dongfangyuxin.service.business.MaterialReturningSlipService;
 import com.dongfangyuxin.service.master.InventoryInfoService;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +46,8 @@ public class MaterialReturnController extends BaseAction {
     private MaterialReturningDetailService materialReturningDetailService;
     @Autowired
     private InventoryInfoService inventoryInfoService;
+    @Autowired
+    private Sample sampleMapper;
 
     /**
      * 测试hello
@@ -52,12 +56,12 @@ public class MaterialReturnController extends BaseAction {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String materialReturn(Model model) {
-        List<MaterialBean> thirdArray= materialMasterService.getMaterialInfo(null);
-        ProjectInfoBeanExample condition = new ProjectInfoBeanExample();
-        condition.createCriteria().andStatusNotEqualTo("001").andStatusNotEqualTo("005");
-        List<ProjectInfoBean> taskArray= projectInfoMasterService.getAllInfo(condition);
-        model.addAttribute("thirdArray", thirdArray);
-        model.addAttribute("taskArray", taskArray);
+        Map<String, Object> materialMap = new HashMap<>();
+
+        materialMap.put("code","1");
+        List<MaterialRetrunVo>  materialReturnArray = sampleMapper.getReceiveMaterial(materialMap);
+
+        model.addAttribute("materialReturnArray", materialReturnArray);
         return "materialReturn";
     }
 
@@ -83,18 +87,16 @@ public class MaterialReturnController extends BaseAction {
             materialReturningDetailBean.setCode(orderCode);
             //原料编号
             materialReturningDetailBean.setTaskCode(vo.getMaterialCode());
-            materialReturningDetailBean.setQuantity(vo.getQuantity());
+            materialReturningDetailBean.setQuantity(vo.getBackQuantity());
             long key = materialReturningDetailService.addDataInfo(materialReturningDetailBean);
 
             //更新库存
-            if(vo.getReason().equals("2")){
-                InventoryInfoBeanExample condition = new InventoryInfoBeanExample();
-                condition.createCriteria().andMaterialCodeEqualTo(vo.getMaterialCode());
-                List<InventoryInfoBean> inventoryList=inventoryInfoService.getDataByCondition(condition);
-                if(null!=inventoryList){
-                    inventoryList.get(0).setQuantity(inventoryList.get(0).getQuantity()+vo.getQuantity());
-                    inventoryInfoService.editDataInfo(inventoryList.get(0));
-                }
+            InventoryInfoBeanExample condition = new InventoryInfoBeanExample();
+            condition.createCriteria().andMaterialCodeEqualTo(vo.getMaterialCode());
+            List<InventoryInfoBean> inventoryList=inventoryInfoService.getDataByCondition(condition);
+            if(null!=inventoryList){
+                inventoryList.get(0).setQuantity(inventoryList.get(0).getQuantity()+vo.getBackQuantity());
+                inventoryInfoService.editDataInfo(inventoryList.get(0));
             }
         }
 
@@ -106,6 +108,8 @@ public class MaterialReturnController extends BaseAction {
         materialReturningSlipBean.setCode(orderCode);
         materialReturningSlipBean.setCount(count);
         materialReturningSlipBean.setTaskCode(taskCode);
+        materialReturningSlipBean.setOperatingTime(new Date());
+        materialReturningSlipBean.setOperator("login");
 
         long key = materialReturningSlipService.addDataInfo(materialReturningSlipBean);
         return convertReponse(resultMap, true, null);

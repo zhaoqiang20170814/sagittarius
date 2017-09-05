@@ -3,6 +3,9 @@
  */
 
 $(function () {
+    if(authority!="001"){
+        $('#aa').accordion('getPanel','主档维护').panel('close');
+    }
 
 })
 
@@ -79,18 +82,6 @@ function createFrame(url) {
 var LocString=String(window.document.location.href);
 var loginName=decodeURI(GetQueryString("name"));
 var authority=GetQueryString("authority");
-
-window.onload=function(){
-
-    if(authority=="001"){
-        $("#masterDiv").hide();
-    }
-}
-
-
-window.onload=function(){
-
-}
 
 function GetQueryString(str){
     var rs=new RegExp("(^|)"+str+"=([^&]*)(&|$)","gi").exec(LocString),tmp;

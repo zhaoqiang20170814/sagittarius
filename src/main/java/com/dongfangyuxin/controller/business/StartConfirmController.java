@@ -51,10 +51,6 @@ public class StartConfirmController extends BaseAction {
         ProjectInfoBeanExample condition = new ProjectInfoBeanExample();
         condition.createCriteria().andStatusEqualTo("001");
         List<ProjectInfoBean> taskArray= projectInfoMasterService.getAllInfo(condition);
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        for(int i=0;i<taskArray.size();i++){
-//            taskArray.get(i).setStartTime(formatter.parse(formatter.format(taskArray.get(i).getStartTime())));
-//        }
         model.addAttribute("taskArray", taskArray);
         return "startConfirm";
     }
