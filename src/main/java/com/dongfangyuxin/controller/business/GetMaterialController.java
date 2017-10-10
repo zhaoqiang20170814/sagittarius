@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -46,7 +47,7 @@ public class GetMaterialController extends BaseAction {
 
     // 车辆信息信息表DAO
     @Autowired
-    private Sample sampleMapper;
+    public Sample sampleMapper;
 
     /**
      * 领料概要表新增
@@ -67,19 +68,21 @@ public class GetMaterialController extends BaseAction {
         for (ThirdLevelVo vo:detailList) {
             if(vo.getSelectQuantity()>0){
                 count++;
+                materialRequisitionDetailBean = new MaterialRequisitionDetailBean();
+                materialRequisitionDetailBean.setCode(orderCode);
+                materialRequisitionDetailBean.setTaskCode(vo.getLevelId());
+                materialRequisitionDetailBean.setQuantity(vo.getSelectQuantity());
+                materialRequisitionDetailBean.setAmount(BigDecimal.valueOf(vo.getSelectQuantity()*vo.getPrice()));
+                long key = materialRequisitionDetailService.addDataInfo(materialRequisitionDetailBean);
+                InventoryInfoBeanExample condition = new InventoryInfoBeanExample();
+                condition.createCriteria().andMaterialCodeEqualTo(vo.getLevelId());
+                List<InventoryInfoBean> inventoryList=inventoryInfoService.getDataByCondition(condition);
+                if(null!=inventoryList){
+                    inventoryList.get(0).setQuantity(inventoryList.get(0).getQuantity()-vo.getSelectQuantity());
+                    inventoryInfoService.editDataInfo(inventoryList.get(0));
+                }
             }
-            materialRequisitionDetailBean = new MaterialRequisitionDetailBean();
-            materialRequisitionDetailBean.setCode(orderCode);
-            materialRequisitionDetailBean.setTaskCode(vo.getLevelId());
-            materialRequisitionDetailBean.setQuantity(vo.getSelectQuantity());
-            long key = materialRequisitionDetailService.addDataInfo(materialRequisitionDetailBean);
-            InventoryInfoBeanExample condition = new InventoryInfoBeanExample();
-            condition.createCriteria().andMaterialCodeEqualTo(vo.getLevelId());
-            List<InventoryInfoBean> inventoryList=inventoryInfoService.getDataByCondition(condition);
-//            if(null!=inventoryList){
-//                inventoryList.get(0).setQuantity(inventoryList.get(0).getQuantity()-vo.getSelectQuantity());
-//                inventoryInfoService.editDataInfo(inventoryList.get(0));
-//            }
+
         }
 
         // 请求结果

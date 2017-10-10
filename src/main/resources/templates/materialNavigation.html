@@ -7,7 +7,7 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="sagittarius/vue.js"></script>
     <script src="sagittarius/vue-resource.js"></script>
-    <script type="text/javascript" src="sagittarius/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="plugins/jquery.min.js"></script>
     <script language="javascript" src="sagittarius/jquery.jqprint-0.3.js"></script>
 
     <style>
@@ -37,7 +37,7 @@
 
 <div id="selectPage" :class="{hide:display==1}">
     <div style="position: fixed;top: 0px;width: 100%;z-index:10;background: #fff;">
-        <h1 style="text-align: center;">任务1</h1>
+        <h1 style="text-align: center;">{{taskName}}</h1>
         <nav class="navbar navbar-default" role="navigation" style="background: lightskyblue;">
             <div class="container-fluid">
                 <div class="navbar-header" style="width: 100px">
@@ -125,6 +125,8 @@
 </div>
 
 <script th:inline="javascript">
+
+
         var menulist = new Vue({
             el: 'body',
 
@@ -134,6 +136,7 @@
                 thirdLevelList: [[${thirdArray}]],
                 currentIndex: '99',
                 display:0,
+                taskName:'',
                 currentTime:new Date().getFullYear()+"-"+(new Date().getMonth()+1)+"-"+new Date().getDate()+" "+new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds()
             },
             // 在 `methods` 对象中定义方法
@@ -153,11 +156,26 @@
                             $("#printDiv").show()
                             $("#printDiv").jqprint();
                             $("#printDiv").hide()
+                            var browserName=navigator.appName;
+                            alert(browserName);
+                            window.open('','_parent','');
+                            window.close();
                         }
                     });
                 }
             }
         })
+
+        var LocString=String(window.document.location.href);
+        var userName=decodeURI(GetQueryString("name"));
+        menulist.taskName=decodeURI(GetQueryString("name"));
+        var taskid=GetQueryString("taskid");
+
+        function GetQueryString(str){
+            var rs=new RegExp("(^|)"+str+"=([^&amp;]*)(&amp;|$)","gi").exec(LocString),tmp;
+            if(tmp=rs)return tmp[2];
+            return "没有这个参数";
+        }
 
 
 </script>

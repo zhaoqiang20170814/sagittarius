@@ -15,6 +15,15 @@ public class ThirdLevelVo implements Serializable {
     private int stockQuantity;
 
     private int selectQuantity;
+    private  int price;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public String getParentlevelId() {
         return parentlevelId;

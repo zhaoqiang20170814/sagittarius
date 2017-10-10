@@ -6,8 +6,9 @@
         SELECT
 	      material.CODE as levelId,
           material.NAME as levelName,
-          material.TYPE as parentlevelId,
+          material.TYPE_LEVEL_2 as parentlevelId,
           material.IMAGE as imageUrl,
+          material.PRICE as price,
           inventory_info.QUANTITY as stockQuantity
         FROM material LEFT JOIN inventory_info ON material.CODE = inventory_info.MATERIAL_CODE
     </select>
@@ -61,6 +62,7 @@
             material.`CODE` AS materialCode,
             material.`NAME` AS materialName,
             material.IMAGE AS materialImage,
+            material.PRICE AS price,
             material_requisition_detail.QUANTITY AS selectQuantity,
             0 AS backQuantity
         FROM

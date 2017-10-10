@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +89,7 @@ public class MaterialReturnController extends BaseAction {
             //原料编号
             materialReturningDetailBean.setTaskCode(vo.getMaterialCode());
             materialReturningDetailBean.setQuantity(vo.getBackQuantity());
+            materialReturningDetailBean.setAmount(BigDecimal.valueOf(vo.getBackQuantity()*vo.getPrice()));
             long key = materialReturningDetailService.addDataInfo(materialReturningDetailBean);
 
             //更新库存
